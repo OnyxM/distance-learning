@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Str;
 
+$DATABASE_URL=parse_url("postgres://ythfcenihzkzxv:efb0857ea2b397859a2661d6663d8ad814df8d6a49315098199a2d06493d0bc2@ec2-34-230-133-163.compute-1.amazonaws.com:5432/daqea6lvra8bnr"); //Utilisé par Heroku Postgres
+
+
 return [
 
     /*
