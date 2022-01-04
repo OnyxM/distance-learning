@@ -5,7 +5,6 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-11 col-md-11">
-
                     <div class="row no-gutters position-relative log_rads">
                         @include("auth.partial_auth_view")
 
@@ -19,7 +18,7 @@
 
                                 <div class="form-group">
                                     <label>Emain Address*</label>
-                                    <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="email@domain.com" name="email" value="{{ old('email') }}" required>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="email@domain.com" name="email" value="{{ old('email') }}" required autofocus>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -30,11 +29,9 @@
                                 <div class="form-group">
                                     <input type="submit" class="btn btn_apply w-100 btn-danger" value="Reset Password">
                                 </div>
-
                             </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
