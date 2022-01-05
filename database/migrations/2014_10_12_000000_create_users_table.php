@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->enum('priority', [User::USER_PRIORITY['student'], User::USER_PRIORITY['teacher'], User::USER_PRIORITY['manager'], User::USER_PRIORITY['admin']]);
             $table->string('photo')->default("avatar.png");
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
