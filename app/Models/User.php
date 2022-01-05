@@ -19,6 +19,7 @@ class User extends Authenticatable
         'password',
         'date_naissance',
         'lieu_naissance',
+        'photo',
         'priority',
     ];
 
@@ -32,4 +33,16 @@ class User extends Authenticatable
     ];
 
     const USER_PRIORITY = ['student' => '0', 'teacher' => '1', 'manager' => '2', 'admin' => '3'];
+
+    protected $appends = [
+        'name',
+    ];
+
+    public function getNameAttribute(){
+        return $this->lastname." ".$this->firstname;
+    }
+
+    public function getPhotoAttribute(){
+        return asset("assets/img/".$this->attributes['photo']);
+    }
 }

@@ -49,8 +49,8 @@
                     <div class="dashboard-navbar">
 
                         <div class="d-user-avater">
-                            <img src="assets/img/user-3.jpg" class="img-fluid avater" alt="">
-                            <h4>Adam Harshvardhan</h4>
+                            <img src="{{auth()->user()->photo}}" class="img-fluid avater" alt="">
+                            <h4>{{ucwords(auth()->user()->name)}}</h4>
                             <span>Canada USA</span>
                         </div>
 

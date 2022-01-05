@@ -18,15 +18,20 @@
             </ul>
 
             <ul class="nav-menu nav-menu-social align-to-right">
-
-                <li class="login_click light">
-                    <a href="{{route('login')}}" >Sign in</a>
-                    {{--									<a href="#" data-toggle="modal" data-target="#login">Sign in</a>--}}
-                </li>
-                <li class="login_click theme-bg">
-                    <a href="{{route('register')}}">Sign up</a>
-                    {{--									<a href="#" data-toggle="modal" data-target="#signup">Sign up</a>--}}
-                </li>
+                @if(!auth()->user())
+                    <li class="login_click light">
+                        <a href="{{route('login')}}" >Sign in</a>
+                        {{--									<a href="#" data-toggle="modal" data-target="#login">Sign in</a>--}}
+                    </li>
+                    <li class="login_click theme-bg">
+                        <a href="{{route('register')}}">Sign up</a>
+                        {{--									<a href="#" data-toggle="modal" data-target="#signup">Sign up</a>--}}
+                    </li>
+                @else
+                    <li class="login_click theme-bg">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>

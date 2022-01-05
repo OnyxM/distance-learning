@@ -86,7 +86,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Date of birth <span class="text-danger">*</span></label>
-                                            <input type="datetime-local"
+                                            <input type="date"
                                                    class="form-control @error('date_naissance') is-invalid @enderror"
                                                    placeholder="Date of birth" name="date_naissance"
                                                    value="{{ old('date_naissance') }}" required>
