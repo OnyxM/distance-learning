@@ -27,39 +27,11 @@
             <!-- Top header  -->
             <!-- ============================================================== -->
             <!-- Start Navigation -->
-			<div class="header header-light">
-				<div class="container">
-					<nav id="navigation" class="navigation navigation-landscape">
-						<div class="nav-header">
-							<a class="nav-brand" href="#">
-								<img src="{{asset('assets/img/logo.png')}}" class="logo" alt="" />
-							</a>
-							<div class="nav-toggle"></div>
-						</div>
-						<div class="nav-menus-wrapper" style="transition-property: none;">
-							<ul class="nav-menu">
-
-                                <li class="active"><a href="{{route('index')}}">Home</a></li>
-
-                                <li><a href="#">Courses</a></li>
-
-								<li><a href="{{route('about')}}">Contact</a></li>
-
-							</ul>
-
-							<ul class="nav-menu nav-menu-social align-to-right">
-
-								<li class="login_click light">
-									<a href="#" data-toggle="modal" data-target="#login">Sign in</a>
-								</li>
-								<li class="login_click theme-bg">
-									<a href="#" data-toggle="modal" data-target="#signup">Sign up</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
+			@if(!isset($no_header))
+                <div class="header header-light">
+                    @include("layouts.nav")
+                </div>
+            @endif
 			<!-- End Navigation -->
 			<div class="clearfix"></div>
 			<!-- ============================================================== -->
@@ -69,6 +41,7 @@
 			@yield("content")
 
 			<!-- ============================== Start Newsletter ================================== -->
+            @if(!isset($no_footer))
 			<section class="bg-cover newsletter inverse-theme" style="background:url('{{asset("assets/img/banner-2.jpg")}}');" data-overlay="9">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -196,6 +169,7 @@
 					</div>
 				</div>
 			</footer>
+            @endif
 			<!-- ============================ Footer End ================================== -->
 
 			<!-- Log In Modal -->
