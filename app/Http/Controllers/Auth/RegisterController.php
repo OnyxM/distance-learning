@@ -75,6 +75,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'date_naissance' => $data['date_naissance'],
             'lieu_naissance' => $data['lieu_naissance'],
+            'priority' => User::USER_PRIORITY['user'],
         ]);
 
         // We will notify the user here with an email
