@@ -10,8 +10,9 @@
 <body>
 Hello {{$name}}, <br><br>
 
-You registered an account on SmartLearning.com, before being able to use your account you need to verify that
-this is your email address by clicking here: {{$link}} <br><br><br><br>
+Thanks for signing up on our platform. <br>
+You can now take a course by going to {{$courses_link}} <br>
+But if you're here to post your own courses, go to {{$new_course_link}} <br><br><br><br><br>
 
 Kind Regards, Smart Learning 237
 </body>

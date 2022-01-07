@@ -41,14 +41,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const USER_PRIORITY = ['student' => '0', 'teacher' => '1', 'manager' => '2', 'admin' => '3'];
+    const USER_PRIORITY = ['user' => '0', 'manager' => '2', 'admin' => '3'];
 
     protected $appends = [
         'name',
     ];
 
     public function getNameAttribute(){
-        return $this->lastname." ".$this->firstname;
+        return $this->firstname." ".$this->lastname;
     }
 
     public function getPhotoAttribute(){

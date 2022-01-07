@@ -38,9 +38,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    public function login(Request $request)
-    {
-        die("Intercept login to check the 'deleted_at' then inform that the email confirmation is awaiting ..");
-    }
 }

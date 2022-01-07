@@ -75,7 +75,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'date_naissance' => $data['date_naissance'],
             'lieu_naissance' => $data['lieu_naissance'],
-            'deleted_at' => time(),
         ]);
 
         // We will notify the user here with an email
@@ -83,7 +82,8 @@ class RegisterController extends Controller
         $to_email = $new_user->email;
         $data = [
             'name' => $to_name,
-            'link' => "https://google.com"
+            'courses_link' => route('courses'),
+            'new_course_link' => route('teacher.index'),
         ]; // Pour la vue
 
         Mail::send('mails.welcome', $data, function($message) use ($to_name, $to_email){
