@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use SoftDeletes;
 
     protected $fillable = [
         'firstname',
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'lieu_naissance',
         'photo',
         'priority',
+        'deleted_at',
     ];
 
     protected $hidden = [
@@ -28,18 +31,24 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    const USER_PRIORITY = ['student' => '0', 'teacher' => '1', 'manager' => '2', 'admin' => '3'];
+    const USER_PRIORITY = ['user' => '0', 'manager' => '2', 'admin' => '3'];
 
     protected $appends = [
         'name',
     ];
 
     public function getNameAttribute(){
-        return $this->lastname." ".$this->firstname;
+        return $this->firstname." ".$this->lastname;
     }
 
     public function getPhotoAttribute(){

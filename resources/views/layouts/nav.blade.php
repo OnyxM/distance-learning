@@ -28,6 +28,9 @@
                         {{--									<a href="#" data-toggle="modal" data-target="#signup">Sign up</a>--}}
                     </li>
                 @else
+                    <li class="login_click light">
+                        <a href="{{ route('teacher.index') }}">As Teacher</a>
+                    </li>
                     <li class="login_click theme-bg">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
                     </li>

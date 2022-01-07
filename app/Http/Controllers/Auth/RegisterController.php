@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -67,7 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $new_user = User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
@@ -76,6 +77,22 @@ class RegisterController extends Controller
             'lieu_naissance' => $data['lieu_naissance'],
         ]);
 
-        // We will here notify the user here with an email
+        // We will notify the user here with an email
+        $to_name = $new_user->name;
+        $to_email = $new_user->email;
+        $data = [
+            'name' => $to_name,
+            'courses_link' => route('courses'),
+            'new_course_link' => route('teacher.index'),
+        ]; // Pour la vue
+
+        Mail::send('mails.welcome', $data, function($message) use ($to_name, $to_email){
+            $message->to($to_email, $to_name)
+                ->subject("Welcome!");
+
+            $message->from("smartlearning237@gmail.com", "Smart Learning 237");
+        });
+
+        return $new_user;
     }
 }
