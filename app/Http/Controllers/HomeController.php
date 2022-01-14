@@ -16,7 +16,7 @@ class HomeController extends Controller
 
     public function courses(){
         $data = [
-            'title' => "",
+            'title' => "Courses - ",
         ];
 
         return view("courses", $data);
@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function about(){
         $data = [
-            'title' => "",
+            'title' => "About us - ",
         ];
 
         return view("about", $data);
