@@ -1,4 +1,4 @@
-@extends('layouts.home', ['title' => " | Register", 'no_header'=>true, 'no_footer'=>true])
+@extends('layouts.home', ['title' => "Register - ", 'no_header'=>true, 'no_footer'=>true])
 
 @section('content')
     <section class="log-space">

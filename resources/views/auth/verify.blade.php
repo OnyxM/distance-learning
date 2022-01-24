@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['title' => "Verify - ", 'no_header'=>true, 'no_footer'=>true])
 
 @section('content')
 <div class="container">
