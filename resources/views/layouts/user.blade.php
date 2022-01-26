@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from themezhub.net/learnup-demo-2/learnup/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Dec 2021 12:57:24 GMT -->
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="www.frebsite.nl" />
@@ -15,6 +14,7 @@
     <!-- Custom Color Option -->
     <link href="{{asset('assets/css/colors.css')}}" rel="stylesheet">
 
+    @yield("css")
 </head>
 
 <body class="red-skin">
@@ -58,7 +58,7 @@
                             <ul id="side-menu">
                                 <li class="active"><a href="{{route('user.index')}}"><i class="ti-user"></i>Dashboard</a></li>
                                 <li><a href="my-profile.html"><i class="ti-heart"></i>My Profile</a></li>
-                                <li><a href="add-listing.html"><i class="ti-plus"></i>Add Course</a></li>
+                                <li><a href="{{route('course.add')}}"><i class="ti-plus"></i>Add Course</a></li>
                                 <li><a href="saved-courses.html"><i class="ti-heart"></i>Saved Courses</a></li>
                                 <li class="dropdown">
                                     <a href="all-courses.html"><i class="ti-layers"></i>All Courses<span class="ti-angle-left"></span></a>
@@ -106,20 +106,22 @@
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/select2.min.js')}}"></script>
+{{--<script src="{{asset('assets/js/select2.min.js')}}"></script>--}}
 <script src="{{asset('assets/js/slick.js')}}"></script>
 <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
 <script src="{{asset('assets/js/counterup.min.js')}}"></script>
-<script src="{{asset('assets/js/custom.js')}}"></script>
+{{--<script src="{{asset('assets/js/custom.js')}}"></script>--}}
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->
 <script src="{{asset('assets/js/metisMenu.min.js')}}"></script>
 <script>
+    let stockage = localStorage;
+
     $('#side-menu').metisMenu();
 </script>
+@yield("js")
 
 </body>
 
-<!-- Mirrored from themezhub.net/learnup-demo-2/learnup/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 29 Dec 2021 12:57:25 GMT -->
 </html>

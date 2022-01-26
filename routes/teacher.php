@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, "index"])->name("teacher.index");
+
+Route::group(['prefix' => "course"], function(){
+    Route::get('create', [CourseController::class, 'add'])->name('course.add');
+});
