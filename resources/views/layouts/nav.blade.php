@@ -29,7 +29,11 @@
                     </li>
                 @else
                     <li class="login_click light">
-                        <a href="{{ route('teacher.index') }}">As Teacher</a>
+                        @if($logged_as == 'teacher')
+                        <a href="{{ route('user.index') }}">As Student</a>
+                        @elseif($logged_as == 'student')
+                            <a href="{{ route('teacher.index') }}">As Teacher</a>
+                        @endif
                     </li>
                     <li class="login_click theme-bg">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>

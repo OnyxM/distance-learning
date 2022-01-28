@@ -54,4 +54,9 @@ class User extends Authenticatable
     public function getPhotoAttribute(){
         return asset("assets/img/".$this->attributes['photo']);
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }

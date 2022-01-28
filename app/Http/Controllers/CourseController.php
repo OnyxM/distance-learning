@@ -10,6 +10,16 @@ use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
+    public function getAllUserCourses()
+    {
+        $data = [
+            'title' => "My Courses - ",
+            'courses' => auth()->user()->courses
+        ];
+
+        return view("teacher.list_courses", $data);
+    }
+
     public function add()
     {
         $data = [
@@ -56,7 +66,7 @@ class CourseController extends Controller
     public function addContent($uuid_course)
     {
         // On récupère le cours en fonction du uuid
-        $course = Course::whereUuid($uuid_course)->first();
+        $course = Course::where(['uuid'=>$uuid_course, 'user_id'=>auth()->user()->id]) ->first();
 
         if(is_null($course)){
             abort(404);
@@ -90,7 +100,7 @@ class CourseController extends Controller
             Part::create([
                 'title' => $request->part_title[$key],
                 'slug' => Str::slug($request->part_title[$key]),
-                'content' => $request->part_content[$key],
+                'content' => $content_name,
                 'td' => $request->part_td[$key],
                 'tp' => $request->part_tp[$key],
                 'course_id' => $course->id,
@@ -98,6 +108,94 @@ class CourseController extends Controller
             ]);
         }
 
-        return redirect()->route("course.index", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
+        return redirect()->route("course.details", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
+    }
+
+    public function edit($uuid_course)
+    {
+        // On récupère le cours en fonction du uuid
+        $course = Course::where(['uuid'=>$uuid_course,'user_id' =>auth()->user()->id])->first();
+
+        if(is_null($course)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "Edit Course - ".$course->title. " - ",
+            'course' => $course,
+            'categories' => Category::all()
+        ];
+
+        return view('courses.edit', $data);
+    }
+
+    public function update(Request $request, $uuid_course)
+    {
+        // On récupère le cours en fonction du uuid
+        $course = Course::where(['uuid'=>$uuid_course,'user_id' =>auth()->user()->id])->first();
+
+        if(is_null($course)){
+            abort(404);
+        }
+
+        $this->validate($request, [
+            'title' => "required|min:10",
+            'price' => "required",
+            'description' => "required|min:200",
+            'category' => "required|exists:categories,id",
+        ]);
+
+        // Si il y'a l'image on val'uploader et update en bd aussi ...
+        if(!is_null($request->image)){
+            $image_file= $request->image;
+            $image_name = $image_file->getClientOriginalName();
+            $image_file->move("uploads/courses/".$course->uuid."/", $image_name);
+
+            $course->photo = $image_name; // update de la BD
+        }
+
+        $course->title = $request->title;
+        $course->slug = Str::slug($request->title);
+        $course->description = $request->description;
+        $course->category_id = $request->category;
+
+        $course->save();
+
+        return redirect()->route('course.editContent', ['uuid_course' => $course->uuid]);
+    }
+
+    public function editContent ($uuid_course)
+    {
+        // On récupère le cours en fonction du uuid
+        $course = Course::where(['uuid'=>$uuid_course, 'user_id'=>auth()->user()->id]) ->first();
+
+        if(is_null($course)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "Edit Content - " . $course->title . " - ",
+            'course' => $course,
+            'parts' => $course->parts,
+        ];
+
+        return view("courses.edit_content", $data);
+    }
+
+    public function delete(Request $request)
+    {
+        $this->validate($request, [
+            'course' => "required",
+        ]);
+        // On récupère le cours en fonction du uuid
+        $course = Course::where(['uuid'=>$request->course, 'user_id'=>auth()->user()->id]) ->first();
+
+        if(is_null($course)){
+            abort(404);
+        }
+
+        $course->delete();
+
+        return redirect()->route('course.index');
     }
 }

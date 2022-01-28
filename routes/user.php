@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, "index"])->name("user.index");
-Route::get('/course/{slug_course}', [UserController::class, "index"])->name("course.index");
+Route::get('/course/{slug_course}', [UserController::class, "index"])->name("course.details");

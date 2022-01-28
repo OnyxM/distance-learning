@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable=[
         'title',
@@ -19,6 +21,13 @@ class Course extends Model
         'photo',
         'user_id',
     ];
+
+    public function getPhotoAttribute()
+    {
+        $uuid_course = $this->uuid;
+
+        return asset("uploads/courses/$uuid_course/".$this->attributes['photo']);
+    }
 
     public function category()
     {

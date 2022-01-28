@@ -23,6 +23,7 @@ class CreateCoursesTable extends Migration
             $table->string("photo");
             $table->integer("category_id");
             $table->integer("user_id");
+            $table->softDeletes();
             $table->timestamps();
         });
 

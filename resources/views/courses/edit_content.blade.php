@@ -14,7 +14,7 @@
     </div>
     <!-- /Row -->
 
-    <form action="{{route('course.createContent', ['uuid_course' => $course->uuid])}}" method="POST" enctype="multipart/form-data" id="createContentForm">
+    <form action="{{route('course.editContent', ['uuid_course' => $course->uuid])}}" method="POST" enctype="multipart/form-data" id="createContentForm">
     @csrf
     <!-- Row -->
         <div class="row">
