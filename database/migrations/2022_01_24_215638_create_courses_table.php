@@ -14,9 +14,19 @@ class CreateCoursesTable extends Migration
     public function up()
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->unsigned();
+            $table->string("title");
+            $table->string("slug");
+            $table->string("price");
+            $table->text("description");
+            $table->uuid("uuid");
+            $table->string("photo");
+            $table->integer("category_id");
+            $table->integer("user_id");
             $table->timestamps();
         });
+
+        DB::update("ALTER TABLE courses AUTO_INCREMENT = 25365;");
     }
 
     /**

@@ -16,7 +16,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Development', 'Busincess', 'Finance & Accounting', 'IT & Software', 'Office Productivity', 'Personal Development',
+            'Development', 'Business', 'Finance & Accounting', 'IT & Software', 'Office Productivity', 'Personal Development',
             'Design', 'Marketing', 'Health & Fitness', 'Music'
         ];
 

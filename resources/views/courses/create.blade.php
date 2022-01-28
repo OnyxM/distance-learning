@@ -14,7 +14,7 @@
     </div>
     <!-- /Row -->
 
-    <form action="#" method="POST" enctype="multipart/form-data">
+    <form action="{{route('course.create')}}" method="POST" enctype="multipart/form-data">
     @csrf
     <!-- Row -->
         <div class="row">
@@ -31,32 +31,57 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>Course Image <sup class="text-danger">*</sup></label>
-                                    <input type="file" class="form-control" required name="image" accept=".jpg, .jpeg, .png">
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror" required name="image" accept=".jpg, .jpeg, .png">
+                                    @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Course Title <sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control" placeholder="Course Title" required>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}" placeholder="Course Title" required name="title">
+                                    @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Course Price <sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control" placeholder="Ex. 199.10" required>
+                                    <input type="text" class="form-control @error('price') is-invalid @enderror" value="{{old('price')}}" placeholder="Ex. 25000" name="price" required>
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group col-md-12">
                                     <label>About Course <sup class="text-danger">*</sup></label>
-                                    <textarea class="form-control" placeholder="Description" required></textarea>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" placeholder="Description" required>{{old('description')}}</textarea>
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group col-md-12">
                                     <label>Category <sup class="text-danger">*</sup></label>
-                                    <select name="category" id="category" class="form-control" required>
+                                    <select name="category" id="category" class="form-control @error('category') is-invalid @enderror" required>
                                         <option value="">Choose category</option>
                                         @foreach($categories as $cat)
-                                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                            <option value="{{$cat->id}}" @if($cat->id == old('category')) selected @endif>{{$cat->name}}</option>
                                         @endforeach
                                     </select>
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -67,77 +92,29 @@
         </div>
         <!-- /Row -->
 
-        <!-- Row -->
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="" id="course_content"></div>
+{{--        <!-- Row -->--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-lg-12 col-md-12 col-sm-12">--}}
+{{--                <div class="" id="course_content"></div>--}}
 
-                <div class="form-group col-md-12">
-                    <a href="javascript:void(0);" class="btn add-items" onclick="addSection()"><i
-                            class="fa fa-plus-circle"></i>Add Section</a>
-                    <a id="removeSection" href="javascript:void(0);" class="d-none btn-link text-danger"
-                       onclick="removeSection()"><i class="fa fa-minus-circle"></i>Remove Last Section</a>
-                </div>
-            </div>
-        </div>
-        <!-- /Row -->
+{{--                <div class="form-group col-md-12">--}}
+{{--                    <a href="javascript:void(0);" class="btn add-items" onclick="addSection()"><i class="fa fa-plus-circle"></i>Add Section</a>--}}
+{{--                    <a id="removeSection" href="javascript:void(0);" class="d-none btn-link text-danger" onclick="removeSection()"><i class="fa fa-minus-circle"></i>Remove Last Section</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- /Row -->--}}
 
         <div class="row">
-            <div class="form-group col-lg-12 col-md-12">
-                <button class="btn btn-theme" type="submit">Save Course</button>
+            <div class="form-group col-lg-12 col-md-12 text-right">
+                <button class="btn btn-theme" type="submit">Create Course</button>
             </div>
         </div>
     </form>
 @endsection
 
 @section("js")
-    <script>
-        $(document).ready(function () {
-            stockage.nbre_sections = 0;
 
-            addSection(); // On ajoute la première section obligatoire
-        })
-
-        function getNewSectionTemplate() {
-            stockage.nbre_sections++;
-            var id = stockage.nbre_sections; // get the n° of the section to be created
-
-            return '<div class="dashboard_container section" id="section' + id + '">\n' +
-                '<div class="dashboard_container_header">\n' +
-                '    <div class="dashboard_fl_1">\n' +
-                '        <h4>Section ' + id + '</h4>\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dashboard_container_body p-4">\n' +
-                '    <!-- Basic info -->\n' +
-                '    <div class="submit-section">\n' +
-                '        <div class="form-row">\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>Title <sup class="text-danger">*</sup></label>\n' +
-                '                <input type="text" class="form-control" placeholder="Section Title" required>\n' +
-                '            </div>\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>Section content(Presentation, PDF or Video) <sup class="text-danger">*</sup></label>\n' +
-                '                <div class="row">\n' +
-                '                    <div class="form-group col-md-12">\n' +
-                '                        <input type="file" accept=".pdf,.pptx,.mp4" class="form-control" placeholder="PDF Document" required>\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>TD Worksheet (<span class="text-danger">pdf only</span>)</label>\n' +
-                '                <input type="text" class="form-control" placeholder="TD worksheet" accept=".pdf" >\n' +
-                '            </div>\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>TP Worksheet (<span class="text-danger">pdf only</span>)</label>\n' +
-                '                <input type="text" class="form-control" placeholder="TP worksheet" accept=".pdf" >\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '</div>';
-        }
-    </script>
     <script src="{{asset('assets/js/dropzone.js')}}"></script>
 
     <!-- Date Booking Script -->
@@ -165,29 +142,5 @@
             $('input[name="start"]').val('');
             $('input[name="start"]').attr("placeholder", "Course Start");
         });
-    </script>
-
-    <script>
-        function addSection() {
-            let course_content = $("#course_content"),
-                child_template = getNewSectionTemplate();
-
-            course_content.append(child_template);
-
-            if (stockage.nbre_sections > 1) {
-                $("#removeSection").removeClass("d-none");
-            }
-        }
-
-        function removeSection() {
-            if (stockage.nbre_sections > 1) {
-                var content = document.getElementById("course_content");
-                content.removeChild(content.lastChild);
-                stockage.nbre_sections = stockage.nbre_sections - 1;
-            }
-            if (stockage.nbre_sections == 1) {
-                $("#removeSection").addClass("d-none");
-            }
-        }
     </script>
 @endsection
