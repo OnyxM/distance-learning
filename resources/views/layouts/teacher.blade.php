@@ -56,8 +56,9 @@
 
                         <div class="d-navigation">
                             <ul id="side-menu">
-                                <li class="active"><a href="{{route('user.index')}}"><i class="ti-user"></i>Dashboard</a></li>
-                                <li><a href="javascript:void(0);"><i class="ti-heart"></i>My Profile</a></li>
+                                <li class="active"><a href="{{route('teacher.index')}}"><i class="ti-user"></i>Dashboard</a></li>
+{{--                                <li><a href="javascript:void(0);"><i class="ti-heart"></i>My Profile</a></li>--}}
+                                <li><a href="{{route('course.add')}}"><i class="ti-plus"></i>Add Course</a></li>
                                 <li><a href="{{route('course.index')}}"><i class="ti-plus"></i>My Courses</a></li>
 {{--                                <li><a href="{{route('course.add')}}"><i class="ti-plus"></i>Add Course</a></li>--}}
 {{--                                <li><a href="saved-courses.html"><i class="ti-heart"></i>Saved Courses</a></li>--}}
