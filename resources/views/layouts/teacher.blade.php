@@ -6,7 +6,7 @@
     <meta name="author" content="www.frebsite.nl" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-    <title>LearnUp - Online Course & Education HTML Template</title>
+    <title>{{$title}}Smart Learning</title>
 
     <!-- Custom CSS -->
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet">

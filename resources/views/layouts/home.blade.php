@@ -31,7 +31,7 @@
     <!-- Start Navigation -->
     @if(!isset($no_header))
         <div class="header header-light">
-            @include("layouts.nav")
+            @include("layouts.nav", ['logged_as' => "teacher"])
         </div>
     @endif
 <!-- End Navigation -->
