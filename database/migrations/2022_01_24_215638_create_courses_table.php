@@ -27,7 +27,7 @@ class CreateCoursesTable extends Migration
             $table->timestamps();
         });
 
-        DB::update("ALTER TABLE courses AUTO_INCREMENT = 25365;");
+        // DB::update("ALTER TABLE courses AUTO_INCREMENT = 25365;");
     }
 
     /**

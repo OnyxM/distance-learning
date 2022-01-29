@@ -25,7 +25,7 @@ class CreatePartsTable extends Migration
             $table->timestamps();
         });
 
-        DB::update("ALTER TABLE parts AUTO_INCREMENT = 97866;");
+        // DB::update("ALTER TABLE parts AUTO_INCREMENT = 97866;");
     }
 
     /**
