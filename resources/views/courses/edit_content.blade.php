@@ -14,7 +14,7 @@
     </div>
     <!-- /Row -->
 
-    <form action="{{route('course.editContent', ['uuid_course' => $course->uuid])}}" method="POST" enctype="multipart/form-data" id="createContentForm">
+    <form action="{{route('course.updateContent', ['uuid_course' => $course->uuid])}}" method="POST" enctype="multipart/form-data" id="createContentForm">
     @csrf
     <!-- Row -->
         <div class="row">
@@ -33,11 +33,48 @@
         <!-- Row -->
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="" id="course_content"></div>
+                <div class="" id="course_content">
+                    @foreach($parts as $key => $part)<div class="dashboard_container section" id="{{"section".$key+1}}">
+                            <div class="dashboard_container_header">
+                                <div class="dashboard_fl_1">
+                                    <h4>Section {{$key+1}}</h4>
+                                </div>
+                            </div>
+                            <div class="dashboard_container_body p-4">
+                                <!-- Basic info -->
+                                <div class="submit-section">
+                                    <input type="hidden" name="ref_part[]" value="{{$part->uuid}}" required>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label>Title <sup class="text-danger">*</sup></label>
+                                            <input type="text" class="form-control" value="{{old('part_title[$key]')??$part->title}}" placeholder="Section Title" name="part_title[]" required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>Section content(Presentation, PDF or Video) <sup class="text-danger">*</sup></label>
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+{{--                                                    <input type="file" name="uploadfile" id="img" style="display:none;"/>--}}
+{{--                                                    <label for="img">Click me to upload image</label>--}}
+                                                    <input type="file" value="file.png" accept=".pdf,.pptx,.mp4" class="form-control" placeholder="PDF Document" name="part_content[]" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>TD Worksheet (<span class="text-danger">pdf only</span>)</label>
+                                            <input type="text" class="form-control" placeholder="TD worksheet" accept=".pdf"  name="part_td[]">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label>TP Worksheet (<span class="text-danger">pdf only</span>)</label>
+                                            <input type="text" class="form-control" placeholder="TP worksheet" accept=".pdf"  name="part_tp[]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>@endforeach</div>
 
                 <div class="form-group col-md-12">
                     <a href="javascript:void(0);" class="btn add-items" onclick="addSection()"><i class="fa fa-plus-circle"></i>Add Section</a>
-                    <a id="removeSection" href="javascript:void(0);" class="d-none btn-link text-danger" onclick="removeSection()"><i class="fa fa-minus-circle"></i>Remove Last Section</a>
+                    <a id="removeSection" href="javascript:void(0);" class="@if($parts->count() == 1) d-none @endif btn-link text-danger" onclick="removeSection()"><i class="fa fa-minus-circle"></i>Remove Last Section</a>
                 </div>
             </div>
         </div>
@@ -54,9 +91,8 @@
 @section("js")
     <script>
         $(document).ready(function () {
-            stockage.nbre_sections = 0;
-
-            addSection(); // On ajoute la première section obligatoire
+            var parts = {{$parts->count()}};
+            stockage.nbre_sections = parts;
         })
 
         function getNewSectionTemplate() {
@@ -144,6 +180,11 @@
         function removeSection() {
             if (stockage.nbre_sections > 1) {
                 var content = document.getElementById("course_content");
+
+                console.log(content.lastChild);
+                if(content.lastChild === "\n"){
+                    content.removeChild(content.lastChild);
+                }
                 content.removeChild(content.lastChild);
                 stockage.nbre_sections = stockage.nbre_sections - 1;
             }
@@ -151,16 +192,5 @@
                 $("#removeSection").addClass("d-none");
             }
         }
-
-
-        // $(document).on('submit', "#createContentForm", function(evt){
-        //     evt.preventDefault();
-        //
-        //     var formData = new FormData();
-        //
-        //     $.ajax({
-        //
-        //     })
-        // });
     </script>
 @endsection

@@ -182,6 +182,40 @@ class CourseController extends Controller
         return view("courses.edit_content", $data);
     }
 
+    public function updateContent(Request $request, $uuid_course)
+    {
+        // On récupère le cours en fonction du uuid
+        $course = Course::where(['uuid'=>$uuid_course,'user_id' =>auth()->user()->id])->first();
+        if(is_null($course)){
+            abort(404);
+        }
+
+        // On commence par mettre ce côté les parties actuelles (on va les delete à la fin du process)
+        $old_parts = $course->parts;
+
+        // On ajoute le nouveau content
+        foreach ($request->part_title as $key => $title){
+            $uuid_part = Str::uuid();
+
+            // on va upload le contenu du cours
+            $content_file = $request->part_content[$key];
+            $content_name = $content_file->getClientOriginalName();
+            $content_file->move("uploads/courses/".$course->uuid."/$uuid_part/", $content_name);
+
+            Part::create([
+                'title' => $request->part_title[$key],
+                'slug' => Str::slug($request->part_title[$key]),
+                'content' => $content_name,
+                'td' => $request->part_td[$key],
+                'tp' => $request->part_tp[$key],
+                'course_id' => $course->id,
+                'part_uuid' => $uuid_part,
+            ]);
+        }
+
+
+    }
+
     public function delete(Request $request)
     {
         $this->validate($request, [
