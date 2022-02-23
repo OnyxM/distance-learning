@@ -1,0 +1,46 @@
+<div class="dashboard_container section" id="section_1">
+    <div class="dashboard_container_header">
+        <div class="dashboard_fl_1">
+            <div class="h3">
+                <div class="mb-2" data-target="#panel_module_1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">
+                    Module 1
+                </div>
+                <input type="text" class="form-control" placeholder="Chapter II: Phases of a pentest" name="title[]" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard_container_body p-4 collapse" id="panel_module_1">
+        <div class="submit-section">
+            <div class="form-row">
+                <label class="h4">Introductive Video <sup class="text-danger">*</sup></label>
+                <div class="form-group col-md-12">
+                    <input type="file" accept=".mp4,.mkv" class="form-control" placeholder="Introduction" name="intro[]" required>
+                </div>
+
+                <div class="accordion form-group col-md-12">
+                    <div data-target="#panel_module_1_sections" class="accordion-panel-header collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">
+                        Sections of Module
+                    </div>
+                    <div class="collapse" id="panel_module_1_sections">
+                        <div class="form-group col-md-12 mb-4">
+                            <div class="row sections"></div>
+
+                            <a href="javascript:void(0);" class="btn text-dark" onclick="addSection(this)"><i class="fa fa-plus-circle"></i>Add section</a>
+                            <a href="javascript:void(0);" style="display: none" class="btn text-danger" onclick="removeSection(this)"><i class="fa fa-minus-circle"></i>Remove last section</a>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="h4">TD Worksheet (<span class="text-danger">pdf only</span>)</label>
+                <div class="form-group col-md-12">
+                    <input type="file" class="form-control" placeholder="TD worksheet" accept=".pdf"  name="module_td[]">
+                </div>
+                <label class="h4">TP Worksheet (<span class="text-danger">pdf only</span>)</label>
+                <div class="form-group col-md-12">
+                    <input type="file" class="form-control" placeholder="TP worksheet" accept=".pdf"  name="module_tp[]">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

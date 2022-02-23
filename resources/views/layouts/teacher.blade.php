@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="author" content="www.frebsite.nl" />
+    <meta name="author" content="Tsinda Moffo Onesime" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>{{$title}}Smart Learning</title>
@@ -13,6 +13,7 @@
 
     <!-- Custom Color Option -->
     <link href="{{asset('assets/css/colors.css')}}" rel="stylesheet">
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 
     @yield("css")
 </head>
@@ -105,7 +106,6 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/js/popper.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
 {{--<script src="{{asset('assets/js/select2.min.js')}}"></script>--}}

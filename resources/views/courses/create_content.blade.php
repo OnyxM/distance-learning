@@ -1,5 +1,10 @@
 @extends("layouts.teacher")
 
+@section("css")
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+@endsection
+
 @section("content")
     <!-- Row -->
     <div class="row">
@@ -7,7 +12,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('user.index')}}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Add Course</li>
+                    <li class="breadcrumb-item active" aria-current="page">Add content to your newly created course</li>
                 </ol>
             </nav>
         </div>
@@ -16,63 +21,11 @@
 
     <form action="{{route('course.createContent', ['uuid_course' => $course->uuid])}}" method="POST" enctype="multipart/form-data" id="createContentForm">
     @csrf
-    <!-- Row -->
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="dashboard_container">
-                    <div class="dashboard_container_header">
-                        <div class="dashboard_fl_1">
-                            <h4>Course Content</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /Row -->
 
         <!-- Row -->
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="" id="course_content">
-                    <div class="dashboard_container section" id="section_1">
-                        <div class="dashboard_container_header">
-                            <div class="dashboard_fl_1">
-                                <div class="h3">
-                                    Module 1:
-                                    <input type="text" class="form-control" placeholder="Chapter II: Phases of a pentest" name="title[]" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dashboard_container_body p-4">
-                            <div class="submit-section">
-                                <div class="form-row">
-                                    <label class="h4">Introductive Video <sup class="text-danger">*</sup></label>:
-                                    <div class="form-group col-md-12">
-                                        <input type="file" accept=".mp4,.mkv" class="form-control" placeholder="Introduction" name="intro[]" required>
-                                    </div>
-
-                                    <label for="Sections" class="h4">Sections of Module</label>
-                                    <div class="form-group col-md-12 mb-4">
-                                        <div class="row sections"></div>
-
-                                        <a href="javascript:void(0);" class="btn text-dark" onclick="addSection(this)"><i class="fa fa-plus-circle"></i>Add section</a>
-                                        <a href="javascript:void(0);" style="display: none" class="btn text-danger" onclick="removeSection(this)"><i class="fa fa-minus-circle"></i>Remove last section</a>
-                                    </div>
-
-                                    <label class="h4">TD Worksheet (<span class="text-danger">pdf only</span>)</label>
-                                    <div class="form-group col-md-12">
-                                        <input type="file" class="form-control" placeholder="TD worksheet" accept=".pdf"  name="module_td[]">
-                                    </div>
-                                    <label class="h4">TP Worksheet (<span class="text-danger">pdf only</span>)</label>
-                                    <div class="form-group col-md-12">
-                                        <input type="file" class="form-control" placeholder="TP worksheet" accept=".pdf"  name="module_tp[]">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="" id="course_content"></div>
 
                 <div class="form-group col-md-12">
                     <a href="javascript:void(0);" class="btn add-items" onclick="addModule()"><i class="fa fa-plus-circle"></i>Add Module</a>
@@ -93,63 +46,77 @@
 @section("js")
     <script>
         $(document).ready(function () {
-            stockage.nbre_sections = 0;
+            stockage.nbre_modules = 0;
 
-            // addModule(); // On ajoute la première section obligatoire
+            addModule(); // On ajoute la première section obligatoire
         })
 
         function getNewModuleTemplate() {
-            stockage.nbre_sections++;
-            var id = stockage.nbre_sections; // get the n° of the section to be created
+            stockage.nbre_modules++;
+            var id = stockage.nbre_modules; // get the n° of the section to be created
 
-            return '<div class="dashboard_container section" id="section' + id + '">\n' +
-                '<div class="dashboard_container_header">\n' +
-                '    <div class="dashboard_fl_1">\n' +
-                '        <h4>Module ' + id + '</h4>\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '<div class="dashboard_container_body p-4">\n' +
-                '    <!-- Basic info -->\n' +
-                '    <div class="submit-section">\n' +
-                '        <div class="form-row">\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>Title <sup class="text-danger">*</sup></label>\n' +
-                '                <input type="text" class="form-control" placeholder="Module Title" name="part_title[]" required>\n' +
-                '            </div>\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>Module content(Presentation, PDF or Video) <sup class="text-danger">*</sup></label>\n' +
-                '                <div class="row">\n' +
-                '                    <div class="form-group col-md-12">\n' +
-                '                        <input type="file" accept=".pdf,.pptx,.mp4" class="form-control" placeholder="PDF Document" name="part_content[]" required>\n' +
-                '                    </div>\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>TD Worksheet (<span class="text-danger">pdf only</span>)</label>\n' +
-                '                <input type="text" class="form-control" placeholder="TD worksheet" accept=".pdf"  name="part_td[]">\n' +
-                '            </div>\n' +
-                '            <div class="form-group col-md-12">\n' +
-                '                <label>TP Worksheet (<span class="text-danger">pdf only</span>)</label>\n' +
-                '                <input type="text" class="form-control" placeholder="TP worksheet" accept=".pdf"  name="part_tp[]">\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '    </div>\n' +
-                '</div>\n' +
-                '</div>';
+            return '<div class="dashboard_container section" id="module' + id + '">\n' +
+                '                        <div class="dashboard_container_header">\n' +
+                '                            <div class="dashboard_fl_1">\n' +
+                '                                <div class="h3">\n' +
+                '                                    <div class="mb-2" data-target="#panel_module_'+id+'" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-'+id+'">Module ' + id + '</div>\n' +
+                '                                    <input type="text" class="form-control" placeholder="Chapter II: Phases of a pentest" name="title[]" required>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '\n' +
+                '                        <div class="dashboard_container_body p-4 collapse" id="panel_module_'+id+'">\n' +
+                '                            <div class="submit-section">\n' +
+                '                                <div class="form-row">\n' +
+                '                                    <label class="h4">Introductive Video <sup class="text-danger">*</sup></label>\n' +
+                '                                    <div class="form-group col-md-12">\n' +
+                '                                        <input type="file" accept=".mp4,.mkv" class="form-control" placeholder="Introduction" name="intro[]" required>\n' +
+                '                                    </div>\n' +
+                '\n' +
+                '                                    <div class="accordion form-group col-md-12">\n' +
+                '                                        <div data-target="#panel_module_'+id+'_sections" class="accordion-panel-header collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">\n' +
+                '                                            <label for="Sections" class="h4">Sections of Module</label>\n' +
+                '                                        </div>\n' +
+                '                                        <div class="collapse" id="panel_module_'+id+'_sections">\n' +
+                '                                            <div class="form-group col-md-12 mb-4">\n' +
+                '                                                <div class="row sections"></div>\n' +
+                '\n' +
+                '                                                <a href="javascript:void(0);" class="btn text-dark add_section_item" onclick="addSection(this)"><i class="fa fa-plus-circle"></i>Add section</a>\n' +
+                '                                                <a href="javascript:void(0);" style="display: none" class="btn text-danger" onclick="removeSection(this)"><i class="fa fa-minus-circle"></i>Remove last section</a>\n' +
+                '                                            </div>\n' +
+                '                                        </div>\n' +
+                '                                    </div>\n' +
+                '\n' +
+                '                                    <label class="h4">TD Worksheet (<span class="text-danger">pdf only</span>)</label>\n' +
+                '                                    <div class="form-group col-md-12">\n' +
+                '                                        <input type="file" class="form-control" placeholder="TD worksheet" accept=".pdf"  name="module_td[]">\n' +
+                '                                    </div>\n' +
+                '                                    <label class="h4">TP Worksheet (<span class="text-danger">pdf only</span>)</label>\n' +
+                '                                    <div class="form-group col-md-12">\n' +
+                '                                        <input type="file" class="form-control" placeholder="TP worksheet" accept=".pdf"  name="module_tp[]">\n' +
+                '                                    </div>\n' +
+                '                                </div>\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                    </div>';
         }
 
         function getNewSectionTemplate(m_i, s_i){
-            return "<div class=\"form-group col-md-12\" id=\"module_"+m_i+"_section_"+s_i+"\">\n" +
-                "               <label>Section content <sup class=\"text-danger\">*</sup></label>\n" +
-                "               <div class=\"row\">\n" +
-                "                    <div class=\"form-group col-md-12\">\n" +
-                "                         <input type=\"text\" class=\"form-control\" placeholder=\"Section "+s_i+": Name of Section\" name=\"module_"+m_i+"_section_title[]\" required>\n" +
-                "                     </div>\n" +
-                "                     <div class=\"form-group col-md-12\">\n" +
-                "                          <textarea name=\"module_"+m_i+"_section_content[]\" id=\"\" cols=\"30\" rows=\"10\" class=\"form-control\" required></textarea>\n" +
-                "                     </div>\n" +
-                "                 </div>\n" +
-                "           </div>";
+            return "<div class=\"accordion form-group col-md-12\" id=\"module_"+m_i+"_section_"+s_i+"\">\n" +
+                "      <div data-target=\"#panel_module_"+m_i+"_section_"+s_i+"\" class=\"accordion-panel-header collapsed\" data-toggle=\"collapse\" role=\"button\" aria-expanded=\"false\" aria-controls=\"panel-1\">\n" +
+                "          <span class=\"h6 mb-0\">Section "+s_i+" </span>\n" +
+                "       </div>"+
+                "       <div class=\"collapse\" id=\"panel_module_"+m_i+"_section_"+s_i+"\">"+
+                "           <div class=\"row\">\n" +
+                "               <div class=\"form-group col-md-12\">\n" +
+                "                   <input type=\"text\" class=\"form-control\" placeholder=\"Section "+s_i+": Name of Section\" name=\"module_"+m_i+"_section_title[]\" required>\n" +
+                "               </div>\n" +
+                "               <div class=\"form-group col-md-12\">\n" +
+                "                   <textarea name=\"module_"+m_i+"_section_content[]\" id=\"\" cols=\"30\" rows=\"10\" class=\"form-control summernote\" required></textarea>\n" +
+                "               </div>\n" +
+                "             </div>\n" +
+                "        </div>"+
+                "     </div>";
         }
     </script>
 
@@ -163,24 +130,7 @@
     <!-- ============================================================== -->
     <script src="{{asset('assets/js/metisMenu.min.js')}}"></script>
 
-    <script>
-        // Course Expire and Start Daterange Script
-        $(function () {
-            $('input[name="edu-expire"]').daterangepicker({
-                singleDatePicker: true,
-            });
-            $('input[name="edu-expire"]').val('');
-            $('input[name="edu-expire"]').attr("placeholder", "Course Expire");
-        });
-        $(function () {
-            $('input[name="edu-start"]').daterangepicker({
-                singleDatePicker: true,
 
-            });
-            $('input[name="start"]').val('');
-            $('input[name="start"]').attr("placeholder", "Course Start");
-        });
-    </script>
 
     <script>
         function addModule() {
@@ -189,39 +139,48 @@
 
             course_content.append(child_template);
 
-            if (stockage.nbre_sections > 1) {
+            if (stockage.nbre_modules > 1) {
                 $("#removeModule").removeClass("d-none");
             }
+
+            var id = stockage.nbre_modules,
+                parent = "module"+id;
+
+            // adding the first section of this module
+            document.querySelectorAll("#"+parent+" .add_section_item")[0].click();
         }
 
         function addSection(add_section_btn){
             let section_content = add_section_btn.previousElementSibling,
-                new_section = getNewSectionTemplate(1, section_content.childElementCount+1);
+                new_section = getNewSectionTemplate(1, section_content.childElementCount+1),
+                remove_section_btn = add_section_btn.nextElementSibling;
 
             $(section_content).append(new_section);
 
-            toggleRemoveSectionButton(section_content);
+            toggleDisplaySectionButton(section_content, remove_section_btn);
+
+            $(".summernote").summernote();
         }
 
         function removeModule() {
-            if (stockage.nbre_sections > 1) {
+            if (stockage.nbre_modules > 1) {
                 var content = document.getElementById("course_content");
                 content.removeChild(content.lastChild);
-                stockage.nbre_sections = stockage.nbre_sections - 1;
+                stockage.nbre_modules = stockage.nbre_modules - 1;
             }
-            if (stockage.nbre_sections == 1) {
+            if (stockage.nbre_modules == 1) {
                 $("#removeModule").addClass("d-none");
             }
         }
 
         function removeSection(remove_section_btn){
             let section_content = (remove_section_btn.previousElementSibling).previousElementSibling;
+            section_content.lastElementChild.remove();
 
-            toggleRemoveSectionButton(section_content);
+            toggleDisplaySectionButton(section_content, remove_section_btn);
         }
 
-        function toggleRemoveSectionButton(section_content){
-            section_content.lastElementChild.remove();
+        function toggleDisplaySectionButton(section_content, remove_section_btn){
 
             if(section_content.childElementCount > 1){
                 remove_section_btn.style.display = "inline";
