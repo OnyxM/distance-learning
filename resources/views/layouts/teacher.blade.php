@@ -33,34 +33,28 @@
     <div class="header header-light head-shadow">
         @include("layouts.nav", ['logged_as' => 'teacher'])
     </div>
-    <!-- End Navigation -->
-    <div class="clearfix"></div>
-    <!-- ============================================================== -->
-    <!-- Top header  -->
-    <!-- ============================================================== -->
-
 
     <!-- ============================ Dashboard: Dashboard Start ================================== -->
     <section class="gray pt-0">
         <div class="container-fluid">
 
-            <div class="row">
+            <div class="row justify-content-center">
 
-                <div class="col-lg-3 col-md-3 p-0">
-                    <div class="dashboard-navbar">
+{{--                <div class="col-lg-3 col-md-3 p-0">--}}
+{{--                    <div class="dashboard-navbar">--}}
 
-                        <div class="d-user-avater">
-                            <img src="{{auth()->user()->photo}}" class="img-fluid avater" alt="">
-                            <h4>{{ucwords(auth()->user()->name)}}</h4>
-                            <span>Canada USA</span>
-                        </div>
+{{--                        <div class="d-user-avater">--}}
+{{--                            <img src="{{auth()->user()->photo}}" class="img-fluid avater" alt="">--}}
+{{--                            <h4>{{ucwords(auth()->user()->name)}}</h4>--}}
+{{--                            <span>Canada USA</span>--}}
+{{--                        </div>--}}
 
-                        <div class="d-navigation">
-                            <ul id="side-menu">
-                                <li class="active"><a href="{{route('teacher.index')}}"><i class="ti-user"></i>Dashboard</a></li>
+{{--                        <div class="d-navigation">--}}
+{{--                            <ul id="side-menu">--}}
+{{--                                <li class="active"><a href="{{route('teacher.index')}}"><i class="ti-user"></i>Dashboard</a></li>--}}
 {{--                                <li><a href="javascript:void(0);"><i class="ti-heart"></i>My Profile</a></li>--}}
-                                <li><a href="{{route('course.add')}}"><i class="ti-plus"></i>Add Course</a></li>
-                                <li><a href="{{route('course.index')}}"><i class="ti-plus"></i>My Courses</a></li>
+{{--                                <li><a href="{{route('course.add')}}"><i class="ti-plus"></i>Add Course</a></li>--}}
+{{--                                <li><a href="{{route('course.index')}}"><i class="ti-plus"></i>My Courses</a></li>--}}
 {{--                                <li><a href="{{route('course.add')}}"><i class="ti-plus"></i>Add Course</a></li>--}}
 {{--                                <li><a href="saved-courses.html"><i class="ti-heart"></i>Saved Courses</a></li>--}}
 {{--                                <li class="dropdown">--}}
@@ -76,16 +70,16 @@
 {{--                                <li><a href="settings.html"><i class="ti-settings"></i>Settings</a></li>--}}
 {{--                                <li><a href="reviews.html"><i class="ti-comment-alt"></i>Reviews</a></li>--}}
 
-                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ti-power-off"></i>Log Out</a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+{{--                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="ti-power-off"></i>Log Out</a></li>--}}
+{{--                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">--}}
+{{--                                    @csrf--}}
+{{--                                </form>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div class="col-lg-9 col-md-9 col-sm-12">
+                <div class="col-lg-8 col-md-8 col-sm-12">
                     @yield("content")
                 </div>
 

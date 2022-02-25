@@ -18,8 +18,8 @@ class CreateSectionsTable extends Migration
             $table->string("title");
             $table->string("slug");
             $table->text("content");
+            $table->uuid("uuid");
             $table->integer("module_id");
-            $table->uuid("section_uuid");
             $table->timestamps();
         });
     }

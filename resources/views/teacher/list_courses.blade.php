@@ -8,6 +8,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('teacher.index')}}">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">All Courses</li>
+                    <li class=""><a href="{{route('course.add')}}" class="btn btn-sm btn-danger" style="margin-left: 72%!important;">Add Course</a></li>
                 </ol>
             </nav>
         </div>

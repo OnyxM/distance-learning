@@ -34,8 +34,8 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function parts()
+    public function modules()
     {
-        return $this->hasMany(Part::class);
+        return $this->hasMany(Module::class);
     }
 }

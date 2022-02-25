@@ -21,6 +21,7 @@
 
     <form action="{{route('course.createContent', ['uuid_course' => $course->uuid])}}" method="POST" enctype="multipart/form-data" id="createContentForm">
     @csrf
+        <input type="hidden" name="uuid" value="{{$course->uuid}}" required>
 
         <!-- Row -->
         <div class="row">
@@ -60,7 +61,7 @@
                 '                            <div class="dashboard_fl_1">\n' +
                 '                                <div class="h3">\n' +
                 '                                    <div class="mb-2" data-target="#panel_module_'+id+'" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-'+id+'">Module ' + id + '</div>\n' +
-                '                                    <input type="text" class="form-control" placeholder="Chapter II: Phases of a pentest" name="title[]" required>\n' +
+                '                                    <input type="text" class="form-control" placeholder="Chapter II: Phases of a pentest" name="module_title[]" required>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                        </div>\n' +
@@ -70,7 +71,7 @@
                 '                                <div class="form-row">\n' +
                 '                                    <label class="h4">Introductive Video <sup class="text-danger">*</sup></label>\n' +
                 '                                    <div class="form-group col-md-12">\n' +
-                '                                        <input type="file" accept=".mp4,.mkv" class="form-control" placeholder="Introduction" name="intro[]" required>\n' +
+                '                                        <input type="file" accept=".mp4,.mkv" class="form-control" placeholder="Introduction" name="module_intro[]" required>\n' +
                 '                                    </div>\n' +
                 '\n' +
                 '                                    <div class="accordion form-group col-md-12">\n' +
@@ -151,8 +152,11 @@
         }
 
         function addSection(add_section_btn){
+
+            let primeParent_id = add_section_btn.closest("div[class='dashboard_container section']").getAttribute("id");
+
             let section_content = add_section_btn.previousElementSibling,
-                new_section = getNewSectionTemplate(1, section_content.childElementCount+1),
+                new_section = getNewSectionTemplate(primeParent_id.split('module')[1], section_content.childElementCount+1),
                 remove_section_btn = add_section_btn.nextElementSibling;
 
             $(section_content).append(new_section);

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Module;
 use App\Models\Part;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -66,7 +68,7 @@ class CourseController extends Controller
     public function addContent($uuid_course)
     {
         // On récupère le cours en fonction du uuid
-        $course = Course::where(['uuid'=>$uuid_course, 'user_id'=>auth()->user()->id]) ->first();
+        $course = Course::where(['uuid'=>$uuid_course, 'user_id'=>auth()->user()->id])->first();
 
         if(is_null($course)){
             abort(404);
@@ -89,23 +91,50 @@ class CourseController extends Controller
             abort(404);
         }
 
-        foreach ($request->part_title as $key => $title){
-            $uuid_part = Str::uuid();
+        $nbre=1;
+        foreach ($request->module_title as $key => $module_title) {
+            $module_uuid = Str::uuid();
 
-            // on va upload le contenu du cours
-            $content_file = $request->part_content[$key];
-            $content_name = $content_file->getClientOriginalName();
-            $content_file->move("uploads/courses/".$course->uuid."/$uuid_part/", $content_name);
+            // Upload de la vid_intro
+            $intro_vid_file = $request->module_intro[$key];
+            $intro_video = $intro_vid_file->getClientOriginalName();
+            $intro_vid_file->move("uploads/courses/".$course->uuid."/module$nbre/", $intro_video);
 
-            Part::create([
-                'title' => $request->part_title[$key],
-                'slug' => Str::slug($request->part_title[$key]),
-                'content' => $content_name,
-                'td' => $request->part_td[$key],
-                'tp' => $request->part_tp[$key],
+            // Upload de la td_file
+            $td_file = $request->module_td[$key];
+            $td_name = $td_file->getClientOriginalName();
+            $td_file->move("uploads/courses/".$course->uuid."/module$nbre/", $td_name);
+
+            // Upload de la tp_file
+            $tp_file = $request->module_tp[$key];
+            $tp_name = $tp_file->getClientOriginalName();
+            $tp_file->move("uploads/courses/".$course->uuid."/module$nbre/", $tp_name);
+
+
+            $module = Module::create([
+                'name' => $module_title,
+                'slug' => Str::slug($module_title),
+                'intro' => $intro_video,
+                'td' => $td_name,
+                'tp' => $tp_name,
+                'uuid' => $module_uuid,
                 'course_id' => $course->id,
-                'part_uuid' => $uuid_part,
             ]);
+
+            $module_sections_title ="module_".$nbre."_section_title";
+            $module_sections_content ="module_".$nbre."_section_content";
+
+            foreach ($request->$module_sections_title as $k => $module_section_title) {
+                Section::create([
+                    'title' => $module_section_title,
+                    'slug' => Str::slug($module_section_title),
+                    'content' => $request->$module_sections_content[$k],
+                    'uuid' => Str::uuid(),
+                    'module_id' => $module->id
+                ]);
+            }
+
+            $nbre++;
         }
 
         return redirect()->route("course.details", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
