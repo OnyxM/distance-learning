@@ -185,6 +185,7 @@ class CourseController extends Controller
 
         $course->title = $request->title;
         $course->slug = Str::slug($request->title);
+        $course->price = $request->price;
         $course->description = $request->description;
         $course->category_id = $request->category;
 
@@ -205,7 +206,7 @@ class CourseController extends Controller
         $data = [
             'title' => "Edit Content - " . $course->title . " - ",
             'course' => $course,
-            'parts' => $course->parts,
+            'modules' => $course->modules,
         ];
 
         return view("courses.edit_content", $data);
@@ -219,30 +220,146 @@ class CourseController extends Controller
             abort(404);
         }
 
-        // On commence par mettre ce côté les parties actuelles (on va les delete à la fin du process)
-        $old_parts = $course->parts;
+        dd($request->all());
+        // Il manque plus que la suppression des éléments non modifiés (meaning ils n'existent pas dans le Request soumis)
 
-        // On ajoute le nouveau content
-        foreach ($request->part_title as $key => $title){
-            $uuid_part = Str::uuid();
+        /* On va parcourir les uuid des modules qui sont hidden.
+         * On commence par DELETE les modules qui n'ont pas été envoyées dans le formulaire
+         * Pour chacun restant, on s'assure qu'il est le uuid d'un module de ce cours et on update ses élts.
+         * On fait la même chose au sous-niveau pour les sections. */
 
-            // on va upload le contenu du cours
-            $content_file = $request->part_content[$key];
-            $content_name = $content_file->getClientOriginalName();
-            $content_file->move("uploads/courses/".$course->uuid."/$uuid_part/", $content_name);
+//        $fake_modules = $course->modules()->whereNotIn('uuid', $request->m_uuid)->get();
+//        foreach ($fake_modules as $fake_module) {
+//            $fake_module->sections()->delete(); // suppression en cascade
+//            $fake_module->delete();
+//        }
 
-            Part::create([
-                'title' => $request->part_title[$key],
-                'slug' => Str::slug($request->part_title[$key]),
-                'content' => $content_name,
-                'td' => $request->part_td[$key],
-                'tp' => $request->part_tp[$key],
-                'course_id' => $course->id,
-                'part_uuid' => $uuid_part,
-            ]);
+        $new_module_indices = 0;
+        foreach ($request->module_title as $key => $title) {
+            $ind = $key+1; $m_uuid = "m_{$ind}_uuid"; @$module_uuid = $request->$m_uuid;
+            $module = $course->modules()->whereUuid($module_uuid)->first();
+
+            if(!is_null($module)){
+                $intro_file = "intro$ind"; $module_td = "module_td$ind"; $module_tp = "module_tp$ind";
+
+                if(!is_null($request->$intro_file)){
+                    // Upload de la vid_intro
+                    $intro_vid_file = $request->$intro_file;
+                    $intro_video = $intro_vid_file->getClientOriginalName();
+                    $intro_vid_file->move("uploads/courses/".$course->uuid."/module$ind/", $intro_video);
+
+                    $module->update([
+                        'intro' => $intro_video
+                    ]); $module->save();
+
+                }
+                if(!is_null($request->$module_td)){
+                    $td_file = $request->$module_td;
+                    $td_name = $td_file->getClientOriginalName();
+                    $td_file->move("uploads/courses/".$course->uuid."/module$nbre/", $td_name);
+
+                    $module->update([
+                        'intro' => $td_name
+                    ]); $module->save();
+
+                }
+                if(!is_null($request->$module_tp)){
+                    $tp_file = $request->$module_tp;
+                    $tp_name = $tp_file->getClientOriginalName();
+                    $tp_file->move("uploads/courses/".$course->uuid."/module$nbre/", $tp_name);
+
+                    $module->update([
+                        'intro' => $tp_name
+                    ]); $module->save();
+
+                }
+                $module->update([
+                    'name' => $request->module_title[$key],
+                    'slug' => Str::slug($request->module_title[$key]),
+                ]); $module->save();
+
+                // On s'occupe now des sections
+//                $fake_sections = $module->sections()->whereNotIn('uuid', $request->$section_uuids)->get();
+//                foreach ($fake_sections as $fake_section) {
+//                    $fake_section->delete();
+//                }
+
+                $mod_section_title = "module_{$ind}_section_title"; $mod_section_content = "module_{$ind}_section_content";
+                if(!is_null($request->$mod_section_title)){ // This is not suppose to happen but ....
+                    foreach ($request->$mod_section_title as $sec_key => $section_title) {
+                        $s_ind = $sec_key+1; $m_s_uuid = "m_{$ind}_s_{$s_ind}_uuid"; @$section_uuid = $request->$m_s_uuid;
+                        $section = $module->sections()->whereUuid($section_uuid)->first();
+                        //dd($s_ind, $m_s_uuid, $section_uuid, $section);
+
+                        if(!is_null($section)){
+                            $section->update([
+                                'title' => $request->$mod_section_title[$sec_key],
+                                'slug' => Str::slug($request->$mod_section_title[$sec_key]),
+                                'content' => $request->$mod_section_content[$sec_key],
+                            ]); $section->save();
+                        }else{
+                            Section::create([
+                                'title' => $request->$mod_section_title[$sec_key],
+                                'slug' => Str::slug($request->$mod_section_title[$sec_key]),
+                                'content' => $request->$mod_section_content[$sec_key],
+                                'uuid' => Str::uuid(),
+                                'module_id' => $module->id
+                            ]);
+                        }
+                    }
+                }
+            }
+            else{
+                // die("Create this module and attach it to the course ...");
+
+                $nbre = $course->modules()->count() + 1;
+
+                $new_module_uuid = Str::uuid();
+
+                // Upload de la vid_intro
+                $intro_vid_file = $request->module_intro[$new_module_indices];
+                $intro_video = $intro_vid_file->getClientOriginalName();
+                $intro_vid_file->move("uploads/courses/".$course->uuid."/module$nbre/", $intro_video);
+
+                // Upload de la td_file
+                $td_file = $request->module_td[$new_module_indices];
+                $td_name = $td_file->getClientOriginalName();
+                $td_file->move("uploads/courses/".$course->uuid."/module$nbre/", $td_name);
+
+                // Upload de la tp_file
+                $tp_file = $request->module_tp[$new_module_indices];
+                $tp_name = $tp_file->getClientOriginalName();
+                $tp_file->move("uploads/courses/".$course->uuid."/module$nbre/", $tp_name);
+
+
+                $new_module_created = Module::create([
+                    'name' => $request->module_title[$key],
+                    'slug' => Str::slug($request->module_title[$key]),
+                    'intro' => $intro_video,
+                    'td' => $td_name,
+                    'tp' => $tp_name,
+                    'uuid' => $new_module_uuid,
+                    'course_id' => $course->id,
+                ]);
+
+                $module_sections_title ="module_".$nbre."_section_title";
+                $module_sections_content ="module_".$nbre."_section_content";
+
+                foreach ($request->$module_sections_title as $k => $module_section_title) {
+                    Section::create([
+                        'title' => $module_section_title,
+                        'slug' => Str::slug($module_section_title),
+                        'content' => $request->$module_sections_content[$k],
+                        'uuid' => Str::uuid(),
+                        'module_id' => $new_module_created->id
+                    ]);
+                }
+
+                $nbre++; $new_module_indices++;
+            }
         }
 
-
+        // return redirect()->route("course.details", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
     }
 
     public function delete(Request $request)

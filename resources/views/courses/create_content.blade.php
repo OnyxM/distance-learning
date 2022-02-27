@@ -47,7 +47,7 @@
 @section("js")
     <script>
         $(document).ready(function () {
-            stockage.nbre_modules = 0;
+            stockage.nbre_modules = document.getElementById("course_content").childElementCount; // pour plus de précision
 
             addModule(); // On ajoute la première section obligatoire
         })
