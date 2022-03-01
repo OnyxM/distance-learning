@@ -220,7 +220,7 @@ class CourseController extends Controller
             abort(404);
         }
 
-        dd($request->all());
+        // dd($request->all());
         // Il manque plus que la suppression des éléments non modifiés (meaning ils n'existent pas dans le Request soumis)
 
         /* On va parcourir les uuid des modules qui sont hidden.
@@ -228,16 +228,13 @@ class CourseController extends Controller
          * Pour chacun restant, on s'assure qu'il est le uuid d'un module de ce cours et on update ses élts.
          * On fait la même chose au sous-niveau pour les sections. */
 
-//        $fake_modules = $course->modules()->whereNotIn('uuid', $request->m_uuid)->get();
-//        foreach ($fake_modules as $fake_module) {
-//            $fake_module->sections()->delete(); // suppression en cascade
-//            $fake_module->delete();
-//        }
-
         $new_module_indices = 0;
+        $modules_to_update = array();
         foreach ($request->module_title as $key => $title) {
             $ind = $key+1; $m_uuid = "m_{$ind}_uuid"; @$module_uuid = $request->$m_uuid;
             $module = $course->modules()->whereUuid($module_uuid)->first();
+
+            $modules_to_update[] = $module_uuid;
 
             if(!is_null($module)){
                 $intro_file = "intro$ind"; $module_td = "module_td$ind"; $module_tp = "module_tp$ind";
@@ -278,18 +275,14 @@ class CourseController extends Controller
                     'slug' => Str::slug($request->module_title[$key]),
                 ]); $module->save();
 
-                // On s'occupe now des sections
-//                $fake_sections = $module->sections()->whereNotIn('uuid', $request->$section_uuids)->get();
-//                foreach ($fake_sections as $fake_section) {
-//                    $fake_section->delete();
-//                }
-
                 $mod_section_title = "module_{$ind}_section_title"; $mod_section_content = "module_{$ind}_section_content";
                 if(!is_null($request->$mod_section_title)){ // This is not suppose to happen but ....
+
+                    $sections_to_update = array();
                     foreach ($request->$mod_section_title as $sec_key => $section_title) {
                         $s_ind = $sec_key+1; $m_s_uuid = "m_{$ind}_s_{$s_ind}_uuid"; @$section_uuid = $request->$m_s_uuid;
                         $section = $module->sections()->whereUuid($section_uuid)->first();
-                        //dd($s_ind, $m_s_uuid, $section_uuid, $section);
+                        $sections_to_update[] = $section_uuid;
 
                         if(!is_null($section)){
                             $section->update([
@@ -306,6 +299,12 @@ class CourseController extends Controller
                                 'module_id' => $module->id
                             ]);
                         }
+                    }
+
+
+                    $fake_sections = $module->sections()->whereNotIn('uuid', $sections_to_update)->get();
+                    foreach ($fake_sections as $fake_section) {
+                        $fake_section->delete();
                     }
                 }
             }
@@ -358,6 +357,14 @@ class CourseController extends Controller
                 $nbre++; $new_module_indices++;
             }
         }
+
+        $fake_modules = $course->modules()->whereNotIn('uuid', $modules_to_update)->get();
+        foreach ($fake_modules as $fake_module) {
+            $fake_module->sections()->delete(); // suppression en cascade
+            $fake_module->delete();
+        }
+
+        dd($modules_to_update, $course->modules()->pluck('uuid')->toArray());
 
         // return redirect()->route("course.details", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
     }

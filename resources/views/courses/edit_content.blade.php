@@ -80,7 +80,7 @@
                                                     </div>
 
                                                     <a href="javascript:void(0);" class="btn text-dark" onclick="addSection(this)"><i class="fa fa-plus-circle"></i>Add section</a>
-                                                    <a href="javascript:void(0);" style="display: none" class="btn text-danger" onclick="removeSection(this)"><i class="fa fa-minus-circle"></i>Remove last section</a>
+                                                    <a href="javascript:void(0);" @if($module->sections()->count() <= 1) style="display: none" @endif class="btn text-danger" onclick="removeSection(this)"><i class="fa fa-minus-circle"></i>Remove last section</a>
                                                 </div>
                                             </div>
                                         </div>
