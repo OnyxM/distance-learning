@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+ini_set("upload_max_filesize", "40m");
+ini_set("post_max_size", "50m");
+
 /*
 |--------------------------------------------------------------------------
 | Check If The Application Is Under Maintenance
