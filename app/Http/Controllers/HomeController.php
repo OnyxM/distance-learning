@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,6 +19,8 @@ class HomeController extends Controller
     public function courses(){
         $data = [
             'title' => "Courses - ",
+            'courses' => Course::cursorPaginate(9),
+            'categories' => Category::all(),
         ];
 
         return view("courses", $data);

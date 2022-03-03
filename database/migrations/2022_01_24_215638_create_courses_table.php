@@ -20,7 +20,7 @@ class CreateCoursesTable extends Migration
             $table->string("price");
             $table->text("description");
             $table->uuid("uuid");
-            $table->string("photo");
+            $table->string("photo")->default("course-4.jpg");
             $table->integer("category_id");
             $table->integer("user_id");
             $table->softDeletes();
