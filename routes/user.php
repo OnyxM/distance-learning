@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, "index"])->name("user.index");
-Route::get('/course/{slug_course}', [UserController::class, "index"])->name("course.details");
+Route::get('/course/{id}-{slug_course}', [CourseController::class, "course_details"])->name("course.details");
