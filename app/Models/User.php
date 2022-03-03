@@ -48,7 +48,7 @@ class User extends Authenticatable
     ];
 
     public function getNameAttribute(){
-        return $this->firstname." ".$this->lastname;
+        return ucwords($this->firstname." ".$this->lastname);
     }
 
     public function getPhotoAttribute(){
