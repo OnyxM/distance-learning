@@ -385,4 +385,20 @@ class CourseController extends Controller
 
         return redirect()->route('course.index');
     }
+
+    public function course_details($id, $slug_course)
+    {
+        $course = Course::where(['id' => $id,'slug' => $slug_course])->first();
+
+        if(is_null($course)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => $course->title." - ",
+            'course' => $course
+        ];
+
+        return view("courses.overview", $data);
+    }
 }
