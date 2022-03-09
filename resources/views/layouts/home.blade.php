@@ -16,6 +16,9 @@
     <!-- Custom Color Option -->
     <link href="{{asset('assets/css/colors.css')}}" rel="stylesheet">
 
+    @yield('css')
+
+
 </head>
 
 <body class="red-skin">
