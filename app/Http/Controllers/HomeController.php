@@ -51,7 +51,6 @@ class HomeController extends Controller
             $courses = (isset($courses)) ? $courses->whereIn("category_id", $filter_category) : Course::whereIn("category_id", $filter_category);
         }
 
-        die;
         $data = [
             'title' => "Courses - ",
             'courses' => (isset($courses)) ? $courses->cursorPaginate(9) : Course::cursorPaginate(9),
