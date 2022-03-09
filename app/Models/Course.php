@@ -24,6 +24,9 @@ class Course extends Model
 
     public function getPhotoAttribute()
     {
+        if($this->attributes['photo'] == "course-4.jpg"){
+            return asset("assets/img/".$this->attributes['photo']);
+        }
         $uuid_course = $this->uuid;
 
         return asset("uploads/courses/$uuid_course/".$this->attributes['photo']);

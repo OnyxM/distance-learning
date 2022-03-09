@@ -16,7 +16,7 @@ class CourseController extends Controller
     {
         $data = [
             'title' => "My Courses - ",
-            'courses' => auth()->user()->courses
+            'courses' => auth()->user()->courses()->paginate(2)
         ];
 
         return view("teacher.list_courses", $data);
@@ -384,21 +384,5 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()->route('course.index');
-    }
-
-    public function course_details($id, $slug_course)
-    {
-        $course = Course::where(['id' => $id,'slug' => $slug_course])->first();
-
-        if(is_null($course)){
-            abort(404);
-        }
-
-        $data = [
-            'title' => $course->title." - ",
-            'course' => $course
-        ];
-
-        return view("courses.overview", $data);
     }
 }
