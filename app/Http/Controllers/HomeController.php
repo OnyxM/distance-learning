@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function courses(){
         $data = [
             'title' => "Courses - ",
-            'courses' => Course::cursorPaginate(9),
+            'courses' => Course::paginate(9),
             'categories' => Category::all(),
         ];
 
@@ -34,16 +34,15 @@ class HomeController extends Controller
         }
 
         $filter_price = $request->filter_price;
-
         switch ($filter_price){
             case 0:
-                $courses = $courses->wherePrice('0') ?? Course::wherePrice('0');
+                $courses = (isset($courses)) ? $courses->wherePrice('0') : Course::wherePrice('0');
                 break;
             case 1:
-                $courses = $courses->where('price', '<=', 25000) ?? Course::where('price', '<=', 25000);
+                $courses = (isset($courses)) ? $courses->where('price', '<=', 25000) : Course::where('price', '<=', 25000);
                 break;
             case 2:
-                $courses = $courses->where('price', '>', 25000)  ?? Course::where('price', '>', 25000);
+                $courses = (isset($courses)) ? $courses->where('price', '>', 25000)  : Course::where('price', '>', 25000);
                 break;
         }
 
@@ -52,9 +51,10 @@ class HomeController extends Controller
             $courses = (isset($courses)) ? $courses->whereIn("category_id", $filter_category) : Course::whereIn("category_id", $filter_category);
         }
 
+        die;
         $data = [
             'title' => "Courses - ",
-            'courses' => (isset($courses)) ? $courses->get() : Course::all(),
+            'courses' => (isset($courses)) ? $courses->cursorPaginate(9) : Course::cursorPaginate(9),
             'categories' => Category::all(),
         ];
 

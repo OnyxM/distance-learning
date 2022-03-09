@@ -96,7 +96,7 @@
                     <!-- Row -->
                     <div class="row align-items-center mb-3">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            We found <strong>{{count($courses)}}</strong> courses for you
+                            We found <strong>{{$courses->total()}}</strong> courses for you
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 ordering">
                             <div class="filter_wraps">
@@ -120,7 +120,7 @@
                                         <a href="course-detail.html"><img src="{{$course->photo}}" class="img-fluid" alt=""></a>
 {{--                                        <a href="course-detail.html"><img src="{{$course->photo}}" class="img-fluid" alt=""></a>--}}
                                         <div class="cources_price">{{$course->price}} XAF</div>
-{{--                                        <div class="education_ratting"><i class="fa fa-star"></i>4.8 (62)</div>--}}
+                                        <div class="education_ratting">{{$course->category->name}}</div>
                                     </div>
 
                                     <div class="education_block_body">
@@ -140,12 +140,35 @@
                             </div>
                         @endforeach
                         <!-- Cource Grid -->
+                    </div>
 
-                        <!-- Pagination -->
-                        <div class="row mx-auto">
-{{--                            {!! $courses->links() !!}--}}
+                    <!-- Pagination -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <ul class="pagination p-center">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span class="ti-arrow-left"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">18</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span class="ti-arrow-right"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Pagination -->
                     </div>
                 </div>
 
