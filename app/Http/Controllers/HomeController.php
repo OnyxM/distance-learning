@@ -36,7 +36,7 @@ class HomeController extends Controller
         $filter_price = $request->filter_price;
         switch ($filter_price){
             case 0:
-                $courses = (isset($courses)) ? $courses->wherePrice('0') : Course::wherePrice('0');
+                $courses = (isset($courses)) ? $courses->where('price', '0') : Course::wherePrice('0');
                 break;
             case 1:
                 $courses = (isset($courses)) ? $courses->where('price', '<=', 25000) : Course::where('price', '<=', 25000);
