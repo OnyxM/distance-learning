@@ -16,7 +16,7 @@ class CourseController extends Controller
     {
         $data = [
             'title' => "My Courses - ",
-            'courses' => auth()->user()->courses()->paginate(2)
+            'courses' => auth()->user()->courses()->get()
         ];
 
         return view("teacher.list_courses", $data);
