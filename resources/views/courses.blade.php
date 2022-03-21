@@ -96,7 +96,7 @@
                     <!-- Row -->
                     <div class="row align-items-center mb-3">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            We found <strong>{{$courses->total()}}</strong> courses for you
+                            We found <strong>{{$courses->count()}}</strong> courses for you
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 ordering">
                             <div class="filter_wraps">
