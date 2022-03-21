@@ -16,6 +16,9 @@
     <!-- Custom Color Option -->
     <link href="{{asset('assets/css/colors.css')}}" rel="stylesheet">
 
+    @yield('css')
+
+
 </head>
 
 <body class="red-skin">
@@ -251,6 +254,7 @@
 <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
 <script src="{{asset('assets/js/counterup.min.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+@yield("js")
 <!-- ============================================================== -->
 <!-- This page plugins -->
 <!-- ============================================================== -->

@@ -9,7 +9,7 @@
         <div class="nav-menus-wrapper" style="transition-property: none;">
             <ul class="nav-menu">
 
-                <li><a href="#">Courses</a></li>
+                <li><a href="{{route('courses')}}">Courses</a></li>
 
                 <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Dashboard</a></li>
                 <li><a href="{{route('course.index')}}">My Courses</a></li>

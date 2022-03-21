@@ -44,7 +44,7 @@
                                 <img src="{{$course->photo}}" class="img-fluid" alt="" />
                                 <div class="dashboard_action">
                                     <a href="{{route('course.edit', ['uuid_course' => $course->uuid])}}" class="btn btn-ect">Edit</a>
-                                    <a href="#" class="btn btn-ect">View</a>
+                                    <a href="{{ route('course.details', ['id'=>$course->id, 'slug_course'=>$course->slug]) }}" class="btn btn-ect">View</a>
                                 </div>
                             </div>
                             <div class="dashboard_single_course_caption">
