@@ -40,50 +40,47 @@
                             <div class="sidebar-widgets">
 
                                 <!-- Search Form -->
-                                <form class="form-inline addons mb-3">
-                                    <input class="form-control" type="search" placeholder="Search Courses" aria-label="Search">
-                                    <button class="btn my-2 my-sm-0" type="submit"><i class="ti-search"></i></button>
-                                </form>
+                                <form class="form" action="{{ route('courses.filter') }}" method="POST">
+                                    @csrf
+                                    <div class="form-inline addons mb-3">
+                                        <h4 class="side_title">Course name</h4>
+                                        <input class="form-control" type="text" placeholder="Search Courses" aria-label="Search" name="filter_name">
+{{--                                        <button class="btn my-2 my-sm-0" type="submit"><i class="ti-search"></i></button>--}}
+                                    </div>
 
-                                <h4 class="side_title">Course categories</h4>
-                                <ul class="no-ul-list mb-3">
-                                    @foreach($categories as $cat => $category)
+                                    <h4 class="side_title">Course categories</h4>
+                                    <ul class="no-ul-list mb-3">
+                                        @foreach($categories as $cat => $category)
+                                            <li>
+                                                <input id='{{"a-$cat"}}' class="checkbox-custom" name="filter_category[]" type="checkbox" value="{{$category->id}}">
+                                                <label for='{{"a-$cat"}}' class="checkbox-custom-label">{{ucwords($category->name)}} ({{$category->courses()->count()}})</label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
+                                    <h4 class="side_title">Price</h4>
+                                    <ul class="no-ul-list mb-3">
                                         <li>
-                                            <input id='{{"a-$cat"}}' class="checkbox-custom" name="filter_category[]" type="checkbox" value="{{$category->id}}">
-                                            <label for='{{"a-$cat"}}' class="checkbox-custom-label">{{ucwords($category->name)}} ({{$category->courses()->count()}})</label>
+                                            <input id="a-10" class="checkbox-custom" name="filter_price" value="-1" type="radio" checked>
+                                            <label for="a-10" class="checkbox-custom-label">All ({{\App\Models\Course::count()}})</label>
                                         </li>
-                                    @endforeach
-                                </ul>
+                                        <li>
+                                            <input id="a-11" class="checkbox-custom" name="filter_price" value="0" type="radio">
+                                            <label for="a-11" class="checkbox-custom-label">Free ({{\App\Models\Course::where('price',0)->count()}})</label>
+                                        </li>
+                                        <li>
+                                            <input id="a-12" class="checkbox-custom" name="filter_price" value="1" type="radio">
+                                            <label for="a-12" class="checkbox-custom-label"><= 25,000 XAF (...)</label>
+                                        </li>
+                                        <li>
+                                            <input id="a-13" class="checkbox-custom" name="filter_price" value="2" type="radio">
+                                            <label for="a-13" class="checkbox-custom-label">>= 25,000 XAF (...)</label>
+                                        </li>
+                                    </ul>
 
-                                <h4 class="side_title">Instructors</h4>
-                                <ul class="no-ul-list mb-3">
-                                    <li>
-                                        <input id='{{"b-1"}}' class="checkbox-custom" name="fiilter_instructor" type="checkbox" value="">
-                                        <label for='{{"b-1"}}' class="checkbox-custom-label">Keny White (4)</label>
-                                    </li>
-                                </ul>
 
-                                <h4 class="side_title">Price</h4>
-                                <ul class="no-ul-list mb-3">
-                                    <li>
-                                        <input id="a-10" class="checkbox-custom" name="a-10" type="checkbox">
-                                        <label for="a-10" class="checkbox-custom-label">All ({{\App\Models\Course::count()}})</label>
-                                    </li>
-                                    <li>
-                                        <input id="a-11" class="checkbox-custom" name="a-11" type="checkbox">
-                                        <label for="a-11" class="checkbox-custom-label">Free ({{\App\Models\Course::where('price',0)->count()}})</label>
-                                    </li>
-                                    <li>
-                                        <input id="a-12" class="checkbox-custom" name="a-12" type="checkbox">
-                                        <label for="a-12" class="checkbox-custom-label"><= 25,000 XAF (...)</label>
-                                    </li>
-                                    <li>
-                                        <input id="a-12" class="checkbox-custom" name="a-12" type="checkbox">
-                                        <label for="a-12" class="checkbox-custom-label">>= 25,000 XAF (...)</label>
-                                    </li>
-                                </ul>
-
-                                <button class="btn btn-theme full-width mb-2">Filter Result</button>
+                                    <input class="btn btn-theme full-width mb-2" value="Filter Result" type="submit" required>
+                                </form>
                             </div>
 
                         </div>
@@ -99,7 +96,7 @@
                     <!-- Row -->
                     <div class="row align-items-center mb-3">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            We found <strong>142</strong> courses for you
+                            We found <strong>{{$courses->count()}}</strong> courses for you
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 ordering">
                             <div class="filter_wraps">
@@ -123,7 +120,7 @@
                                         <a href="course-detail.html"><img src="{{$course->photo}}" class="img-fluid" alt=""></a>
 {{--                                        <a href="course-detail.html"><img src="{{$course->photo}}" class="img-fluid" alt=""></a>--}}
                                         <div class="cources_price">{{$course->price}} XAF</div>
-{{--                                        <div class="education_ratting"><i class="fa fa-star"></i>4.8 (62)</div>--}}
+                                        <div class="education_ratting">{{$course->category->name}}</div>
                                     </div>
 
                                     <div class="education_block_body">
@@ -143,12 +140,35 @@
                             </div>
                         @endforeach
                         <!-- Cource Grid -->
+                    </div>
 
-                        <!-- Pagination -->
-                        <div class="row mx-auto">
-                            {!! $courses->links() !!}
+                    <!-- Pagination -->
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <ul class="pagination p-center">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span class="ti-arrow-left"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">18</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span class="ti-arrow-right"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Pagination -->
                     </div>
                 </div>
 
