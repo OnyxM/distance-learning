@@ -44,7 +44,7 @@
                                     @csrf
                                     <div class="form-inline addons mb-3">
                                         <h4 class="side_title">Course name</h4>
-                                        <input class="form-control" type="text" placeholder="Search Courses" aria-label="Search" name="filter_name">
+                                        <input class="form-control" type="text" placeholder="Search Courses" aria-label="Search" name="filter_name" value="{{$filter_name}}">
 {{--                                        <button class="btn my-2 my-sm-0" type="submit"><i class="ti-search"></i></button>--}}
                                     </div>
 
@@ -52,7 +52,7 @@
                                     <ul class="no-ul-list mb-3">
                                         @foreach($categories as $cat => $category)
                                             <li>
-                                                <input id='{{"a-$cat"}}' class="checkbox-custom" name="filter_category[]" type="checkbox" value="{{$category->id}}">
+                                                <input id='{{"a-$cat"}}' class="checkbox-custom" name="filter_category[]" @if(in_array($category->id, $filter_cat)) checked @endif type="checkbox" value="{{$category->id}}">
                                                 <label for='{{"a-$cat"}}' class="checkbox-custom-label">{{ucwords($category->name)}} ({{$category->courses()->count()}})</label>
                                             </li>
                                         @endforeach
@@ -61,19 +61,19 @@
                                     <h4 class="side_title">Price</h4>
                                     <ul class="no-ul-list mb-3">
                                         <li>
-                                            <input id="a-10" class="checkbox-custom" name="filter_price" value="-1" type="radio" checked>
+                                            <input id="a-10" class="checkbox-custom" name="filter_price" value="-1" @if($filter_price=='-1') checked @endif type="radio">
                                             <label for="a-10" class="checkbox-custom-label">All ({{\App\Models\Course::count()}})</label>
                                         </li>
                                         <li>
-                                            <input id="a-11" class="checkbox-custom" name="filter_price" value="0" type="radio">
+                                            <input id="a-11" class="checkbox-custom" name="filter_price" value="0" @if($filter_price=='0') checked @endif type="radio">
                                             <label for="a-11" class="checkbox-custom-label">Free ({{\App\Models\Course::where('price',0)->count()}})</label>
                                         </li>
                                         <li>
-                                            <input id="a-12" class="checkbox-custom" name="filter_price" value="1" type="radio">
+                                            <input id="a-12" class="checkbox-custom" name="filter_price" value="1" @if($filter_price=='1') checked @endif type="radio">
                                             <label for="a-12" class="checkbox-custom-label"><= 25,000 XAF (...)</label>
                                         </li>
                                         <li>
-                                            <input id="a-13" class="checkbox-custom" name="filter_price" value="2" type="radio">
+                                            <input id="a-13" class="checkbox-custom" name="filter_price" value="2" @if($filter_price=='2') checked @endif type="radio">
                                             <label for="a-13" class="checkbox-custom-label">>= 25,000 XAF (...)</label>
                                         </li>
                                     </ul>
@@ -96,7 +96,7 @@
                     <!-- Row -->
                     <div class="row align-items-center mb-3">
                         <div class="col-lg-6 col-md-6 col-sm-12">
-                            We found <strong>{{$courses->count()}}</strong> courses for you
+                            We found <strong>{{$total_courses}}</strong> courses for you
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 ordering">
                             <div class="filter_wraps">

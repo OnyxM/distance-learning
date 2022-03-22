@@ -21,6 +21,10 @@ class HomeController extends Controller
             'title' => "Courses - ",
             'courses' => Course::paginate(9),
             'categories' => Category::all(),
+            'total_courses' => count(Course::all()),
+            'filter_name' => "",
+            'filter_cat' => [],
+            'filter_price' => '-1',
         ];
 
         return view("courses", $data);
@@ -49,13 +53,19 @@ class HomeController extends Controller
         if(isset($request->filter_category)){
             $filter_category = $request->filter_category;
             $courses = (isset($courses)) ? $courses->whereIn("category_id", $filter_category) : Course::whereIn("category_id", $filter_category);
+
         }
 
         $data = [
             'title' => "Courses - ",
-            'courses' => (isset($courses)) ? $courses->cursorPaginate(9) : Course::cursorPaginate(9),
+            'total_courses' => isset($courses) ? count($courses->get()) : count(Course::all()),
+            'courses' => (isset($courses)) ? $courses->paginate(9) : Course::paginate(9),
             'categories' => Category::all(),
+            'filter_name' => $request->filter_name,
+            'filter_cat' => $request->filter_category ?? [],
+            'filter_price' => $request->filter_price,
         ];
+
 
         return view("courses", $data);
     }
