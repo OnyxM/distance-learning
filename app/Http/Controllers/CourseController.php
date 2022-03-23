@@ -98,17 +98,17 @@ class CourseController extends Controller
             // Upload de la vid_intro
             $intro_vid_file = $request->module_intro[$key];
             $intro_video = $intro_vid_file->getClientOriginalName();
-            $intro_vid_file->move("uploads/courses/".$course->uuid."/module$nbre/", $intro_video);
+            $intro_vid_file->move("uploads/courses/".$course->uuid."/$module_uuid/", $intro_video);
 
             // Upload de la td_file
             $td_file = $request->module_td[$key];
             $td_name = $td_file->getClientOriginalName();
-            $td_file->move("uploads/courses/".$course->uuid."/module$nbre/", $td_name);
+            $td_file->move("uploads/courses/".$course->uuid."/$module_uuid/", $td_name);
 
             // Upload de la tp_file
             $tp_file = $request->module_tp[$key];
             $tp_name = $tp_file->getClientOriginalName();
-            $tp_file->move("uploads/courses/".$course->uuid."/module$nbre/", $tp_name);
+            $tp_file->move("uploads/courses/".$course->uuid."/$module_uuid/", $tp_name);
 
 
             $module = Module::create([
@@ -137,7 +137,7 @@ class CourseController extends Controller
             $nbre++;
         }
 
-        return redirect()->route("course.details", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
+        return redirect()->route("course.details", ['id' => $course->id, 'slug_course' => $course->slug]);
     }
 
     public function edit($uuid_course)
@@ -237,13 +237,15 @@ class CourseController extends Controller
             $modules_to_update[] = $module_uuid;
 
             if(!is_null($module)){
+                $mod_uuid = $module->uuid;
+
                 $intro_file = "intro$ind"; $module_td = "module_td$ind"; $module_tp = "module_tp$ind";
 
                 if(!is_null($request->$intro_file)){
                     // Upload de la vid_intro
                     $intro_vid_file = $request->$intro_file;
                     $intro_video = $intro_vid_file->getClientOriginalName();
-                    $intro_vid_file->move("uploads/courses/".$course->uuid."/module$ind/", $intro_video);
+                    $intro_vid_file->move("uploads/courses/".$course->uuid."/$mod_uuid/", $intro_video);
 
                     $module->update([
                         'intro' => $intro_video
@@ -253,7 +255,7 @@ class CourseController extends Controller
                 if(!is_null($request->$module_td)){
                     $td_file = $request->$module_td;
                     $td_name = $td_file->getClientOriginalName();
-                    $td_file->move("uploads/courses/".$course->uuid."/module$nbre/", $td_name);
+                    $td_file->move("uploads/courses/".$course->uuid."/$mod_uuid/", $td_name);
 
                     $module->update([
                         'intro' => $td_name
@@ -263,7 +265,7 @@ class CourseController extends Controller
                 if(!is_null($request->$module_tp)){
                     $tp_file = $request->$module_tp;
                     $tp_name = $tp_file->getClientOriginalName();
-                    $tp_file->move("uploads/courses/".$course->uuid."/module$nbre/", $tp_name);
+                    $tp_file->move("uploads/courses/".$course->uuid."/$mod_uuid/", $tp_name);
 
                     $module->update([
                         'intro' => $tp_name
@@ -318,17 +320,17 @@ class CourseController extends Controller
                 // Upload de la vid_intro
                 $intro_vid_file = $request->module_intro[$new_module_indices];
                 $intro_video = $intro_vid_file->getClientOriginalName();
-                $intro_vid_file->move("uploads/courses/".$course->uuid."/module$nbre/", $intro_video);
+                $intro_vid_file->move("uploads/courses/".$course->uuid."/$new_module_uuid/", $intro_video);
 
                 // Upload de la td_file
                 $td_file = $request->module_td[$new_module_indices];
                 $td_name = $td_file->getClientOriginalName();
-                $td_file->move("uploads/courses/".$course->uuid."/module$nbre/", $td_name);
+                $td_file->move("uploads/courses/".$course->uuid."/$new_module_uuid/", $td_name);
 
                 // Upload de la tp_file
                 $tp_file = $request->module_tp[$new_module_indices];
                 $tp_name = $tp_file->getClientOriginalName();
-                $tp_file->move("uploads/courses/".$course->uuid."/module$nbre/", $tp_name);
+                $tp_file->move("uploads/courses/".$course->uuid."/$new_module_uuid/", $tp_name);
 
 
                 $new_module_created = Module::create([
@@ -364,9 +366,7 @@ class CourseController extends Controller
             $fake_module->delete();
         }
 
-        dd($modules_to_update, $course->modules()->pluck('uuid')->toArray());
-
-        // return redirect()->route("course.details", ['slug_course' => Str::slug($course->id."-".$course->slug)]);
+        return redirect()->route("course.details", ['id' => $course->id, 'slug_course' => $course->slug]);
     }
 
     public function delete(Request $request)
@@ -384,5 +384,97 @@ class CourseController extends Controller
         $course->delete();
 
         return redirect()->route('course.index');
+    }
+
+    public function course_details($id, $slug)
+    {
+        $course = Course::where(['id' => $id, 'slug' => $slug])->first();
+
+        if(is_null($course)){
+            return redirect()->route('courses');
+        }
+
+        $data = [
+            'title' => $course->title. " - ",
+            'course' => $course,
+            'type' => "",
+        ];
+
+        return view('courses.view', $data);
+    }
+
+    public function course_details_introduction($id, $slug, $module)
+    {
+        $course = Course::where(['id' => $id, 'slug' => $slug])->first();
+
+        if(is_null($course)){
+            return redirect()->route('courses');
+        }
+
+        $module = $course->modules()->where('slug', $module)->first();
+        if(is_null($module)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => $course->title. " - ",
+            'course' => $course,
+            'module' => $module,
+            'type' => "intro",
+        ];
+
+        return view('courses.view', $data);
+    }
+
+    public function course_details_section($id, $slug, $module, $section)
+    {
+        $course = Course::where(['id' => $id, 'slug' => $slug])->first();
+
+        if(is_null($course)){
+            return redirect()->route('courses');
+        }
+
+        $module = $course->modules()->where('slug', $module)->first();
+        if(is_null($module)){
+            abort(404);
+        }
+
+        $section = $module->sections()->where('slug', $section)->first();
+        if(is_null($section)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => $course->title. " - ",
+            'course' => $course,
+            'module' => $module,
+            'section' => $section,
+            'type' => "section",
+        ];
+
+        return view('courses.view', $data);
+    }
+
+    public function course_details_worksheet($id, $slug, $module, $worksheet)
+    {
+        $course = Course::where(['id' => $id, 'slug' => $slug])->first();
+
+        if(is_null($course)){
+            return redirect()->route('courses');
+        }
+
+        $module = $course->modules()->where('slug', $module)->first();
+        if(is_null($module)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => $course->title. " - ",
+            'course' => $course,
+            'module' => $module,
+            'type' => $worksheet,
+        ];
+
+        return view('courses.view', $data);
     }
 }
