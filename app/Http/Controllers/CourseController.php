@@ -394,6 +394,17 @@ class CourseController extends Controller
             return redirect()->route('courses');
         }
 
+        /**
+         * On va l'ajouter au cours si il n'y est pas déjà ...
+         *
+         * NB: Ceci sera fait dans une fonction séparée au moment d'intégrer le module de paiement.
+         */
+        $user_id = auth()->user()->id;
+
+        if(!in_array($user_id, $course->participants()->pluck('user_id')->toArray()) && $course->user->id != $user_id){
+            $course->participants()->attach($user_id, ['registration_date' => time()]);
+        }
+
         $data = [
             'title' => $course->title. " - ",
             'course' => $course,

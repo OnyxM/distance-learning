@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, "index"])->name("user.index");
-Route::get('/course/{id}-{slug_course}', [CourseController::class, "course_details"])->name("course.details");
-Route::get('/course/{id}-{slug_course}/{module}/introduction', [CourseController::class, "course_details_introduction"])->name("course.details.module.intro");
-Route::get('/course/{id}-{slug_course}/{module}/{worksheet}', [CourseController::class, "course_details_worksheet"])
+Route::get('/course/v/{id}-{slug_course}', [CourseController::class, "course_details"])->name("course.enroll");
+Route::get('/course/v/{id}-{slug_course}/{module}/introduction', [CourseController::class, "course_details_introduction"])->name("course.details.module.intro");
+Route::get('/course/v/{id}-{slug_course}/{module}/{worksheet}', [CourseController::class, "course_details_worksheet"])
     ->name("course.details.module.worksheet")
     ->where([
         'worksheet' => "td|tp"

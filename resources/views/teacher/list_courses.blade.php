@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="dashboard_single_course_progress_2">
                                         <ul class="m-0">
-                                            <li class="list-inline-item"><i class="ti-user mr-1"></i>4512 Enrolled</li>
+                                            <li class="list-inline-item"><i class="ti-user mr-1"></i>{{$course->participants()->count()}} Enrolled</li>
                                             <li class="list-inline-item"><i class="ti-comment-alt mr-1"></i>112 Comments</li>
                                         </ul>
                                     </div>

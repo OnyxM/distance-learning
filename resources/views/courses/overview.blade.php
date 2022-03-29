@@ -115,7 +115,11 @@
                             @endif
                         </div>
                         <div class="ed_view_link">
-                            <a href="javascript:void(0);" class="btn btn-theme enroll-btn">Enroll Now<i class="ti-angle-right"></i></a>
+                            @if(!in_array(auth()->user()->id, $course->participants()->pluck('user_id')->toArray()))
+                                <a href="{{route('course.enroll', ['id'=>$course->id, 'slug_course'=>$course->slug])}}" class="btn btn-theme enroll-btn">Enroll Now<i class="ti-angle-right"></i></a>
+                            @else
+                                <a href="{{route('course.enroll', ['id'=>$course->id, 'slug_course'=>$course->slug])}}" class="btn btn-theme enroll-btn">Continue <i class="ti-angle-right"></i></a>
+                            @endif
                         </div>
 
                     </div>
