@@ -104,12 +104,10 @@
                     @elseif(in_array($type, ['tp', 'td']))
                         <div class="edu_wraper">
                             <h4 class="edu_title">{!! $module->name !!}</h4>
-
                         </div>
 
                         <div class="container-frame">
-                            <embed class="responsive-iframe" src="{{$module->$type}}#toolbar=0" width="500" height="375">
-{{--                            <iframe class="responsive-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.9441905843764!2d-7.990237885181996!3d12.58592989110972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe51cf52bc7b53b1%3A0x8cd7e54d2c774c8d!2sCISSE%20INNOVATION!5e0!3m2!1sen!2scm!4v1648031800767!5m2!1sen!2scm" style="border:0;" allowfullscreen="" loading="lazy"></iframe>--}}
+                            <embed class="responsive-iframe" src="{{$module->$type}}#toolbar=0">
                         </div>
                     @else
                     <div class="edu_wraper">
