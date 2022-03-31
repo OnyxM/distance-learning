@@ -1,4 +1,4 @@
-@extends("layouts.user")
+@extends("layouts.user", ['container' => true])
 
 @section("content")
     <!-- ============================ Page Title Start================================== -->
@@ -20,11 +20,11 @@
                         <div class="ed_header_caption">
                             <h2 class="ed_title">{{ucwords($course->title)}}</h2>
                             <ul>
-                                <li><i class="ti-user"></i>502 Student Enrolled</li>
+                                <li><i class="ti-user"></i>{{$course->participants()->count()}} Student Enrolled</li>
                             </ul>
                         </div>
                         <div class="ed_header_short">
-                            <p>{!! $course->description !!}</p>
+                            <p>{!! $course->substr_description !!}</p>
                         </div>
 
                         <div class="ed_rate_info">
@@ -57,7 +57,7 @@
                     <!-- Overview -->
                     <div class="edu_wraper">
                         <h4 class="edu_title">Course Overview</h4>
-                        <p>{!! $course->description !!}</p>
+                        <p>{!! $course->substr_description !!}</p>
                     </div>
 
                     <div class="edu_wraper">
@@ -90,11 +90,102 @@
                             @endforeach
                         </div>
                     </div>
+
+                    <!-- Reviews -->
+                    <div class="list-single-main-item fl-wrap">
+                        <div class="list-single-main-item-title fl-wrap">
+                            <h3>Reviews -  <span> 3 </span></h3>
+                        </div>
+                        <div class="reviews-comments-wrap">
+                            <!-- reviews-comments-item -->
+                            <div class="reviews-comments-item">
+                                <div class="review-comments-avatar">
+                                    <img src="{{asset('assets/img/user-1.jpg')}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="reviews-comments-item-text">
+                                    <h4>
+                                        <a href="#">Josaph Manrty</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>27 Oct 2019</span></h4>
+
+                                    <div class="clearfix"></div>
+                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
+                                </div>
+                            </div>
+                            <!--reviews-comments-item end-->
+
+                            <!-- reviews-comments-item -->
+                            <div class="reviews-comments-item">
+                                <div class="review-comments-avatar">
+                                    <img src="{{asset('assets/img/user-2.jpg')}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="reviews-comments-item-text">
+                                    <h4><a href="#">Rita Chawla</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>2 Nov May 2019</span></h4>
+
+                                    <div class="clearfix"></div>
+                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
+                                </div>
+                            </div>
+                            <!--reviews-comments-item end-->
+
+                            <!-- reviews-comments-item -->
+                            <div class="reviews-comments-item">
+                                <div class="review-comments-avatar">
+                                    <img src="{{asset('assets/img/user-3.jpg')}}" class="img-fluid" alt="">
+                                </div>
+                                <div class="reviews-comments-item-text">
+                                    <h4><a href="#">Adam Wilsom</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>10 Nov 2019</span></h4>
+
+                                    <div class="clearfix"></div>
+                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
+                                </div>
+                            </div>
+                            <!--reviews-comments-item end-->
+
+                        </div>
+                    </div>
+
+                @if(in_array(auth()->user()->id, $course->participants()->pluck('user_id')->toArray()))
+                <!-- Submit Reviews -->
+                <div class="edu_wraper">
+                    <h4 class="edu_title">Submit Reviews</h4>
+                    <div class="review-form-box form-submit">
+                        <form action="{{route('course.submit_review', ['id'=>$course->id, 'slug_course'=>$course->slug])}}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input class="form-control" type="text" placeholder="Your Name" value="{{auth()->user()->name}}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input class="form-control" type="email" placeholder="Your Email" value="{{auth()->user()->email}}" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Review</label>
+                                        <textarea class="form-control ht-140" placeholder="Review" name="review" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-right">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-theme">Submit Review</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                @endif
                 </div>
 
                 <!-- Sidebar -->
                 <div class="col-lg-4 col-md-4">
-
                     <div class="ed_view_box style_2">
 
                         <div class="ed_author">

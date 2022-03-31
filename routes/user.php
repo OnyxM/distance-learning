@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, "index"])->name("user.index");
 Route::get('/course/v/{id}-{slug_course}', [CourseController::class, "course_details"])->name("course.enroll");
+Route::post('/course/r/{id}-{slug_course}', [CourseController::class, "submit_review"])->name("course.submit_review");
 Route::get('/course/v/{id}-{slug_course}/{module}/introduction', [CourseController::class, "course_details_introduction"])->name("course.details.module.intro");
 Route::get('/course/v/{id}-{slug_course}/{module}/{worksheet}', [CourseController::class, "course_details_worksheet"])
     ->name("course.details.module.worksheet")

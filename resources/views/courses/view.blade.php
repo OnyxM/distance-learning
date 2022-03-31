@@ -1,4 +1,4 @@
-@extends("layouts.user")
+@extends("layouts.user", ['container' => true])
 
 @section("css")
     <style>

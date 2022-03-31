@@ -22,6 +22,10 @@ class Course extends Model
         'user_id',
     ];
 
+    protected $appends=[
+        'substr_description'
+    ];
+
     public function getPhotoAttribute()
     {
         if($this->attributes['photo'] == "course-4.jpg"){
@@ -30,6 +34,13 @@ class Course extends Model
         $uuid_course = $this->uuid;
 
         return asset("uploads/courses/$uuid_course/".$this->attributes['photo']);
+    }
+
+    public function getSubstrDescriptionAttribute()
+    {
+        $substr_description = $this->attributes['description'];
+
+        return substr($substr_description, 0, 400). "(...)";
     }
 
     public function category()
