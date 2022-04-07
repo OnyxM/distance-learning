@@ -119,7 +119,7 @@
                                     <div class="education_block_thumb">
                                         <a href="course-detail.html"><img src="{{$course->photo}}" class="img-fluid" alt=""></a>
 {{--                                        <a href="course-detail.html"><img src="{{$course->photo}}" class="img-fluid" alt=""></a>--}}
-                                        <div class="cources_price">{{$course->price}} XAF</div>
+                                        <div class="cources_price">{{number_format($course->price)}} XAF</div>
                                         <div class="education_ratting">{{$course->category->name}}</div>
                                     </div>
 
