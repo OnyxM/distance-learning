@@ -16,8 +16,12 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            'Development', 'Business', 'Finance & Accounting', 'IT & Software', 'Office Productivity', 'Personal Development',
-            'Design', 'Marketing', 'Health & Fitness', 'Music'
+            'Allemand', 'Anglais', 'Anthropologie', 'Arts et Archéologie', 'Espagnol', 'Géographie', 'Histoire', 'Langues Africaines et Linguistique',
+            'Lettres Bilingues', 'Littérature et Civilisation Africaine', 'Lettres Modernes Françaises', 'Philosophie', 'Psychologie', 'Sciences du Langage',
+            'Sociologie', 'Tourisme et Hotellerie',
+
+            'Biochimie', 'Biologie et Physiologie Animales', 'Biologie et Physiologie Végétales', 'Chimie Inorganique', 'Chimie Organique',
+            'Informatique', 'Mathématiques', 'Microbiologie', 'Physiques', 'Sciences de la Terre et de l’Univers',
         ];
 
         foreach ($categories as $category) {

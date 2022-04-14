@@ -26,7 +26,7 @@ class CourseController extends Controller
     {
         $data = [
             'title' => "Add Course - ",
-            'categories' => Category::all()
+            'categories' => Category::orderBy('name', 'asc')->get(),
         ];
 
         return view("courses.create", $data);
