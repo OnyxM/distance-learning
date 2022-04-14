@@ -428,7 +428,7 @@ class CourseController extends Controller
         }
 
         // On va update le niveau_de_lecture
-        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$course->uuid, 's'=>0])]);
+        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$module->uuid, 's'=>0])]);
 
         $data = [
             'title' => $course->title. " - ",
@@ -459,7 +459,7 @@ class CourseController extends Controller
         }
 
         // On va update le niveau_de_lecture
-        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$course->uuid, 's'=>$section->uuid])]);
+        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$module->uuid, 's'=>$section->uuid])]);
 
         $data = [
             'title' => $course->title. " - ",
@@ -491,7 +491,7 @@ class CourseController extends Controller
         }else if($worksheet=="tp"){
             $sec = -2;
         }
-        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$course->uuid, 's'=>$sec])]);
+        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$module->uuid, 's'=>$sec])]);
 
         $data = [
             'title' => $course->title. " - ",

@@ -20,7 +20,7 @@ class SectionFactory extends Factory
         return [
             'title' => $name ,
             'slug' => Str::slug($name),
-            'content' => $this->faker->realText($maxNbChars  = 200),
+            'content' => $this->faker->realText($maxNbChars  = 10000),
             'uuid' => Str::uuid(),
             'module_id' => rand(1, Module::count())
         ];

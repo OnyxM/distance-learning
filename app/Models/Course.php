@@ -60,6 +60,6 @@ class Course extends Model
 
     public function participants()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot("registration_date", "comment", "playback_level");
     }
 }
