@@ -19,6 +19,7 @@ class CreateCourseUserTable extends Migration
             $table->integer("user_id");
             $table->string("registration_date");
             $table->text("comment")->nullable();
+            $table->string("playback_level");
             $table->timestamps();
         });
     }

@@ -46,5 +46,7 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user) {
             User::create($user);
         }
+
+        User::factory()->count(25)->create();
     }
 }

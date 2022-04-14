@@ -402,7 +402,7 @@ class CourseController extends Controller
         $user_id = auth()->user()->id;
 
         if(!in_array($user_id, $course->participants()->pluck('user_id')->toArray()) && $course->user->id != $user_id){
-            $course->participants()->attach($user_id, ['registration_date' => time()]);
+            $course->participants()->attach($user_id, ['registration_date' => time(), 'playback_level' => json_encode(['m'=>0, 's'=>0])]);
         }
 
         $data = [
@@ -426,6 +426,9 @@ class CourseController extends Controller
         if(is_null($module)){
             abort(404);
         }
+
+        // On va update le niveau_de_lecture
+        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$course->uuid, 's'=>0])]);
 
         $data = [
             'title' => $course->title. " - ",
@@ -455,6 +458,9 @@ class CourseController extends Controller
             abort(404);
         }
 
+        // On va update le niveau_de_lecture
+        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$course->uuid, 's'=>$section->uuid])]);
+
         $data = [
             'title' => $course->title. " - ",
             'course' => $course,
@@ -478,6 +484,14 @@ class CourseController extends Controller
         if(is_null($module)){
             abort(404);
         }
+
+        // On va update le niveau_de_lecture
+        if($worksheet=="td"){
+            $sec = -1;
+        }else if($worksheet=="tp"){
+            $sec = -2;
+        }
+        $course->participants()->where('user_id',auth()->user()->id)->update(['playback_level' => json_encode(['m'=>$course->uuid, 's'=>$sec])]);
 
         $data = [
             'title' => $course->title. " - ",
