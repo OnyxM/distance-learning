@@ -92,10 +92,14 @@
                     </div>
 
                     <!-- Reviews -->
+
                     <div class="list-single-main-item fl-wrap">
                         <div class="list-single-main-item-title fl-wrap">
-                            <h3>Reviews -  <span> 3 </span></h3>
+                            <h3>Reviews</h3>
                         </div>
+
+                        @foreach($course->participants as $p)
+                        @if(!is_null($p->pivot->comment ))
                         <div class="reviews-comments-wrap">
                             <!-- reviews-comments-item -->
                             <div class="reviews-comments-item">
@@ -104,14 +108,16 @@
                                 </div>
                                 <div class="reviews-comments-item-text">
                                     <h4>
-                                        <a href="#">Josaph Manrty</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>27 Oct 2019</span></h4>
+                                        <a href="#">{{ $p->name }}</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>{{ date('d M Y', $p->pivot->registration_date) }}</span></h4>
 
                                     <div class="clearfix"></div>
-                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
+                                    <p>{{ $p->pivot->comment }}</p>
                                 </div>
                             </div>
                             <!--reviews-comments-item end-->
                         </div>
+                        @endif
+                        @endforeach
                     </div>
 
                 @if(in_array(auth()->user()->id, $course->participants()->pluck('user_id')->toArray())
