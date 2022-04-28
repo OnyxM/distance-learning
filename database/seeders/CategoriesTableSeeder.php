@@ -16,6 +16,7 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
+            'ICT For Development',
             'Allemand', 'Anglais', 'Anthropologie', 'Arts et Archéologie', 'Espagnol', 'Géographie', 'Histoire', 'Langues Africaines et Linguistique',
             'Lettres Bilingues', 'Littérature et Civilisation Africaine', 'Lettres Modernes Françaises', 'Philosophie', 'Psychologie', 'Sciences du Langage',
             'Sociologie', 'Tourisme et Hotellerie',
