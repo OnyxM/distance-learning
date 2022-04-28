@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\User;
 use App\Models\Course;
 use App\Models\Module;
 use App\Models\Part;
@@ -501,5 +502,31 @@ class CourseController extends Controller
         ];
 
         return view('courses.view', $data);
+    }
+
+    public function submit_review(Request $request, $id, $slug_course)
+    {
+        $course = Course::where(['id' => $id,'slug' => $slug_course])->first();
+        $user = User::find(auth()->user()->id);
+        $course_user = $course->participants()->where('user_id',$user->id)->first();
+
+        if(is_null($course) || is_null($course_user)){
+            return abort(404);
+        }
+
+        $this->validate($request, [
+            'review' => "string:min:50",
+        ]);
+
+        $course->participants()->where('user_id',$user->id)->detach();
+
+        $course->participants()->attach($user->id,[
+            'registration_date' => $course_user->pivot->registration_date,
+            'playback_level' => $course_user->pivot->playback_level,
+            'comment' => $request->review
+        ]);
+
+        return redirect()->back();
+
     }
 }

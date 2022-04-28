@@ -111,39 +111,11 @@
                                 </div>
                             </div>
                             <!--reviews-comments-item end-->
-
-                            <!-- reviews-comments-item -->
-                            <div class="reviews-comments-item">
-                                <div class="review-comments-avatar">
-                                    <img src="{{asset('assets/img/user-2.jpg')}}" class="img-fluid" alt="">
-                                </div>
-                                <div class="reviews-comments-item-text">
-                                    <h4><a href="#">Rita Chawla</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>2 Nov May 2019</span></h4>
-
-                                    <div class="clearfix"></div>
-                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
-                                </div>
-                            </div>
-                            <!--reviews-comments-item end-->
-
-                            <!-- reviews-comments-item -->
-                            <div class="reviews-comments-item">
-                                <div class="review-comments-avatar">
-                                    <img src="{{asset('assets/img/user-3.jpg')}}" class="img-fluid" alt="">
-                                </div>
-                                <div class="reviews-comments-item-text">
-                                    <h4><a href="#">Adam Wilsom</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>10 Nov 2019</span></h4>
-
-                                    <div class="clearfix"></div>
-                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
-                                </div>
-                            </div>
-                            <!--reviews-comments-item end-->
-
                         </div>
                     </div>
 
-                @if(in_array(auth()->user()->id, $course->participants()->pluck('user_id')->toArray()))
+                @if(in_array(auth()->user()->id, $course->participants()->pluck('user_id')->toArray())
+                        && is_null($course->participants()->where('user_id',auth()->user()->id)->first()->pivot->comment))
                 <!-- Submit Reviews -->
                 <div class="edu_wraper">
                     <h4 class="edu_title">Submit Reviews</h4>
