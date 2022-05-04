@@ -112,7 +112,12 @@
                     </div>
                     @elseif(in_array($type, ['tp', 'td']))
                         <div class="edu_wraper">
-                            <h4 class="edu_title">{!! $module->name !!}</h4>
+                            <h4 class="edu_title row">
+                                <span class="text-left col-md-6">{!! $module->name !!}</span>
+                                <span class="text-right col-md-6">
+                                    <button onclick="window.print();">print</button>
+                                </span>
+                            </h4>
                         </div>
 
                         <div class="container-frame">
