@@ -26,12 +26,12 @@ class ModuleFactory extends Factory
         return [
             'name' => $name ,
             'slug' => Str::slug($name),
-            'intro' => "null",
-            'td' => "null",
-            'tp' => "null",
-//            'intro' => $this->faker->file("C:\Users\Onyx\Desktop\a1", "public/uploads/courses/$course_uuid/$uuid/", false),
-//            'td' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
-//            'tp' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
+//            'intro' => "null",
+//            'td' => "null",
+//            'tp' => "null",
+            'intro' => $this->faker->file("C:\Users\Onyx\Desktop\a1", "public/uploads/courses/$course_uuid/$uuid/", false),
+            'td' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
+            'tp' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
             'uuid' => $uuid,
             'course_id' => $course->id,
         ];
