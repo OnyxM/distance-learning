@@ -59,9 +59,17 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Course::class);
     }
-
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function assistsLives()
+    {
+        return $this->belongsToMany(Live::class);
+    }
+    public function lives()
+    {
+        return $this->hasMany(Live::class);
     }
 }

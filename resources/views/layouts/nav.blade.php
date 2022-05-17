@@ -10,9 +10,11 @@
             <ul class="nav-menu">
 
                 <li><a href="{{route('courses')}}">Courses</a></li>
+                <li><a href="#">Lives</a></li>
 
                 <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Dashboard</a></li>
                 <li><a href="{{route('course.index')}}">My Courses</a></li>
+                <li><a href="{{route('user.lives')}}">My Lives</a></li>
                 <li><a href="javascript:void(0);">Settings</a></li>
 
                 <li><a href="{{route('about')}}">Contact</a></li>
