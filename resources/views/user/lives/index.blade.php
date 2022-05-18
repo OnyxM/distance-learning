@@ -46,7 +46,7 @@
                                     <div class="cources_info_style3">
                                         <div class="row">
                                             <div class="col-6 text-left">
-                                                <a href="javascript:void(0);" data-id="{{$live->id}}" class="btn text-danger btn-sm initLive">Start Live</a>
+                                                <a href="{{route('user.lives.assist', ['live_code'=>$live->uuid])}}" data-id="{{$live->id}}" class="btn text-danger btn-sm initLive">Start Live</a>
                                             </div>
                                             <div class="col-6 text-right">
                                                 <a href="javascript:void(0);" data-id="{{$live->id}}" class="btn text-danger btn-sm deleteLive"><i class="fa fa-trash" aria-hidden="true"></i></a>

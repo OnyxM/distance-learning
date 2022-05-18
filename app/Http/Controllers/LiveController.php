@@ -64,4 +64,20 @@ class LiveController extends Controller
 
         return redirect()->back();
     }
+
+    public function live($live_code)
+    {
+        $live = Live::where('uuid', $live_code)->first();
+
+        if(is_null($live)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "Assist Live - ",
+            'live' => $live
+        ];
+
+        return view("user.lives.assist", $data);
+    }
 }
