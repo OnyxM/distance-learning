@@ -173,7 +173,7 @@ async function startBasicLiveStreaming() {
             // Leave the channel.
             await rtc.client.leave();
 
-            window.location = "https://google.com";
+            window.location = "https://distance-learning-237.herokuapp.com/user/live";
         };
     };
 }
