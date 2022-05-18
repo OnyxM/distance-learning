@@ -1,5 +1,6 @@
 {
     "private": true,
+    "main": "liveStreaming.js",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -7,7 +8,9 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "build": "webpack --config webpack.config.js --mode=development",
+        "start:dev": "webpack serve --open --config webpack.config.js"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
@@ -20,6 +23,12 @@
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1",
         "vue": "^2.6.12",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.6.12",
+        "webpack-cli": "^4.9.2"
+    },
+    "dependencies": {
+        "agora-rtc-sdk-ng": "latest",
+        "webpack": "5.28.0",
+        "webpack-dev-server": "3.11.2"
     }
 }
