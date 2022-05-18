@@ -33,5 +33,14 @@ class UsersTableSeeder extends Seeder
             'lieu_naissance' => "HomeCity",
         ]);
 
+        User::create([
+            'firstname' => "Dan", 'lastname' => "Account",
+            'email' => "dan@domain.com",
+            'email_verified_at' => time(),
+            'password' => bcrypt("passwd1234"),
+            'date_naissance' => "1995-06-25",
+            'lieu_naissance' => "HomeCity",
+        ]);
+
     }
 }
