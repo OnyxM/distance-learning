@@ -4,7 +4,7 @@
     <!-- Row -->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 pt-4 pb-4">
-            <span id="prev">{{ url()->previous() }}</span>
+            <span id="prev" class="d-none">{{ url()->previous() }}</span>
         </div>
     </div>
     <!-- /Row -->
