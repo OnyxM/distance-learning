@@ -11,9 +11,9 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "test",
+    channel: "237distance-learning",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IADr1qK34Ugm2y6EIKSSIDFOrrwa4uBpelDy9gcmXfAHZwx+f9gAAAAAEAB+8cTODWSFYgEAAQAMZIVi",
+    token: "0064495024a2d414911932996a968fc8559IADsElzKaL7l5C/FHWeA2mYpVaBK5a5DozyWOC27bX4miFjRKA4AAAAAEACXaa56o7aGYgEAAQChtoZi",
     // Uid
     uid: 123456,
 };
@@ -49,10 +49,10 @@ async function startBasicLiveStreaming() {
 
             // Specify the ID of the DIV container. You can use the `uid` of the remote user.
             localPlayerContainer.id = options.uid;
-            localPlayerContainer.textContent = "Local user " + options.uid;
-            localPlayerContainer.style.width = "640px";
-            localPlayerContainer.style.height = "480px";
-            document.body.append(localPlayerContainer);
+            // localPlayerContainer.textContent = "Local user " + options.uid;
+            localPlayerContainer.style.width = "290px";
+            localPlayerContainer.style.height = "290px";
+            document.getElementById("users_live").append(localPlayerContainer);
 
             rtc.localVideoTrack.play(localPlayerContainer);
 
@@ -68,10 +68,10 @@ async function startBasicLiveStreaming() {
                     const remotePlayerContainer = document.createElement("div");
                     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
                     remotePlayerContainer.id = user.uid.toString();
-                    remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
-                    remotePlayerContainer.style.width = "640px";
-                    remotePlayerContainer.style.height = "480px";
-                    document.body.append(remotePlayerContainer);
+                    // remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
+                    remotePlayerContainer.style.width = "290px";
+                    remotePlayerContainer.style.height = "290px";
+                    document.getElementById("users_live").append(remotePlayerContainer);
 
                     // Play the remote video track.
                     // Pass the DIV container and the SDK dynamically creates a player in the container for playing the remote video track.
@@ -104,6 +104,9 @@ async function startBasicLiveStreaming() {
                 framerate: 15,
                 bitrate: 120,
             });
+
+            $("#host-join").addClass('d-none');
+            $("#leave").removeClass('d-none');
         };
 
         document.getElementById("audience-join").onclick = async function () {
@@ -124,9 +127,9 @@ async function startBasicLiveStreaming() {
                     const remotePlayerContainer = document.createElement("div");
                     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
                     remotePlayerContainer.id = user.uid.toString();
-                    remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
-                    remotePlayerContainer.style.width = "640px";
-                    remotePlayerContainer.style.height = "480px";
+                    // remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
+                    remotePlayerContainer.style.width = "290px";
+                    remotePlayerContainer.style.height = "290px";
                     document.body.append(remotePlayerContainer);
 
                     // Play the remote video track.
@@ -169,6 +172,8 @@ async function startBasicLiveStreaming() {
 
             // Leave the channel.
             await rtc.client.leave();
+
+            window.location = "https://google.com";
         };
     };
 }
