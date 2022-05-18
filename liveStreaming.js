@@ -52,6 +52,7 @@ async function startBasicLiveStreaming() {
             // localPlayerContainer.textContent = "Local user " + options.uid;
             localPlayerContainer.style.width = "290px";
             localPlayerContainer.style.height = "290px";
+            localPlayerContainer.classList.add('m-2');
             document.getElementById("users_live").append(localPlayerContainer);
 
             rtc.localVideoTrack.play(localPlayerContainer);
@@ -68,9 +69,10 @@ async function startBasicLiveStreaming() {
                     const remotePlayerContainer = document.createElement("div");
                     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
                     remotePlayerContainer.id = user.uid.toString();
-                    // remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
                     remotePlayerContainer.style.width = "290px";
                     remotePlayerContainer.style.height = "290px";
+                    // remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
+                    remotePlayerContainer.classList.add('m-2');
                     document.getElementById("users_live").append(remotePlayerContainer);
 
                     // Play the remote video track.
@@ -130,6 +132,7 @@ async function startBasicLiveStreaming() {
                     // remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
                     remotePlayerContainer.style.width = "290px";
                     remotePlayerContainer.style.height = "290px";
+                    remotePlayerContainer.classList.add('m-2');
                     document.body.append(remotePlayerContainer);
 
                     // Play the remote video track.
@@ -173,7 +176,10 @@ async function startBasicLiveStreaming() {
             // Leave the channel.
             await rtc.client.leave();
 
-            window.location = "https://distance-learning-237.herokuapp.com/user/live";
+            // savoir que c'est l'admin et supprimé le live
+
+            window.location = $('#prev').html();
+            // window.location = "https://distance-learning-237.herokuapp.com/user/live";
         };
     };
 }

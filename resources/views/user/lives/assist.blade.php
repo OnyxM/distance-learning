@@ -4,7 +4,7 @@
     <!-- Row -->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 pt-4 pb-4">
-
+            <span id="prev">{{ url()->previous() }}</span>
         </div>
     </div>
     <!-- /Row -->
@@ -26,9 +26,7 @@
 {{--                    <div class="dashboard_fl_1">--}}
 {{--                        <h4>Assist Live : <i>Title here</i></h4>--}}
 {{--                    </div>--}}
-                    <div class="dashboard_fl_2 row" id="users_live" style="height: 600px; overflow-y:scroll;">
-
-                    </div>
+                    <div class="dashboard_fl_2 row" id="users_live" style="height: 600px; overflow-y:scroll;"></div>
                 </div>
             </div>
 

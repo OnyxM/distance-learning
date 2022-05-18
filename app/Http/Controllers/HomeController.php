@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Live;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -93,5 +94,15 @@ class HomeController extends Controller
         ];
 
         return view("about", $data);
+    }
+
+    public function lives()
+    {
+        $data =[
+            'title' => "Available Lives - ",
+            'lives' => Live::orderBy('date_debut', 'desc')->get(),
+        ];
+
+        return view("lives", $data);
     }
 }

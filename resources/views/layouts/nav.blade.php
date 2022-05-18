@@ -10,13 +10,7 @@
             <ul class="nav-menu">
 
                 <li><a href="{{route('courses')}}">Courses</a></li>
-                <li><a href="#">Lives</a></li>
-
-                <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Dashboard</a></li>
-                <li><a href="{{route('course.index')}}">My Courses</a></li>
-                <li><a href="{{route('user.lives')}}">My Lives</a></li>
-                <li><a href="javascript:void(0);">Settings</a></li>
-
+                <li><a href="{{route('lives')}}">Lives</a></li>
                 <li><a href="{{route('about')}}">Contact</a></li>
 
             </ul>
@@ -32,6 +26,11 @@
                         {{--									<a href="#" data-toggle="modal" data-target="#signup">Sign up</a>--}}
                     </li>
                 @else
+                    <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Dashboard</a></li>
+                    <li><a href="{{route('course.index')}}">My Courses</a></li>
+                    <li><a href="{{route('user.lives')}}">My Lives</a></li>
+                    <li><a href="javascript:void(0);">Settings</a></li>
+
                     <li class="login_click light">
                         @if($logged_as == 'teacher')
                         <a href="{{ route('user.index') }}">As Student</a>
