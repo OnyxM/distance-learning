@@ -22,6 +22,8 @@ async function startBasicLiveStreaming() {
     // rtc.client = AgoraRTC.createClient({mode: "live",codec: "vp8"});
 
     window.onload = function () {
+
+        // pour join, récup l'id du user connecté et passer ça en option.uid ...
         document.getElementById("host-join").onclick = async function () {
 
             rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
