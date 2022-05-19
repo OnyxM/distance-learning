@@ -9,4 +9,5 @@ Route::get('/', [AdminController::class, "index"])->name("admin.index");
 
 Route::group(['prefix' => "users"], function(){
     Route::get('/', [UserController::class, "getAll"])->name("admin.users");
+    Route::post('/set-status', [UserController::class, "setStatus"])->name("admin.users.set_status");
 });

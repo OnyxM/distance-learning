@@ -52,7 +52,11 @@
                                         <div class="dropdown-menu dropdown-menu-end" style="">
 {{--                                            <a href="javascript:;" class="dropdown-item text-warning suspend-user">Suspend</a>--}}
 {{--                                            <div class="dropdown-divider"></div>--}}
-                                            <a href="javascript:void(0);" class="dropdown-item text-danger suspend-user" data-user="{{ $user->id }}">Suspend</a>
+                                            @if(is_null($user->deleted_at))
+                                                <a href="javascript:void(0);" class="dropdown-item text-danger suspend-user" data-user="{{ $user->id }}">Suspend</a>
+                                            @else
+                                                <a href="javascript:void(0);" class="dropdown-item text-success enable-user" data-user="{{ $user->id }}">Enable</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
@@ -71,19 +75,20 @@
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-5">Suspend User ?</h3>
+                        <h3 class="mb-5" id="info_m0"></h3>
                     </div>
-                    <h6>Are you sure you want to suspend this user ?</h6>
+                    <h6 id="info_m"></h6>
 
-                    <form id="suspendUserForm" class="row g-3" >
+                    <form id="suspendUserForm" class="row g-3" method="post" action="{{ route('admin.users.set_status') }}">
                         <div class="col-12">
                             @csrf
                             <input type="hidden" name="user" required>
+                            <input type="hidden" name="status" required>
                         </div>
                         <div class="col-12">
-                            <label class="form-label" for="modalEnableOTPPhone">Enter the reason of suspending</label>
+                            <label class="form-label" for="modalEnableOTPPhone">Enter the reason</label>
                             <div class="input-group input-group-merge">
-                                <textarea name="reason_suspending" class="form-control" cols="30" rows="10" required></textarea>
+                                <textarea name="reason" class="form-control" cols="30" rows="10" required></textarea>
                             </div>
                         </div>
                         <div class="col-12">
@@ -107,7 +112,27 @@
                 return ;
             }
 
+            $("#info_m0").html("Suspend User ?");
+            $("#info_m").html("Are you sure you want to suspend this user ?");
             $("input[name='user']").val(user);
+            $("input[name='status']").val("disable");
+
+            $("#suspendUserModal").modal("toggle");
+        });
+
+        $(document).on('click', ".enable-user", function(e){
+            e.preventDefault();
+
+            var user = $(this).data('user');
+
+            if(user === ""){
+                return ;
+            }
+
+            $("#info_m0").html("Enable User ?");
+            $("#info_m").html("Are you sure you want to enable this user ?");
+            $("input[name='user']").val(user);
+            $("input[name='status']").val("enable");
 
             $("#suspendUserModal").modal("toggle");
         });
