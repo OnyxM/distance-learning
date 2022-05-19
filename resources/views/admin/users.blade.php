@@ -40,10 +40,13 @@
                                         <span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span> Admin
                                     @endif
                                 </td>
-                                <td>@if(is_null($user->deleted_at))
-                                        <span class="badge bg-label-success">Active</span>
-                                    @else
-                                        <span class="badge bg-label-secondary">Inactive</span>
+                                <td>
+                                    @if($user->id != auth()->user()->id)
+                                        @if(is_null($user->deleted_at))
+                                            <span class="badge bg-label-success">Active</span>
+                                        @else
+                                            <span class="badge bg-label-secondary">Inactive</span>
+                                        @endif
                                     @endif
                                 </td>
                                 <td>
@@ -69,6 +72,7 @@
         </div>
     </div>
 
+    @if($user->id != auth()->user()->id)
     <div class="modal fade" id="suspendUserModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-enable-otp modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
@@ -99,6 +103,7 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 
 @section("js")
