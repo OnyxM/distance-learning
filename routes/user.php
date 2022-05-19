@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LiveController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, "index"])->name("user.index");
-Route::get('/course/v/{id}-{slug_course}', [CourseController::class, "course_details"])->name("course.enroll");
-Route::post('/course/r/{id}-{slug_course}', [CourseController::class, "submit_review"])->name("course.submit_review");
-Route::get('/course/v/{id}-{slug_course}/{module}/introduction', [CourseController::class, "course_details_introduction"])->name("course.details.module.intro");
-Route::get('/course/v/{id}-{slug_course}/{module}/{worksheet}', [CourseController::class, "course_details_worksheet"])
-    ->name("course.details.module.worksheet")
-    ->where([
-        'worksheet' => "td|tp"
-    ]);
-//Route::get('/course/{id}-{slug_course}/{module}/tp', [CourseController::class, "course_details_worksheet"])->name("course.details.module.tp");
-Route::get('/course/{id}-{slug_course}/{module}/{section}', [CourseController::class, "course_details_section"])->name("course.details.module.section");
+
+Route::group(['prefix'=>"course"], function(){
+    Route::get('/v/{id}-{slug_course}', [CourseController::class, "course_details"])->name("course.enroll");
+    Route::post('/r/{id}-{slug_course}', [CourseController::class, "submit_review"])->name("course.submit_review");
+    Route::get('/v/{id}-{slug_course}/{module}/introduction', [CourseController::class, "course_details_introduction"])->name("course.details.module.intro");
+    Route::get('/v/{id}-{slug_course}/{module}/{worksheet}', [CourseController::class, "course_details_worksheet"])
+        ->name("course.details.module.worksheet")
+        ->where([
+            'worksheet' => "td|tp"
+        ]);
+//Route::get('/{id}-{slug_course}/{module}/tp', [CourseController::class, "course_details_worksheet"])->name("course.details.module.tp");
+    Route::get('/{id}-{slug_course}/{module}/{section}', [CourseController::class, "course_details_section"])->name("course.details.module.section");
+});
+
+Route::group(['prefix'=>"live"], function(){
+    Route::get('',  [LiveController::class, 'getUserLives'])->name("user.lives");
+    Route::post('/new',  [LiveController::class, 'create'])->name("user.lives.new");
+    Route::post('/delete',  [LiveController::class, 'delete'])->name("user.lives.delete");
+    Route::get('{live_code}',  [LiveController::class, 'live'])->name("user.lives.assist");
+});
