@@ -26,21 +26,9 @@ class ModuleFactory extends Factory
         return [
             'name' => $name ,
             'slug' => Str::slug($name),
-<<<<<<< HEAD
-            'intro' => $this->faker->file("C:\Users\Onyx Moffo\Desktop\a1", "public/uploads/courses/$course_uuid/$uuid/", false),
-            'td' => $this->faker->file("C:\Users\Onyx Moffo\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
-            'tp' => $this->faker->file("C:\Users\Onyx Moffo\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
-//            'intro' => $this->faker->file("C:\Users\Onyx\Desktop\a1", "public/uploads/courses/$course_uuid/$uuid/", false),
-//            'td' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
-//            'tp' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
-=======
-//            'intro' => "null",
-//            'td' => "null",
-//            'tp' => "null",
             'intro' => $this->faker->file("C:\Users\Onyx\Desktop\a1", "public/uploads/courses/$course_uuid/$uuid/", false),
             'td' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
             'tp' => $this->faker->file("C:\Users\Onyx\Desktop\a2", "public/uploads/courses/$course_uuid/$uuid/", false),
->>>>>>> 8ee4730b559e6dbe863f5f1893bfd92ef6022e57
             'uuid' => $uuid,
             'course_id' => $course->id,
         ];
