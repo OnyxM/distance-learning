@@ -121,7 +121,7 @@
                         </div>
 
                         <div class="container-frame">
-                            <embed class="responsive-iframe" src="{{$module->$type}}#toolbar=0">
+                            <embed class="responsive-iframe" src="{{$module->$type}}&embedded=true">
                         </div>
                     @else
                     <div class="edu_wraper">

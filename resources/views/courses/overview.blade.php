@@ -93,6 +93,7 @@
 
                     <!-- Reviews -->
 
+                    @if($course->participants()->wherePivot('comment', '!=', null)->count() != 0)
                     <div class="list-single-main-item fl-wrap">
                         <div class="list-single-main-item-title fl-wrap">
                             <h3>Reviews</h3>
@@ -119,12 +120,13 @@
                         @endif
                         @endforeach
                     </div>
+                    @endif
 
                 @if(in_array(auth()->user()->id, $course->participants()->pluck('user_id')->toArray())
                         && is_null($course->participants()->where('user_id',auth()->user()->id)->first()->pivot->comment))
                 <!-- Submit Reviews -->
                 <div class="edu_wraper">
-                    <h4 class="edu_title">Submit Reviews</h4>
+                    <h4 class="edu_title">Say something about this course</h4>
                     <div class="review-form-box form-submit">
                         <form action="{{route('course.submit_review', ['id'=>$course->id, 'slug_course'=>$course->slug])}}" method="POST">
                             @csrf
