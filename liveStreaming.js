@@ -11,11 +11,11 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "237distance-learning",
+    channel: "237-distance-learning",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IADsElzKaL7l5C/FHWeA2mYpVaBK5a5DozyWOC27bX4miFjRKA4AAAAAEACXaa56o7aGYgEAAQChtoZi",
+    token: "0064495024a2d414911932996a968fc8559IADv/85vZZMgfVTtEowJSSN3oWrO4gM9J0g5xPcNc4YG0iQWOMgAAAAAEABCwUE+kqGHYgEAAQCSoYdi",
     // Uid
-    uid: 123456,
+    uid: 123456789,
 };
 
 async function startBasicLiveStreaming() {
