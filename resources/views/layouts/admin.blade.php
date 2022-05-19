@@ -53,6 +53,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('manager/assets/js/config.js')}}"></script>
 
+    @yield('css')
+
 </head>
 
 <body>
@@ -237,6 +239,8 @@
 
 <!-- Page JS -->
 <script src="{{asset('manager/assets/js/dashboards-ecommerce.js')}}"></script>
+
+@yield('js')
 
 </body>
 </html>

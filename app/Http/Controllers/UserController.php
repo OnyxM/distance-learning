@@ -24,4 +24,18 @@ class UserController extends Controller
 
         return view("admin.users", $data);
     }
+
+    public function suspend(Request $request)
+    {
+        if(auth()->user()->priority !== "5"){
+            auth()->logout();
+            return redirect()->route('login');
+        }
+
+        $this->validate($request, [
+            'user_id' => "requried"
+        ]);
+
+        $user = User::find($request->user_id);
+    }
 }

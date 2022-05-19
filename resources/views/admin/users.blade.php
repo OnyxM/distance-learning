@@ -50,9 +50,9 @@
                                     <div class="d-inline-block">
                                         <button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
                                         <div class="dropdown-menu dropdown-menu-end" style="">
-                                            <a href="javascript:;" class="dropdown-item text-warning suspend-user">Suspend</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" class="dropdown-item text-danger delete-user" data-bs-toggle="modal" data-bs-target="#enableOTP">Delete</a>
+{{--                                            <a href="javascript:;" class="dropdown-item text-warning suspend-user">Suspend</a>--}}
+{{--                                            <div class="dropdown-divider"></div>--}}
+                                            <a href="javascript:void(0);" class="dropdown-item text-danger suspend-user" data-user="{{ $user->id }}">Suspend</a>
                                         </div>
                                     </div>
                                 </td>
@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="enableOTP" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="suspendUserModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-enable-otp modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
@@ -75,7 +75,11 @@
                     </div>
                     <h6>Are you sure you want to suspend this user ?</h6>
 
-                    <form id="enableOTPForm" class="row g-3" onsubmit="return false">
+                    <form id="suspendUserForm" class="row g-3" >
+                        <div class="col-12">
+                            @csrf
+                            <input type="hidden" name="user" required>
+                        </div>
                         <div class="col-12">
                             <label class="form-label" for="modalEnableOTPPhone">Enter the reason of suspending</label>
                             <div class="input-group input-group-merge">
@@ -90,4 +94,22 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section("js")
+    <script>
+        $(document).on('click', ".suspend-user", function(e){
+            e.preventDefault();
+
+            var user = $(this).data('user');
+
+            if(user === ""){
+                return ;
+            }
+
+            $("input[name='user']").val(user);
+
+            $("#suspendUserModal").modal("toggle");
+        });
+    </script>
 @endsection
