@@ -18,9 +18,9 @@
                 <div class="dashboard_container_body">
                     <div class="row justify-content-around m-3">
                         @if($live->user_id == auth()->user()->id)
-                        <button type="button" id="join" class="btn btn-theme" data-type="host" data-uid="{{ Str::uuid()  }}">Join</button>
+                        <button type="button" id="join" class="btn btn-theme" data-type="host" data-uid="{{ rand(11111, 99999) }}">Join</button>
                         @else
-                        <button type="button" class="btn btn-theme" id="join" data-type="audience" data-uid="{{ Str::uuid()  }}">Join</button>
+                        <button type="button" class="btn btn-theme" id="join" data-type="audience" data-uid="{{ rand(111111, 999999) }}">Join</button>
                         @endif
                         <button type="button" class="d-none btn btn-theme" id="leave">Leave</button>
                     </div>
