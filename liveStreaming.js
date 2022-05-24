@@ -102,6 +102,9 @@ async function startBasicLiveStreaming() {
             // Enable dual-stream mode.
             rtc.client.enableDualStream();
 
+            // first show the others
+            await publishRemoteUsers(rtc);
+
             // Create an audio track from the audio sampled by a microphone.
             rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
             // Create a video track from the video captured by a camera.
@@ -124,8 +127,6 @@ async function startBasicLiveStreaming() {
             document.getElementById("users_live").append(localPlayerContainer);
 
             rtc.localVideoTrack.play(localPlayerContainer);
-
-            await publishRemoteUsers(rtc);
 
             await userPublished();
             await userUpublished();
