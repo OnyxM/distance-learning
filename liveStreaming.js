@@ -69,11 +69,10 @@ async function startBasicLiveStreaming() {
         }
 
         async function joinLive(role, uid){
-            alert(uid);
-            rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
+            rtc.client = AgoraRTC.createClient({mode: "live",codec: "vp8"});
 
             // dynamic
-            // rtc.client.setClientRole(role);
+            rtc.client.setClientRole(role);
 
             // dynamic
             await rtc.client.join(options.appId, options.channel, options.token, uid);
@@ -90,23 +89,31 @@ async function startBasicLiveStreaming() {
             // rtc.screenTrack = await AgoraRTC.createScreenVideoTrack();
 
             // Publish the local audio and video tracks to the channel.
-            await rtc.client.publish([rtc.localAudioTrack, rtc.localVideoTrack]);
+            await rtc.client.publish(rtc.localAudioTrack);
+            // await rtc.client.publish([rtc.localAudioTrack, rtc.localVideoTrack]);
 
             // Dynamically create a container in the form of a DIV element for playing the remote video track.
             const localPlayerContainer = document.createElement("div");
 
             // Specify the ID of the DIV container. You can use the `uid` of the remote user.
             localPlayerContainer.id = options.uid;
-            // localPlayerContainer.textContent = "Local user " + options.uid;
             localPlayerContainer.style.width = "290px";
             localPlayerContainer.style.height = "290px";
             localPlayerContainer.classList.add('m-2');
             document.getElementById("users_live").append(localPlayerContainer);
 
-            rtc.localVideoTrack.play(localPlayerContainer);
+            // rtc.localVideoTrack.play(localPlayerContainer);
+
+
+            rtc.client.remoteUsers.forEach(user => {
+                // Destroy the dynamically created DIV containers.
+                // const playerContainer = document.getElementById(user.uid);
+                // playerContainer && playerContainer.remove();
+
+                alert(user.uid);
+            });
 
             await userPublished();
-
             await userUpublished();
 
             // Customize the video profile of the low-quality stream. Set the video profile as 160 × 120, 15 fps, 120 Kbps.
@@ -196,14 +203,13 @@ async function startBasicLiveStreaming() {
 
             var uid = $(this).data('uid');
 
-            $("#join").addClass('d-none');
-
             if($(this).data('type') == "host"){
                 await joinLive("host", uid);
             }else{
                 await joinLive("audience", uid);
             }
 
+            $("#join").addClass('d-none');
             $("#leave").removeClass('d-none');
 
         };
