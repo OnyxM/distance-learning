@@ -28,6 +28,8 @@ async function startBasicLiveStreaming() {
                 // Subscribe to a remote user.
                 await rtc.client.subscribe(user, mediaType);
 
+                user.audioTrack.play();
+
                 // If the subscribed track is video.
                 if (mediaType === "video") {
                     // Get `RemoteVideoTrack` in the `user` object.
@@ -51,12 +53,12 @@ async function startBasicLiveStreaming() {
                 }
 
                 // If the subscribed track is audio.
-                if (mediaType === "audio") {
-                    // Get `RemoteAudioTrack` in the `user` object.
-                    const remoteAudioTrack = user.audioTrack;
-                    // Play the audio track. No need to pass any DOM element.
-                    remoteAudioTrack.play();
-                }
+                // if (mediaType === "audio") {
+                //     // Get `RemoteAudioTrack` in the `user` object.
+                //     const remoteAudioTrack = user.audioTrack;
+                //     // Play the audio track. No need to pass any DOM element.
+                //     remoteAudioTrack.play();
+                // }
             });
         }
         async function userUpublished(){
@@ -106,11 +108,23 @@ async function startBasicLiveStreaming() {
 
 
             rtc.client.remoteUsers.forEach(user => {
-                // Destroy the dynamically created DIV containers.
-                // const playerContainer = document.getElementById(user.uid);
-                // playerContainer && playerContainer.remove();
+                let remoteVideoTrackTemp = user.videoTrack;
+                let remoteAudioTrackTemp = user.audioTrack;
+                // Dynamically create a container in the form of a DIV element for playing the remote video track.
+                let remotePlayerContainerTemp = document.createElement("div");
+                // Specify the ID of the DIV container. You can use the `uid` of the remote user.
+                remotePlayerContainerTemp.id = user.uid.toString();
+                remotePlayerContainerTemp.style.width = "290px";
+                remotePlayerContainerTemp.style.height = "290px";
+                // remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
+                remotePlayerContainerTemp.classList.add('m-2');
+                document.getElementById("users_live").append(remotePlayerContainerTemp);
 
-                alert("Remote uid: " + user.uid);
+                // Play the remote video track.
+                // Pass the DIV container and the SDK dynamically creates a player in the container for playing the remote video track.
+                remoteVideoTrackTemp.play(remotePlayerContainerTemp);
+
+                remoteAudioTrackTemp.play();
             });
 
             await userPublished();
