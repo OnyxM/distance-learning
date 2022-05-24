@@ -69,10 +69,10 @@ async function startBasicLiveStreaming() {
         }
 
         async function joinLive(role, uid){
-            rtc.client = AgoraRTC.createClient({mode: "live",codec: "vp8"});
+            rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
 
             // dynamic
-            rtc.client.setClientRole(role);
+            // rtc.client.setClientRole(role);
 
             // dynamic
             await rtc.client.join(options.appId, options.channel, options.token, uid);
@@ -90,7 +90,7 @@ async function startBasicLiveStreaming() {
 
             // Publish the local audio and video tracks to the channel.
             await rtc.client.publish(rtc.localAudioTrack);
-            // await rtc.client.publish([rtc.localAudioTrack, rtc.localVideoTrack]);
+            await rtc.client.publish(rtc.localVideoTrack);
 
             // Dynamically create a container in the form of a DIV element for playing the remote video track.
             const localPlayerContainer = document.createElement("div");
@@ -102,7 +102,7 @@ async function startBasicLiveStreaming() {
             localPlayerContainer.classList.add('m-2');
             document.getElementById("users_live").append(localPlayerContainer);
 
-            // rtc.localVideoTrack.play(localPlayerContainer);
+            rtc.localVideoTrack.play(localPlayerContainer);
 
 
             rtc.client.remoteUsers.forEach(user => {
@@ -110,7 +110,7 @@ async function startBasicLiveStreaming() {
                 // const playerContainer = document.getElementById(user.uid);
                 // playerContainer && playerContainer.remove();
 
-                alert(user.uid);
+                alert("Remote uid: " + user.uid);
             });
 
             await userPublished();
