@@ -69,7 +69,7 @@ async function startBasicLiveStreaming() {
         }
 
         async function joinLive(role, uid){
-            rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
+            rtc.client = AgoraRTC.createClient({mode: "live",codec: "vp8"});
 
             // dynamic
             rtc.client.setClientRole(role);
