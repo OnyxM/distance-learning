@@ -17,8 +17,11 @@
             <div class="dashboard_container">
                 <div class="dashboard_container_body">
                     <div class="row justify-content-around m-3">
-                        <button type="button" id="host-join" class="btn btn-theme">Join</button>
-                        <button type="button" class="d-none btn btn-theme" id="audience-join">Join as audience</button>
+                        @if($live->user_id == auth()->user()->id)
+                        <button type="button" id="join" class="btn btn-theme" data-type="host" data-uid="{{ Str::uuid()  }}">Join</button>
+                        @else
+                        <button type="button" class="btn btn-theme" id="join" data-type="audience" data-uid="{{ Str::uuid()  }}">Join</button>
+                        @endif
                         <button type="button" class="d-none btn btn-theme" id="leave">Leave</button>
                     </div>
                 </div>
