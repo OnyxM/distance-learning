@@ -11,9 +11,9 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "0064495024a2",
+    channel: "1932996a968fc85",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IAAXmFaYATMM9UjLo3niepTNqtFkz17pFLuyaIh3TxoQKkg9PVUAAAAAEACucvvF5x+LYgEAAQDlH4ti",
+    token: "0064495024a2d414911932996a968fc8559IACZHG9upSZBiB/wemGJTrx+0Av2F2YD/OB3Kc0pHydnsE58fAgAAAAAEAB9OJJ5EwyOYgEAAQATDI5i",
     // Uid
     uid: 123456789,
 };
@@ -68,11 +68,13 @@ async function startBasicLiveStreaming() {
             });
         }
 
-        async function joinAsHost(uid){
+        async function joinLive(role, uid){
             rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
 
-            // rtc.client.setClientRole("host");
+            // dynamic
+            rtc.client.setClientRole(role);
 
+            // dynamic
             await rtc.client.join(options.appId, options.channel, options.token, uid);
 
             // Enable dual-stream mode.
@@ -115,29 +117,78 @@ async function startBasicLiveStreaming() {
             // });
         }
 
-        async function joinAsAudience(uid){
-            rtc.client = new AgoraRTC.createClient({mode: "live",codec: "vp8"});
-
-            rtc.client.setClientRole("audience");
-            await rtc.client.join(options.appId, options.channel, options.token, uid);
-
-            // Dynamically create a container in the form of a DIV element for playing the remote video track.
-            const localPlayerContainer = document.createElement("div");
-
-            // Specify the ID of the DIV container. You can use the `uid` of the remote user.
-            localPlayerContainer.id = uid;
-            // localPlayerContainer.textContent = "Local user " + options.uid;
-            localPlayerContainer.style.width = "290px";
-            localPlayerContainer.style.height = "290px";
-            localPlayerContainer.classList.add('m-2');
-            document.getElementById("users_live").append(localPlayerContainer);
-
-            rtc.localVideoTrack.play(localPlayerContainer);
-
-            await userPublished();
-
-            await userUpublished();
-        }
+        // async function joinAsHost(uid){
+        //     rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
+        //
+        //     // dynamic
+        //     rtc.client.setClientRole("host");
+        //
+        //     // dynamic
+        //     await rtc.client.join(options.appId, options.channel, options.token, uid);
+        //
+        //     // Enable dual-stream mode.
+        //     rtc.client.enableDualStream();
+        //
+        //     // Create an audio track from the audio sampled by a microphone.
+        //     rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+        //     // Create a video track from the video captured by a camera.
+        //     rtc.localVideoTrack = await AgoraRTC.createCameraVideoTrack();
+        //
+        //     // screen-sharing ...
+        //     // rtc.screenTrack = await AgoraRTC.createScreenVideoTrack();
+        //
+        //     // Publish the local audio and video tracks to the channel.
+        //     await rtc.client.publish([rtc.localAudioTrack, rtc.localVideoTrack]);
+        //
+        //     // Dynamically create a container in the form of a DIV element for playing the remote video track.
+        //     const localPlayerContainer = document.createElement("div");
+        //
+        //     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
+        //     localPlayerContainer.id = options.uid;
+        //     // localPlayerContainer.textContent = "Local user " + options.uid;
+        //     localPlayerContainer.style.width = "290px";
+        //     localPlayerContainer.style.height = "290px";
+        //     localPlayerContainer.classList.add('m-2');
+        //     document.getElementById("users_live").append(localPlayerContainer);
+        //
+        //     rtc.localVideoTrack.play(localPlayerContainer);
+        //
+        //     await userPublished();
+        //
+        //     await userUpublished();
+        //
+        //     // Customize the video profile of the low-quality stream. Set the video profile as 160 × 120, 15 fps, 120 Kbps.
+        //     // rtc.client.setLowStreamParameter({
+        //     //     width: 160,
+        //     //     height: 120,
+        //     //     framerate: 15,
+        //     //     bitrate: 120,
+        //     // });
+        // }
+        //
+        // async function joinAsAudience(uid){
+        //     rtc.client = new AgoraRTC.createClient({mode: "live",codec: "vp8"});
+        //
+        //     rtc.client.setClientRole("audience");
+        //     await rtc.client.join(options.appId, options.channel, options.token, uid);
+        //
+        //     // Dynamically create a container in the form of a DIV element for playing the remote video track.
+        //     const localPlayerContainer = document.createElement("div");
+        //
+        //     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
+        //     localPlayerContainer.id = uid;
+        //     // localPlayerContainer.textContent = "Local user " + options.uid;
+        //     localPlayerContainer.style.width = "290px";
+        //     localPlayerContainer.style.height = "290px";
+        //     localPlayerContainer.classList.add('m-2');
+        //     document.getElementById("users_live").append(localPlayerContainer);
+        //
+        //     rtc.localVideoTrack.play(localPlayerContainer);
+        //
+        //     await userPublished();
+        //
+        //     await userUpublished();
+        // }
 
         // pour join, récup l'id du user connecté et passer ça en option.uid ...
         document.getElementById("join").onclick = async function () {
@@ -147,9 +198,9 @@ async function startBasicLiveStreaming() {
             $("#join").addClass('d-none');
 
             if($(this).data('type') == "host"){
-                await joinAsHost(uid);
+                await joinLive("host", uid);
             }else{
-                await joinAsAudience(uid);
+                await joinLive("audience", uid);
             }
 
             $("#leave").removeClass('d-none');
