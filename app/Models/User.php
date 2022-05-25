@@ -22,6 +22,7 @@ class User extends Authenticatable
         'date_naissance',
         'lieu_naissance',
         'photo',
+        'teacher_id',
         'priority',
         'deleted_at',
     ];
@@ -71,5 +72,10 @@ class User extends Authenticatable
     public function lives()
     {
         return $this->hasMany(Live::class);
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
     }
 }

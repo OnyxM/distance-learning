@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('lieu_naissance');
             $table->enum('priority', [User::USER_PRIORITY['user'], User::USER_PRIORITY['manager'], User::USER_PRIORITY['admin']])->default(User::USER_PRIORITY['user']);
             $table->string('photo')->default("avatar.png");
+            $table->integer('teacher_id')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
