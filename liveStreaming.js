@@ -36,7 +36,7 @@ async function startBasicLiveStreaming() {
                 remotePlayerContainer.style.width = "240px";
                 remotePlayerContainer.style.height = "240px";
                 remotePlayerContainer.classList.add('m-2');
-                remotePlayerContainerTemp.style.transform = "rotateY(180deg)";
+                remotePlayerContainer.style.transform = "rotateY(180deg)";
                 document.getElementById("users_live").append(remotePlayerContainer);
 
                 // Pass the DIV container and the SDK dynamically creates a player in the container for playing the remote video track.
