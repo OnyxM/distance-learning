@@ -33,7 +33,7 @@ class LiveController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'title' => "string|min:8",
+            'title' => "string",
             'start_time' => "date"
         ]);
 
