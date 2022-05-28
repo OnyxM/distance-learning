@@ -75,7 +75,7 @@ class LiveController extends Controller
 
         $data = [
             'title' => "Assist Live - ",
-            'live' => $live
+            'live' => $live,
         ];
 
         return view("user.lives.assist", $data);

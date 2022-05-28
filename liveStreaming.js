@@ -97,7 +97,9 @@ async function startBasicLiveStreaming() {
         async function joinLive(role, uid){
             rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
 
-            // dynamic
+            // register user in db and join live on Agora
+            registerUserToLive();
+
             await rtc.client.join(options.appId, options.channel, options.token, uid);
 
             // Enable dual-stream mode.
@@ -153,6 +155,20 @@ async function startBasicLiveStreaming() {
 
             window.location = $('#prev').html();
         };
+
+        async function registerUserToLive(){
+            let current_url = window.location.href;
+            current_url = current_url.split("/");
+
+            let live_id = current_url.at('-1');
+
+            $.ajax({
+                url: "/beta-test/"+live_id,
+                success: async function(result){
+                    // await rtc.client.join(options.appId, options.channel, options.token, result.user_id);
+                }
+            });
+        }
     };
 }
 
