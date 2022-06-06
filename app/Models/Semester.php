@@ -24,4 +24,13 @@ class Semester extends Model
     {
         return $this->hasMany(Ue::class);
     }
+
+    // this is a recommended way to declare event handlers
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($semester) { // before delete() method call this
+            $semester->ues()->delete();
+        });
+    }
 }

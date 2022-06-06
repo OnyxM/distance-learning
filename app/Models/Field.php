@@ -19,4 +19,20 @@ class Field extends Model
     {
         return $this->hasMany(Level::class);
     }
+
+    // this is a recommended way to declare event handlers
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($field) { // before delete() method call this
+//            foreach ($field->levels() as $level) {
+//                foreach ($level->semesters() as $semester) {
+//                    $semester->ues()->delete();
+//                }
+//                $level->delete();
+//            }
+            $field->levels()->delete();
+        });
+    }
+
 }

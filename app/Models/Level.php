@@ -26,4 +26,16 @@ class Level extends Model
     {
         return $this->hasMany(Semester::class);
     }
+
+    // this is a recommended way to declare event handlers
+//    public static function boot() {
+//        parent::boot();
+//
+//        static::deleting(function($level) { // before delete() method call this
+//            foreach ($level->semesters as $semester) {
+//                $semester->ues()->delete();
+//            }
+//            $level->semesters()->delete();
+//        });
+//    }
 }

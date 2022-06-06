@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FieldController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,4 +11,20 @@ Route::get('/', [AdminController::class, "index"])->name("admin.index");
 
 Route::group(['prefix' => "users"], function(){
     Route::get('/', [UserController::class, "getAll"])->name("admin.users");
+});
+
+Route::group(['prefix' => "system"], function(){
+    Route::group(['prefix' => "field"], function(){
+        Route::get('/', [FieldController::class, "index"])->name("admin.fields");
+        Route::get('/new', [FieldController::class, "new"])->name("admin.fields.new");
+        Route::post('/create', [FieldController::class, "create"])->name("admin.fields.create");
+        Route::get('/delete/{id}', [FieldController::class, "delete"])->name("admin.fields.delete");
+
+        Route::group(['prefix' => "{field_slug}"], function(){
+            Route::get('/', [LevelController::class, "index"])->name("admin.levels");
+            Route::get('/new', [LevelController::class, "new"])->name("admin.levels.new");
+            Route::post('/create', [LevelController::class, "create"])->name("admin.levels.create");
+            Route::get('/delete/{id}', [LevelController::class, "delete"])->name("admin.levels.delete");
+        });
+    });
 });

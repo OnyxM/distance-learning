@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-bordered" data-assets-path="../../assets/" data-template="vertical-menu-template-bordered">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-bordered" data-assets-path="../../../assets/" data-template="vertical-menu-template-bordered">
 
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>eCommerce - Dashboards | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>{{$title}}Distance Learning Admin</title>
 
     <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
     <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
@@ -83,6 +82,13 @@
                         <i class="menu-icon tf-icons bx bx-home-circle"></i> Home
                     </a>
                 </li>
+                <br>
+                <li class="menu-item">
+                    <a href="{{route('admin.fields')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i> System Management
+                    </a>
+                </li>
+                <br>
                 <li class="menu-item">
                     <a href="{{route('admin.users')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i> Users
@@ -183,8 +189,8 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-                @yield("container-xxl")
-                <!-- / Content -->
+            @yield("container-xxl")
+            <!-- / Content -->
             </div>
             <!-- Content wrapper -->
         </div>
