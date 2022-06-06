@@ -8,7 +8,7 @@
                 List of levels
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="{{ route('admin.fields.new') }}" class="btn btn-info">Add level</a>
+                <a href="{{ route('admin.levels.new', ['field_slug' => $field->slug]) }}" class="btn btn-info">Add level</a>
             </div>
         </div>
         <div class="row">
@@ -31,7 +31,11 @@
                                     <td>{{$level->name}}</td>
 
                                     <td>
-                                        <span class="text-info"><i class="bx bx-street-view"></i></span>
+                                        <span class="text-info">
+                                            <a href="{{route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug])}}">
+                                                <i class="bx bx-street-view"></i>
+                                            </a>
+                                        </span>
                                         <span class="text-danger">
                                             <a href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
                                         </span>

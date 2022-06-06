@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\UeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,13 @@ Route::group(['prefix' => "system"], function(){
             Route::get('/new', [LevelController::class, "new"])->name("admin.levels.new");
             Route::post('/create', [LevelController::class, "create"])->name("admin.levels.create");
             Route::get('/delete/{id}', [LevelController::class, "delete"])->name("admin.levels.delete");
+
+            Route::group(['prefix' => "{level_slug}"], function(){
+                Route::get('/', [UeController::class, "index"])->name("admin.ues");
+                Route::get('/new', [UeController::class, "new"])->name("admin.ues.new");
+                Route::post('/create', [UeController::class, "create"])->name("admin.ues.create");
+                Route::get('/delete/{id}', [UeController::class, "delete"])->name("admin.ues.delete");
+            });
         });
     });
 });

@@ -7,47 +7,57 @@ use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class LevelController extends Controller
+class UeController extends Controller
 {
-    public function index($field_slug)
+    public function index($field_slug, $level_slug)
     {
         $field = Field::whereSlug($field_slug)->first();
-
         if(is_null($field)){
-            return redirect()->route('admin.fields');
+            return redirect()->route('admin.levels');
+        }
+        $level = Level::whereSlug($level_slug)->first();
+        if(is_null($level)){
+            return redirect()->route('admin.fields', ['field_slug' => $field_slug]);
         }
 
         $data = [
-            'title' => "All Levels - ",
+            'title' => "All UEs - ",
             'field' => $field,
-            'levels' => $field->levels
+            'level' => $level,
         ];
 
-        return view("admin.levels.index", $data);
+        return view("admin.ues.index", $data);
     }
 
-    public function new($field_slug)
+    public function new($field_slug, $level_slug)
     {
         $field = Field::whereSlug($field_slug)->first();
-
         if(is_null($field)){
-            return redirect()->route('admin.fields');
+            return redirect()->route('admin.levels');
+        }
+        $level = Level::whereSlug($level_slug)->first();
+        if(is_null($level)){
+            return redirect()->route('admin.fields', ['field_slug' => $field_slug]);
         }
 
         $data = [
-            'title' => "Add a field - ",
-            'field' => $field
+            'title' => "Add an ue - ",
+            'field' => $field,
+            'level' => $level,
         ];
 
-        return view("admin.levels.new", $data);
+        return view("admin.ues.new", $data);
     }
 
     public function create(Request $request)
     {
         $field = Field::find($request->field);
-
         if(is_null($field)){
             return redirect()->route('admin.fields');
+        }
+        $level = Level::find($request->level);
+        if(is_null($level)){
+            return redirect()->route('admin.levels', ['field_slug']);
         }
 
         $this->validate($request, [
@@ -99,7 +109,7 @@ class LevelController extends Controller
             'level' => $level,
         ];
 
-        return view("admin.levels.index", $data);
+        return view("admin.ues.index", $data);
 
     }
 }

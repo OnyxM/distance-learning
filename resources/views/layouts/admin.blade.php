@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-bordered" data-assets-path="../../../assets/" data-template="vertical-menu-template-bordered">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-bordered" data-assets-path="../../../../assets/" data-template="vertical-menu-template-bordered">
 
 
 <head>
