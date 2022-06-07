@@ -11,8 +11,10 @@ class Ue extends Model
 
     protected $fillable=[
         'name',
+        'code',
         'slug',
         'description',
+        'syllabus',
         'semester_id',
     ];
 

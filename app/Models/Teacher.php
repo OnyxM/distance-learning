@@ -10,10 +10,13 @@ class Teacher extends Model
     use HasFactory;
 
     protected $fillable=[
+        'title',
         'name',
         'poste',
         'user_id',
     ];
+
+    protected $appends=['fullname'];
 
     public function user()
     {
@@ -23,5 +26,10 @@ class Teacher extends Model
     public function ues()
     {
         return $this->hasMany(Ue::class);
+    }
+
+    public function getFullnameAttribute()
+    {
+        return ucwords($this->title.". ".$this->name);
     }
 }

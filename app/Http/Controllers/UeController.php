@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Field;
 use App\Models\Level;
+use App\Models\Teacher;
+use App\Models\Ue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -44,6 +46,7 @@ class UeController extends Controller
             'title' => "Add an ue - ",
             'field' => $field,
             'level' => $level,
+            'teachers' => Teacher::all(),
         ];
 
         return view("admin.ues.new", $data);
@@ -61,21 +64,21 @@ class UeController extends Controller
         }
 
         $this->validate($request, [
-            'field' => "required",
             'name' => "required",
-            'description' => "required",
-            'pension' => "required",
+            'code' => "required",
         ]);
 
-        Level::create([
+        $new_ue = Ue::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'code' => $request->code,
             'description' => $request->description,
-            'pension' => $request->pension,
-            'field_id' => $field->id
+            'semester_id' => $request->semester_id,
         ]);
 
-        return redirect()->route('admin.levels', ['field_slug' => $field->slug]);
+        $new_ue->teachers()->attach([1, 2]);
+
+        return redirect()->route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug]);
     }
 
     public function delete($field_slug, $level_id)
