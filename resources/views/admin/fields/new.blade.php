@@ -16,7 +16,7 @@
 
                         <div class="row">
                             <div class="form-group">
-                                <input type="text" name="name" required placeholder="ICT For Development" class="form-control @error('name') is-invalid @enderror">
+                                <input type="text" name="name" required placeholder="ICT For Development" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
                             </div>
                         </div>
 

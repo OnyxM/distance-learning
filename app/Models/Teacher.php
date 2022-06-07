@@ -25,7 +25,7 @@ class Teacher extends Model
 
     public function ues()
     {
-        return $this->hasMany(Ue::class);
+        return $this->belongsToMany(Ue::class);
     }
 
     public function getFullnameAttribute()

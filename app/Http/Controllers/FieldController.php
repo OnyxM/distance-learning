@@ -33,7 +33,7 @@ class FieldController extends Controller
     {
         $this->validate($request, [
             'name' => "required",
-            'description' => "required",
+//            'description' => "required",
         ]);
 
         $new_field = Field::create([

@@ -76,7 +76,8 @@ class UeController extends Controller
             'semester_id' => $request->semester_id,
         ]);
 
-        $new_ue->teachers()->attach([1, 2]);
+        $new_ue->teachers()->attach($request->teacher);
+        // $new_ue->teachers()->attach([1, 2]); // IDs des teachers
 
         return redirect()->route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug]);
     }

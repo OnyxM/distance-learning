@@ -20,11 +20,11 @@ class Ue extends Model
 
     public function semester()
     {
-        return $this->belongsTo(Level::class);
+        return $this->belongsTo(Semester::class);
     }
 
     public function teachers()
     {
-        return $this->hasMany(Teacher::class);
+        return $this->belongsToMany(Teacher::class);
     }
 }
