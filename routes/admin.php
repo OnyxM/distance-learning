@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\LevelController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,10 @@ Route::get('/', [AdminController::class, "index"])->name("admin.index");
 
 Route::group(['prefix' => "users"], function(){
     Route::get('/', [UserController::class, "getAll"])->name("admin.users");
+});
+
+Route::group(['prefix' => "teachers"], function(){
+    Route::get('/', [TeacherController::class, "indexAdmin"])->name("admin.teachers");
 });
 
 Route::group(['prefix' => "system"], function(){
