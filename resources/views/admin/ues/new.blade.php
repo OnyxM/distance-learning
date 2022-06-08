@@ -55,8 +55,8 @@
                                 Select the Semester
                                 <select name="semester_id" id="semester_id" class="form-control" required>
                                     <option value="">Select the Semester</option>
-                                    <option value="1">Semester 1</option>
-                                    <option value="2">Semester 2</option>
+                                    <option value="{{$level->semesters[0]->id}}">Semester 1</option>
+                                    <option value="{{$level->semesters[1]->id}}">Semester 2</option>
                                 </select>
                             </div>
                         </div>

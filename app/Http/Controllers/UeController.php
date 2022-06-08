@@ -65,7 +65,7 @@ class UeController extends Controller
 
         $this->validate($request, [
             'name' => "required",
-            'code' => "required",
+            'code' => "required|unique:ues,code",
         ]);
 
         $new_ue = Ue::create([
