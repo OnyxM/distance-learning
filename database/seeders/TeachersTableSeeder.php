@@ -17,7 +17,7 @@ class TeachersTableSeeder extends Seeder
     {
         $titles = ['Ing', 'Prof', 'Dr'];
         for ($i = 1; $i<15; $i++){
-            $user = User::factory()->create();
+            $user = User::factory()->create(['priority' => '2']);
 
             Teacher::create([
                 'title' => $titles[rand(0,2)],

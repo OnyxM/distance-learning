@@ -17,6 +17,9 @@ Route::group(['prefix' => "users"], function(){
 
 Route::group(['prefix' => "teachers"], function(){
     Route::get('/', [TeacherController::class, "indexAdmin"])->name("admin.teachers");
+    Route::get('/new', [TeacherController::class, "new"])->name("admin.teachers.new");
+    Route::post('/create', [TeacherController::class, "create"])->name("admin.teachers.create");
+    Route::get('/delete/{id}', [TeacherController::class, "delete"])->name("admin.teachers.delete");
 });
 
 Route::group(['prefix' => "system"], function(){

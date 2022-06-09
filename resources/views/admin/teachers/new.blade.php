@@ -11,53 +11,47 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
                 <div class="card">
-                    <form action="{{ route('admin.ues.create', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" method="POST">
+                    <form action="{{ route('admin.teachers.create') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="field" value="{{$field->id}}" required>
-                        <input type="hidden" name="level" value="{{$level->id}}" required>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" required placeholder="Internet and Network Security" class="form-control @error('name') is-invalid @enderror">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name">Code</label>
-                                    <input type="text" name="code" required placeholder="ICT313" class="form-control @error('code') is-invalid @enderror">
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="form-group">
-                                Description
-                                <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group">
-                                Select Teacher / Lecturer
+                                Select User's Account
                                 <select name="teacher" id="teacher" class="form-control" required>
                                     <option value="">Choose a lecturer for this Course</option>
-                                    @foreach($teachers as $teacher)
-                                        <option value="{{$teacher->id}}">{{$teacher->fullname}}</option>
+                                    @foreach($users as $user)
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="form-group">
-                                Select the Semester
-                                <select name="semester_id" id="semester_id" class="form-control" required>
-                                    <option value="">Select the Semester</option>
-                                    <option value="{{$level->semesters[0]->id}}">Semester 1</option>
-                                    <option value="{{$level->semesters[1]->id}}">Semester 2</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Title</label>
+                                    <select name="title" id="title" class="form-control" required>
+                                        <option value="">Choose a lecturer for this Course</option>
+                                        <option value="Dr">Doctor</option>
+                                        <option value="Ing">Ing</option>
+                                        <option value="Prof">Prof</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">name</label>
+                                    <input type="text" name="name" required placeholder="John Doe" class="form-control @error('name') is-invalid @enderror">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Poste</label>
+                                    <input type="text" name="poste" required placeholder="Lecturer" class="form-control @error('poste') is-invalid @enderror">
+                                </div>
                             </div>
                         </div>
 

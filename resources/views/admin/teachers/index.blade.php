@@ -5,10 +5,10 @@
 
         <div class="row">
             <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
-                List of UEs for Semester I
+                List of Lecturers in the platform
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="#" class="btn btn-info">Add a Lecturer</a>
+                <a href="{{route('admin.teachers.new')}}" class="btn btn-info">Add a Lecturer</a>
             </div>
         </div>
         <div class="row">
@@ -39,7 +39,7 @@
                                             </a>
                                         </span>
                                         <span class="text-danger">
-                                            <a href="#"><i class="bx bx-trash"></i></a>
+                                            <a href="{{ route('admin.teachers.delete', ['id' => $teacher->id]) }}"><i class="bx bx-trash"></i></a>
                                         </span>
                                     </td>
                                 </tr>
