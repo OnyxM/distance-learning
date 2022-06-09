@@ -1,12 +1,10 @@
-@extends("layouts.teacher")
+@extends("layouts.teacher", ['large_band' => true])
 
 @section("content")
     <!-- Row -->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 pt-4 pb-4">
             <span id="prev" class="d-none">{{ url()->previous() }}</span> <br>
-
-            <span class="d-none">{{ $live->participants()->count() }}</span>
         </div>
     </div>
     <!-- /Row -->
@@ -16,6 +14,12 @@
         <div class="col-lg-12 col-md-12 col-sm-12">
 
             <!-- Course Style 1 For Student -->
+            @if($live->user_id == auth()->user()->id)
+            <div class="assists_count">
+                Nombre d'utilisateurs: <span id="nbre_assists">1</span>
+            </div>
+            @endif
+
             <div class="dashboard_container">
                 <div class="dashboard_container_body">
                     <div class="row justify-content-around m-3">
@@ -35,7 +39,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- /Row -->
@@ -44,4 +47,27 @@
 
 @section("js")
     <script src="{{asset("dist/live/bundle.js")}}"></script>
+
+    @if($live->user_id == auth()->user()->id)
+    <script>
+
+        function countUsers(){
+            var live_uid = "{{$live->uuid}}";
+
+            $.ajax({
+                url: "{{ route('user.lives.count_users') }}",
+                type: "post",
+                data: "uid=" + live_uid,
+                dataType: "json",
+                success: function(response){
+                    $("#nbre_assists").html(response.users);
+                }
+            });
+
+            setTimeout(countUsers, 10000);
+        }
+
+        countUsers();
+    </script>
+    @endif
 @endsection

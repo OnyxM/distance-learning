@@ -30,6 +30,15 @@ class LiveController extends Controller
         return view("user.lives.index", $data);
     }
 
+    public function getNbreConectedUsers(Request $request)
+    {
+        $live = Live::where('uuid', $request->uid)->first();
+
+        echo json_encode([
+            'users' => $live->participants->count()
+        ]);
+    }
+
     public function create(Request $request)
     {
         $this->validate($request, [
