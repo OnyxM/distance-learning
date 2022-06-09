@@ -129,7 +129,7 @@ class HomeController extends Controller
         ];
     }
 
-    public function disconnectUserFromLive($live_id)
+    public static function disconnectUserFromLive($live_id)
     {
         $live = Live::where('uuid', $live_id)->first();
 
