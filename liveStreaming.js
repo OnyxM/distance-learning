@@ -151,6 +151,7 @@ async function startBasicLiveStreaming() {
             // Leave the channel.
             await rtc.client.leave();
 
+            disconectUserFromLive();
             // savoir que c'est l'admin et supprimé le live
 
             window.location = $('#prev').html();
@@ -166,6 +167,19 @@ async function startBasicLiveStreaming() {
                 url: "/beta-test/"+live_id,
                 success: async function(result){
                     // await rtc.client.join(options.appId, options.channel, options.token, result.user_id);
+                }
+            });
+        }
+
+        async function disconectUserFromLive(){
+            let current_url = window.location.href;
+            current_url = current_url.split("/");
+
+            let live_id = current_url.at('-1');
+
+            $.ajax({
+                url: "/beta-test-disconnect/"+live_id,
+                success: async function(result){
                 }
             });
         }

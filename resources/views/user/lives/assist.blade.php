@@ -16,7 +16,7 @@
             <!-- Course Style 1 For Student -->
             @if($live->user_id == auth()->user()->id)
             <div class="assists_count">
-                Nombre d'utilisateurs: <span id="nbre_assists">1</span>
+                Nombre d'utilisateurs: <span id="nbre_assists">0</span>
             </div>
             @endif
 
