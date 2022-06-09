@@ -37,6 +37,25 @@ class TeacherController extends Controller
         return view("admin.teachers.new", $data);
     }
 
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'title' => "required",
+            'name' => "required",
+            'user' => "required|exists:users,id",
+            'poste' => "required",
+        ]);
+
+        Teacher::create([
+            'title' => $request->title,
+            'name' => $request->name,
+            'poste' => $request->poste,
+            'user_id' => $request->user,
+        ]);
+
+        return redirect()->route('admin.teachers');
+    }
+
     public function delete($id)
     {
         $teacher = Teacher::find($id);

@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
-                Add a new Course to the system
+                Add a new Lecturer to the system
             </div>
         </div>
         <div class="row">
@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="form-group">
                                 Select User's Account
-                                <select name="teacher" id="teacher" class="form-control" required>
+                                <select name="user" id="user" class="form-control" required>
                                     <option value="">Choose a lecturer for this Course</option>
                                     @foreach($users as $user)
                                         <option value="{{$user->id}}">{{$user->name}}</option>
