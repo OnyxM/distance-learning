@@ -15,7 +15,7 @@ class CreateLiveUserTable extends Migration
     {
         Schema::create('live_user', function (Blueprint $table) {
             $table->id();
-            $table->integer("course_id");
+            $table->integer("live_id");
             $table->integer("user_id");
             $table->string("date_adhésion");
             $table->timestamps();

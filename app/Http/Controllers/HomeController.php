@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Live;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -93,5 +95,52 @@ class HomeController extends Controller
         ];
 
         return view("about", $data);
+    }
+
+    public function lives()
+    {
+        $data =[
+            'title' => "Available Lives - ",
+            'lives' => Live::orderBy('date_debut', 'desc')->get(),
+        ];
+
+        return view("lives", $data);
+    }
+
+    public function test($live_id)
+    {
+        $live = Live::where('uuid', $live_id)->first();
+
+        $user = User::find(auth()->user()->id);
+
+        if(is_null($live) || is_null($user)){
+            return null;
+        }
+
+        $live->participants()->detach($user);
+
+        $live->participants()->attach($user, [
+            'date_adhésion' => time()
+        ]);
+
+        return[
+            'user_id' => auth()->user()->id,
+            'live_uuid' => $live_id
+        ];
+    }
+
+    public static function disconnectUserFromLive($live_id)
+    {
+        $live = Live::where('uuid', $live_id)->first();
+
+        $user = User::find(auth()->user()->id);
+
+        if(is_null($live) || is_null($user)){
+            return null;
+        }
+
+        $live->participants()->detach($user);
+
+        return true;
     }
 }

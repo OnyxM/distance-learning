@@ -6,12 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>{{$title}}Distance Learning Admin</title>
-
-    <meta name="description" content="Most Powerful &amp; Comprehensive Bootstrap 5 HTML Admin Dashboard Template built for developers!" />
-    <meta name="keywords" content="dashboard, bootstrap 5 dashboard, bootstrap 5 design, bootstrap 5">
-    <!-- Canonical SEO -->
-    <link rel="canonical" href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/">
+    <title>{{$title}} Distance-Learning | Dashboard</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/assets/img/favicon/favicon.ico" />
@@ -52,6 +47,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{asset('manager/assets/js/config.js')}}"></script>
 
+    @yield('css')
+
 </head>
 
 <body>
@@ -67,7 +64,7 @@
 
             <div class="app-brand demo ">
                 <a href="{{route('index')}}" class="app-brand-link">
-                    <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: none!important;">Home Site</span>
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2" style="text-transform: none!important;">Front Site</span>
                 </a>
                 <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
                     <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -205,8 +202,6 @@
 </div>
 <!-- / Layout wrapper -->
 
-
-
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
 <script src="{{asset('manager/assets/vendor/libs/jquery/jquery.js')}}"></script>
@@ -248,6 +243,8 @@
 
 <!-- Page JS -->
 <script src="{{asset('manager/assets/js/dashboards-ecommerce.js')}}"></script>
+
+@yield('js')
 
 </body>
 </html>
