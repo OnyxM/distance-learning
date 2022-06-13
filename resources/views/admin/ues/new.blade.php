@@ -20,13 +20,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name" required placeholder="Internet and Network Security" class="form-control @error('name') is-invalid @enderror">
+                                    <input type="text" name="name" required placeholder="Internet and Network Security" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Code</label>
-                                    <input type="text" name="code" required placeholder="ICT313" class="form-control @error('code') is-invalid @enderror">
+                                    <input type="text" name="code" required placeholder="ICT313" class="form-control @error('code') is-invalid @enderror" value="{{old('code')}}">
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="form-group">
                                 Description
-                                <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                                <textarea name="description" id="description" cols="30" rows="10" class="form-control" value="{{old('description')}}"></textarea>
                             </div>
                         </div>
 

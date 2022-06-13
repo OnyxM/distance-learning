@@ -16,7 +16,7 @@ class CreateUesTable extends Migration
         Schema::create('ues', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("code");
+            $table->string("code")->unique();
             $table->string("slug");
             $table->string("photo")->default("co-1.jpg");
             $table->text("description")->nullable();

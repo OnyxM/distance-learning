@@ -116,4 +116,30 @@ class UeController extends Controller
         return view("admin.ues.index", $data);
 
     }
+
+    public function getAllTeacherCourses()
+    {
+        $data = [
+            'title' => "My Courses - ",
+            'ues' => auth()->user()->teacher->ues
+        ];
+
+        return view("teacher.ues.index", $data);
+    }
+
+    public function ueDetails($ue_code)
+    {
+        $ue = auth()->user()->teacher->ues()->where('code', $ue_code)->first();
+
+        if(is_null($ue)){
+            return redirect()->route('teacher.ues');
+        }
+
+        $data =[
+            'title' => "$ue->name - ",
+            'ue' => $ue
+        ];
+
+        return view("teacher.ues.details", $data);
+    }
 }

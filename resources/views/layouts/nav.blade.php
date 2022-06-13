@@ -26,7 +26,7 @@
                 @else
                     @if(auth()->user()->priority == \App\Models\User::USER_PRIORITY['teacher'])
                         <li class=""><a href="{{route('teacher.index')}}"><i class="ti-user"></i> Hi, Teacher {{ auth()->user()->name }}</a></li>
-                        <li><a href="{{route('course.index')}}">My Courses</a></li>
+                        <li><a href="{{route('teacher.ues')}}">My Courses</a></li>
                         <li><a href="{{route('user.lives')}}">My Lives</a></li>
                     @else
                         <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Hi, Student {{ auth()->user()->name }}</a></li>
