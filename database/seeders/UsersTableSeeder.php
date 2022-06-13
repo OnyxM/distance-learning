@@ -31,6 +31,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt("passwd1234"),
             'date_naissance' => "1995-06-25",
             'lieu_naissance' => "HomeCity",
+            'priority' => User::USER_PRIORITY['manager'],
         ]);
 
         User::create([

@@ -13,11 +13,11 @@ use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
-    public function getAllUserCourses()
+    public function getAllTeacherCourses()
     {
         $data = [
             'title' => "My Courses - ",
-            'courses' => auth()->user()->courses()->get()
+            'ues' => auth()->user()->teacher->ues
         ];
 
         return view("teacher.list_courses", $data);

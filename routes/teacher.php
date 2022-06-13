@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TeacherController::class, "index"])->name("teacher.index");
 
 Route::group(['prefix' => "course"], function(){
-    Route::get('/', [CourseController::class, 'getAllUserCourses'])->name('course.index');
+    Route::get('/', [CourseController::class, 'getAllTeacherCourses'])->name('course.index');
     Route::get('create', [CourseController::class, 'add'])->name('course.add');
     Route::post('create', [CourseController::class, 'create'])->name('course.create');
     Route::get('create/content/{uuid_course}', [CourseController::class, 'addContent'])->name('course.addContent');

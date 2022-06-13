@@ -16,7 +16,7 @@ class TeachersTableSeeder extends Seeder
     public function run()
     {
         $titles = ['Ing', 'Prof', 'Dr'];
-        for ($i = 1; $i<15; $i++){
+        for ($i = 1; $i<5; $i++){
             $user = User::factory()->create(['priority' => '2']);
 
             Teacher::create([
