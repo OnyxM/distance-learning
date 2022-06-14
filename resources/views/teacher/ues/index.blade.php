@@ -46,8 +46,8 @@
                             <div class="dashboard_single_course_thumb">
                                 <img src="{{ asset('assets/img/co-1.jpg') }}" class="img-fluid" alt="" />
                                 <div class="dashboard_action">
-                                    <a href="{{ route('teacher.ue.details', ['ue_code' => strtolower($ue->code)]) }}" class="btn btn-ect">Edit</a>
-                                    <a href="#" class="btn btn-ect">View</a>
+                                    <a href="{{ route('teacher.ue.edit', ['ue_code' => strtolower($ue->code)]) }}" class="btn btn-ect">Edit</a>
+                                    <a href="{{ route('teacher.ue.details', ['ue_code' => strtolower($ue->code)]) }}" class="btn btn-ect">View</a>
                                 </div>
                             </div>
                             <div class="dashboard_single_course_caption">

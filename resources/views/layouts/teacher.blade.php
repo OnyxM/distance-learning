@@ -31,7 +31,7 @@
     <!-- ============================================================== -->
     <!-- Start Navigation -->
     <div class="header header-light head-shadow">
-        @include("layouts.nav")
+        @include("layouts.nav", ['logged_as' => 'teacher'])
     </div>
 
     <!-- ============================ Dashboard: Dashboard Start ================================== -->
@@ -39,8 +39,8 @@
         <div class="container-fluid">
 
             <div class="row justify-content-center">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    @yield("content")
+                @if(isset($large_band)) <div class="col-lg-12 col-md-12 col-sm-12">@else <div class="col-lg-8 col-md-8 col-sm-12"> @endif
+                        @yield("content")
                 </div>
             </div>
 

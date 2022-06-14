@@ -20,6 +20,8 @@ Route::get('/', [TeacherController::class, "index"])->name("teacher.index");
 Route::group(['prefix' => "ues"], function(){
     Route::get('/', [UeController::class, 'getAllTeacherCourses'])->name('teacher.ues');
     Route::get('/{ue_code}', [UeController::class, 'ueDetails'])->name('teacher.ue.details');
+    Route::get('/edit/{ue_code}', [UeController::class, 'editUe'])->name('teacher.ue.edit');
+    Route::post('/update-ue', [UeController::class, 'updateUe'])->name('teacher.ue.update_infos');
 
 //    Route::get('create', [CourseController::class, 'add'])->name('course.add');
 //    Route::post('create', [CourseController::class, 'create'])->name('course.create');

@@ -142,4 +142,48 @@ class UeController extends Controller
 
         return view("teacher.ues.details", $data);
     }
+
+    public function editUe($ue_code)
+    {
+        $ue = auth()->user()->teacher->ues()->where('code', $ue_code)->first();
+
+        if(is_null($ue)){
+            return redirect()->route('teacher.ues');
+        }
+
+        $data =[
+            'title' => "Edit UE - $ue->name - ",
+            'ue' => $ue
+        ];
+
+        return view("teacher.ues.edit", $data);
+    }
+
+    public function updateUe(Request $request)
+    {
+        $this->validate($request, [
+            'ue' => "required",
+            'name' => "required",
+            'code' => "required",
+            'description' => "required"
+        ]);
+
+        $ue = auth()->user()->teacher->ues()->where('id', $request->ue)->first();
+
+        $ue->name = $request->name;
+        $ue->slug = Str::slug($request->name);
+        $ue->code = $request->code;
+        $ue->description = $request->description;
+
+        if(is_null($request->photo)){
+           // upload de la tof ...
+           $tof = null;
+
+           $ue->photo = $tof;
+        }
+
+        $ue->save();
+
+        return redirect()->route("teacher.ue.details", ['ue_code' => $ue->code]);
+    }
 }
