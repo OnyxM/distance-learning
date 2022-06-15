@@ -26,28 +26,12 @@
                         <div class="ed_header_caption">
                             <h2 class="ed_title">{{ $ue->name }}</h2>
                             <ul>
-                                {{--                                <li><i class="ti-calendar"></i>10 - 20 weeks</li>--}}
-                                {{--                                <li><i class="ti-control-forward"></i>102 Lectures</li>--}}
                                 <li><i class="ti-user"></i>502 Student Enrolled</li>
                             </ul>
                         </div>
                         <div class="ed_header_short">
                             <p>{!! $ue->description !!}</p>
                         </div>
-
-                        {{--                        <div class="ed_rate_info">--}}
-                        {{--                            <div class="star_info">--}}
-                        {{--                                <i class="fas fa-star filled"></i>--}}
-                        {{--                                <i class="fas fa-star filled"></i>--}}
-                        {{--                                <i class="fas fa-star filled"></i>--}}
-                        {{--                                <i class="fas fa-star filled"></i>--}}
-                        {{--                                <i class="fas fa-star"></i>--}}
-                        {{--                            </div>--}}
-                        {{--                            <div class="review_counter">--}}
-                        {{--                                <strong class="high">4.7</strong> 3572 Reviews--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-
                     </div>
                 </div>
             </div>
@@ -280,38 +264,29 @@
                             </div>
                         </div>
 
-                        <div class="ed_view_price pl-4">
+                        @if(!in_array($level->id, auth()->user()->classes()->pluck('levels.id')->toArray()))
+                        <div class="ed_view_price pl-4 text-center">
                             <span>Acctual Price</span>
                             <h2 class="theme-cl">{{ number_format($ue->semester->level->pension) }} XAF</h2>
                         </div>
-                        {{--                        <div class="ed_view_features pl-4">--}}
-                        {{--                            <span>Course Features</span>--}}
-                        {{--                            <ul>--}}
-                        {{--                                <li><i class="ti-angle-right"></i>Fully Programming</li>--}}
-                        {{--                                <li><i class="ti-angle-right"></i>Help Code to Code</li>--}}
-                        {{--                                <li><i class="ti-angle-right"></i>Free Trial 7 Days</li>--}}
-                        {{--                                <li><i class="ti-angle-right"></i>Unlimited Videos</li>--}}
-                        {{--                                <li><i class="ti-angle-right"></i>24x7 Support</li>--}}
-                        {{--                            </ul>--}}
-                        {{--                        </div>--}}
                         <div class="ed_view_link">
-                            <a href="#" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></a>
+                            <form action="{{ route('field.attend') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="field" value="{{ $field->slug }}" required>
+                                <input type="hidden" name="level" value="{{ $level->slug }}" required>
+                                <button type="submit" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
+                            </form>
                         </div>
-
+                        @else
+                            <div class="ed_view_price pl-4 text-center">
+                                <span>Acctual Price</span>
+                                <h2 class="">{{ number_format($ue->semester->level->pension) }} XAF</h2>
+                            </div>
+                            <div class="ed_view_link">
+                                <a href="#" class="btn btn-theme enroll-btn">Follow Course<i class="ti-angle-right"></i></a>
+                            </div>
+                        @endif
                     </div>
-
-                    {{--                    <div class="edu_wraper">--}}
-                    {{--                        <h4 class="edu_title">Course Features</h4>--}}
-                    {{--                        <ul class="edu_list right">--}}
-                    {{--                            <li><i class="ti-user"></i>Student Enrolled:<strong>1740</strong></li>--}}
-                    {{--                            <li><i class="ti-files"></i>lectures:<strong>10</strong></li>--}}
-                    {{--                            <li><i class="ti-game"></i>Quizzes:<strong>4</strong></li>--}}
-                    {{--                            <li><i class="ti-time"></i>Duration:<strong>60 hours</strong></li>--}}
-                    {{--                            <li><i class="ti-tag"></i>Skill Level:<strong>Beginner</strong></li>--}}
-                    {{--                            <li><i class="ti-flag-alt"></i>Language:<strong>English</strong></li>--}}
-                    {{--                            <li><i class="ti-shine"></i>Assessment:<strong>Yes</strong></li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </div>--}}
 
                 </div>
 

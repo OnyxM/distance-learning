@@ -56,10 +56,10 @@ class User extends Authenticatable
         return asset("assets/img/".$this->attributes['photo']);
     }
 
-    public function assists()
-    {
-        return $this->belongsToMany(Course::class);
-    }
+//    public function assists()
+//    {
+//        return $this->belongsToMany(Course::class);
+//    }
     public function courses()
     {
         return $this->hasMany(Course::class);
@@ -77,5 +77,10 @@ class User extends Authenticatable
     public function teacher()
     {
         return $this->hasOne(Teacher::class);
+    }
+
+    public function classes()
+    {
+        return $this->belongsToMany(Level::class);
     }
 }

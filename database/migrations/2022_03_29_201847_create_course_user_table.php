@@ -13,15 +13,15 @@ class CreateCourseUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_user', function (Blueprint $table) {
-            $table->id();
-            $table->integer("course_id");
-            $table->integer("user_id");
-            $table->string("registration_date");
-            $table->text("comment")->nullable();
-            $table->string("playback_level");
-            $table->timestamps();
-        });
+//        Schema::create('course_user', function (Blueprint $table) {
+//            $table->id();
+//            $table->integer("course_id");
+//            $table->integer("user_id");
+//            $table->string("registration_date");
+//            $table->text("comment")->nullable();
+//            $table->string("playback_level");
+//            $table->timestamps();
+//        });
     }
 
     /**

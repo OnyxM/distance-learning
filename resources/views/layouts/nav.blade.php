@@ -31,7 +31,7 @@
                         <li><a href="{{route('user.lives')}}">My Lives</a></li>
                     @else
                         <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Hi, Student {{ auth()->user()->name }}</a></li>
-                        <li><a href="{{route('course.index')}}">My Class</a></li>
+                        <li><a href="{{route('class.index')}}">My Class</a></li>
                     @endif
 
                     <li><a href="javascript:void(0);">Settings</a></li>

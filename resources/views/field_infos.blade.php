@@ -8,7 +8,7 @@
                 <div class="col-lg-12 col-md-12">
 
                     <div class="breadcrumbs-wrap">
-                        <h1 class="breadcrumb-title">Available Fields of {{ $field->name }}</h1>
+                        <h1 class="breadcrumb-title">Available Levels of {{ $field->name }}</h1>
                     </div>
 
                 </div>
@@ -62,16 +62,4 @@
         </div>
     </section>
     <!-- ============================ Full Width Courses End ================================== -->
-@endsection
-
-@section("js")
-    <script>
-        function openNav() {
-            document.getElementById("filter-sidebar").style.width = "320px";
-        }
-
-        function closeNav() {
-            document.getElementById("filter-sidebar").style.width = "0";
-        }
-    </script>
 @endsection

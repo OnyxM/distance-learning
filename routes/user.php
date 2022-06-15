@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LevelController;
 use App\Http\Controllers\LiveController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +39,10 @@ Route::group(['prefix'=>"live"], function(){
     Route::post('/new',  [LiveController::class, 'create'])->name("user.lives.new");
     Route::post('/delete',  [LiveController::class, 'delete'])->name("user.lives.delete");
     Route::get('{live_code}',  [LiveController::class, 'live'])->name("user.lives.assist");
+});
+
+Route::post('register-to-class', [LevelController::class, "registerToClass"])->name('field.attend');
+
+Route::group(['prefix'=>"my-classes"], function(){
+    Route::get('', [ClassController::class, "index"])->name('class.index');
 });

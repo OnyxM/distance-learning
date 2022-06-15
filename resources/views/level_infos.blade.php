@@ -20,7 +20,7 @@
                     <div class="ed_detail_wrap">
                         <ul class="cources_facts_list">
                             <li class="facts-1"><a href="{{ route('fields.info', ['field' => $field->slug]) }}">{{ $field->name }}</a></li>
-                            <li class="facts-5"><a href="{{ route('levels.info', ['field' => $field->slug, 'level' => $level->slug]) }}">{{ $level->name }}</a></li>
+                            <li class="facts-5">{{ $level->name }}</li>
                         </ul>
                         <div class="ed_header_caption">
                             <h2 class="ed_title">{{ $level->name }}</h2>
@@ -66,13 +66,22 @@
                 <div class="col-lg-4 col-md-4">
 
                     <div class="ed_view_box style_2">
-                        <div class="ed_view_price pl-4">
+                        <div class="ed_view_price pl-4 text-center">
                             <span>Acctual Price</span>
                             <h2 class="theme-cl">{{ number_format($level->pension) }} XAF</h2>
                         </div>
 
                         <div class="ed_view_link">
-                            <a href="#" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></a>
+                            @if(!in_array($level->id, auth()->user()->classes()->pluck('levels.id')->toArray()))
+                            <form action="{{ route('field.attend') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="field" value="{{ $field->slug }}" required>
+                                <input type="hidden" name="level" value="{{ $level->slug }}" required>
+                                <button type="submit" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
+                            </form>
+                            @else
+                                <a href="#lessons" class="btn btn-theme enroll-btn">View Lessons<i class="ti-angle-right"></i></a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -88,7 +97,7 @@
                 <div class="col-lg-12 col-md-12">
 
                     <div class="breadcrumbs-wrap">
-                        <h1 class="breadcrumb-title">Courses in {{ $level->name }} of {{ $field->name }}</h1>
+                        <h1 class="breadcrumb-title" id="lessons">Courses in {{ $level->name }} of {{ $field->name }}</h1>
                     </div>
 
                 </div>

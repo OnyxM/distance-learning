@@ -32,6 +32,11 @@ class Level extends Model
         return $this->hasManyThrough(Ue::class, Semester::class);
     }
 
+    public function participants()
+    {
+        return $this->belongsToMany(User::class)->withPivot("registration_date");
+    }
+
     // this is a recommended way to declare event handlers
 //    public static function boot() {
 //        parent::boot();
