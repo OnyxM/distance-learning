@@ -68,6 +68,8 @@
                             <tr>
                                 <th>N°</th>
                                 <th>Name</th>
+                                <th>Code</th>
+                                <th>Lecturer</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -77,10 +79,12 @@
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{$ue->name}}</td>
+                                    <td>{{$ue->code}}</td>
+                                    <td>{{$ue->teachers[0]->fullname}}</td>
 
                                     <td>
                                         <span class="text-info">
-                                            <a href="{{route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug])}}">
+                                            <a href="javascript:void(0);">
                                                 <i class="bx bx-street-view"></i>
                                             </a>
                                         </span>
