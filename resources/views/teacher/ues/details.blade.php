@@ -47,20 +47,6 @@
                         <div class="ed_header_short">
                             <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore. veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                         </div>
-
-{{--                        <div class="ed_rate_info">--}}
-{{--                            <div class="star_info">--}}
-{{--                                <i class="fas fa-star filled"></i>--}}
-{{--                                <i class="fas fa-star filled"></i>--}}
-{{--                                <i class="fas fa-star filled"></i>--}}
-{{--                                <i class="fas fa-star filled"></i>--}}
-{{--                                <i class="fas fa-star"></i>--}}
-{{--                            </div>--}}
-{{--                            <div class="review_counter">--}}
-{{--                                <strong class="high">4.7</strong> 3572 Reviews--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                     </div>
                 </div>
             </div>
@@ -78,16 +64,7 @@
                     <!-- Overview -->
                     <div class="edu_wraper">
                         <h4 class="edu_title">Course Overview</h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                        <h6>Requirements</h6>
-                        <ul class="lists-3">
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                        </ul>
+                        <p>{!! $ue->description !!}</p>
                     </div>
 
                     <div class="edu_wraper">

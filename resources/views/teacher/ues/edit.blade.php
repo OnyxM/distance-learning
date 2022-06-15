@@ -76,80 +76,96 @@
             </div>
 
             <div class="edu_wraper">
-                <h4 class="edu_title">Update UE's content</h4>
+                <h4 class="edu_title">UE's content</h4>
+                <div class="form-group text-right">
+                    <button class="btn btn-outline-theme" id="addChapterButton" type="button">Add a Chapter</button>
+                </div>
                 <div id="accordionExample" class="accordion shadow circullum">
-
-                    <!-- Part 1 -->
-                    <div class="card">
-                        <div id="headingOne" class="card-header bg-white shadow-sm border-0">
-                            <h6 class="mb-0 accordion_title"><a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="d-block position-relative text-dark collapsible-link py-2">Part 01: How To Learn Web Designing Step by Step</a></h6>
+                    @foreach($ue->chapters as $chap)
+                        <div class="card">
+                            <div id="headingThree" class="card-header bg-white shadow-sm border-0">
+                                <h6 class="mb-0 accordion_title row">
+                                    <span class="text-left col-9"><a href="#" class="d-block position-relative text-dark py-2">{{ $chap->name }}</a></span>
+                                    <span class="text-right col-3">
+                                        <a href="#" class="d-block position-relative text-dark py-2"><i class="ti-edit"></i></a>
+                                        <a href="javascript:void(0);" class="d-block position-relative text-danger py-2 deleteChapter" data-id="{{$chap->id}}"><i class="ti-trash"></i></a>
+                                    </span>
+                                </h6>
+                            </div>
+{{--                            <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse">--}}
+{{--                                <div class="card-body pl-3 pr-3">--}}
+{{--                                    <ul class="lectures_lists">--}}
+{{--                                        <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 01</div>Web Designing Beginner</li>--}}
+{{--                                        <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 02</div>Startup Designing with HTML5 & CSS3</li>--}}
+{{--                                        <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 03</div>How To Call Google Map iFrame</li>--}}
+{{--                                        <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 04</div>Create Drop Down Navigation Using CSS3</li>--}}
+{{--                                        <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 05</div>How to Create Sticky Navigation Using JS</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
-                        <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse show">
-                            <div class="card-body pl-3 pr-3">
-                                <ul class="lectures_lists">
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 01</div>Web Designing Beginner</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 02</div>Startup Designing with HTML5 & CSS3</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 03</div>How To Call Google Map iFrame</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 04</div>Create Drop Down Navigation Using CSS3</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 05</div>How to Create Sticky Navigation Using JS</li>
-                                </ul>
+                    @endforeach
+
+                    <form class="card d-none" id="addChapter" method="POST" action="{{route('chapter.add')}}" enctype="multipart/form-data">
+                        <hr>
+                        @csrf
+                        <input type="hidden" name="ue" value="{{ $ue->id }}" required>
+
+                        <div class="card-header bg-white shadow-sm border-0">
+                            <h6 class="d-block position-relative text-dark py-2">Add a Chapter to this Course</h6>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Name <sup class="text-danger">*</sup></label>
+                                    <input type="text" class="text-center form-control @error('chapter_name') is-invalid @enderror" name="chapter_name" required value="{{ old('chapter_name') }}" placeholder="Chap n: Name of the Chapter">
+                                    @error('chapter_name')
+                                    <span class="text-danger text-sm" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Document (pdf,pptx) <sup class="text-danger">*</sup></label>
+                                    <input type="file" class="text-center form-control @error('document') is-invalid @enderror" name="document" required value="{{ old('document') }}">
+                                    @error('document')
+                                    <span class="text-danger text-sm" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>TD <span class="text-danger">(pdf)</span></label>
+                                    <input type="file" class="text-center form-control @error('td') is-invalid @enderror" name="td" value="{{ old('td') }}">
+                                    @error('td')
+                                    <span class="text-danger text-sm" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>TP <span class="text-danger">(pdf)</span></label>
+                                    <input type="file" class="text-center form-control @error('tp') is-invalid @enderror" name="tp" value="{{ old('tp') }}">
+                                    @error('tp')
+                                    <span class="text-danger text-sm" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Part 2 -->
-                    <div class="card">
-                        <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                            <h6 class="mb-0 accordion_title"><a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark collapsible-link py-2">Part 02: Learn Web Designing in Basic Level</a></h6>
+                        <div class="form-group text-right">
+                            <button class="btn btn-outline-theme" type="button" onclick="javascript:location.reload();">Cancel</button>
+                            <button class="btn btn-theme" type="submit">Submit Request</button>
                         </div>
-                        <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
-                            <div class="card-body pl-3 pr-3">
-                                <ul class="lectures_lists">
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 01</div>Web Designing Beginner</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 02</div>Startup Designing with HTML5 & CSS3</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 03</div>How To Call Google Map iFrame</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 04</div>Create Drop Down Navigation Using CSS3</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 05</div>How to Create Sticky Navigation Using JS</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Part 3 -->
-                    <div class="card">
-                        <div id="headingThree" class="card-header bg-white shadow-sm border-0">
-                            <h6 class="mb-0 accordion_title"><a href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="d-block position-relative collapsed text-dark collapsible-link py-2">Part 03: Learn Web Designing in Advance Level</a></h6>
-                        </div>
-                        <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse">
-                            <div class="card-body pl-3 pr-3">
-                                <ul class="lectures_lists">
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 01</div>Web Designing Beginner</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 02</div>Startup Designing with HTML5 & CSS3</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 03</div>How To Call Google Map iFrame</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 04</div>Create Drop Down Navigation Using CSS3</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 05</div>How to Create Sticky Navigation Using JS</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Part 04 -->
-                    <div class="card">
-                        <div id="headingThree" class="card-header bg-white shadow-sm border-0">
-                            <h6 class="mb-0 accordion_title"><a href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="d-block position-relative collapsed text-dark collapsible-link py-2">Part 04: How To Become Succes in Designing & Development?</a></h6>
-                        </div>
-                        <div id="collapseThree" aria-labelledby="headingFour" data-parent="#accordionExample" class="collapse">
-                            <div class="card-body pl-3 pr-3">
-                                <ul class="lectures_lists">
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 01</div>Web Designing Beginner</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 02</div>Startup Designing with HTML5 & CSS3</li>
-                                    <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 03</div>How To Call Google Map iFrame</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 04</div>Create Drop Down Navigation Using CSS3</li>
-                                    <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 05</div>How to Create Sticky Navigation Using JS</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
 
                 </div>
             </div>
@@ -165,6 +181,13 @@
     <script>
         $(document).ready(function(){
             $(".summernote-simple").summernote();
+        });
+
+        $(document).on('click', "#addChapterButton", function(e){
+            e.preventDefault();
+
+            $("#addChapter").removeClass("d-none");
+            $("input[name='chapter_name']").focus();
         });
     </script>
 @endsection

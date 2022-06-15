@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UeController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,11 @@ Route::group(['prefix' => "ues"], function(){
     Route::get('/{ue_code}', [UeController::class, 'ueDetails'])->name('teacher.ue.details');
     Route::get('/edit/{ue_code}', [UeController::class, 'editUe'])->name('teacher.ue.edit');
     Route::post('/update-ue', [UeController::class, 'updateUe'])->name('teacher.ue.update_infos');
+
+    Route::group(['prefix' => "chapter"], function(){
+        Route::post("add", [ChapterController::class, "create"])->name('chapter.add');
+        Route::post("delete", [ChapterController::class, "delete"])->name('chapter.delete');
+    });
 
 //    Route::get('create', [CourseController::class, 'add'])->name('course.add');
 //    Route::post('create', [CourseController::class, 'create'])->name('course.create');

@@ -32,4 +32,9 @@ class Ue extends Model
     {
         return $this->belongsToMany(Teacher::class);
     }
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
 }
