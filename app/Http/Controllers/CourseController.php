@@ -13,15 +13,6 @@ use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
-    public function getAllUserCourses()
-    {
-        $data = [
-            'title' => "My Courses - ",
-            'courses' => auth()->user()->courses()->get()
-        ];
-
-        return view("teacher.list_courses", $data);
-    }
 
     public function add()
     {

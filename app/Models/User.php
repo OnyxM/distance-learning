@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const USER_PRIORITY = ['user' => '0', 'manager' => '2', 'admin' => '3'];
+    const USER_PRIORITY = ['user' => '0', 'teacher' => '2', 'manager' => '4', 'admin' => '5'];
 
     protected $appends = [
         'name',

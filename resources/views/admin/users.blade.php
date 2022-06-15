@@ -40,19 +40,26 @@
                                         <span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span> Admin
                                     @endif
                                 </td>
-                                <td>@if(is_null($user->deleted_at))
-                                        <span class="badge bg-label-success">Active</span>
-                                    @else
-                                        <span class="badge bg-label-secondary">Inactive</span>
+                                <td>
+                                    @if($user->id != auth()->user()->id)
+                                        @if(is_null($user->deleted_at))
+                                            <span class="badge bg-label-success">Active</span>
+                                        @else
+                                            <span class="badge bg-label-secondary">Inactive</span>
+                                        @endif
                                     @endif
                                 </td>
                                 <td>
                                     <div class="d-inline-block">
                                         <button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
                                         <div class="dropdown-menu dropdown-menu-end" style="">
-                                            <a href="javascript:;" class="dropdown-item text-warning suspend-user">Suspend</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" class="dropdown-item text-danger delete-user" data-bs-toggle="modal" data-bs-target="#enableOTP">Delete</a>
+{{--                                            <a href="javascript:;" class="dropdown-item text-warning suspend-user">Suspend</a>--}}
+{{--                                            <div class="dropdown-divider"></div>--}}
+                                            @if(is_null($user->deleted_at))
+                                                <a href="javascript:void(0);" class="dropdown-item text-danger suspend-user" data-user="{{ $user->id }}">Suspend</a>
+                                            @else
+                                                <a href="javascript:void(0);" class="dropdown-item text-success enable-user" data-user="{{ $user->id }}">Enable</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
@@ -65,21 +72,27 @@
         </div>
     </div>
 
-    <div class="modal fade" id="enableOTP" tabindex="-1" aria-hidden="true">
+    @if($user->id != auth()->user()->id)
+    <div class="modal fade" id="suspendUserModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-enable-otp modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-5">Suspend User ?</h3>
+                        <h3 class="mb-5" id="info_m0"></h3>
                     </div>
-                    <h6>Are you sure you want to suspend this user ?</h6>
+                    <h6 id="info_m"></h6>
 
-                    <form id="enableOTPForm" class="row g-3" onsubmit="return false">
+                    <form id="suspendUserForm" class="row g-3" method="post" action="{{ route('admin.users.set_status') }}">
                         <div class="col-12">
-                            <label class="form-label" for="modalEnableOTPPhone">Enter the reason of suspending</label>
+                            @csrf
+                            <input type="hidden" name="user" required>
+                            <input type="hidden" name="status" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="modalEnableOTPPhone">Enter the reason</label>
                             <div class="input-group input-group-merge">
-                                <textarea name="reason_suspending" class="form-control" cols="30" rows="10" required></textarea>
+                                <textarea name="reason" class="form-control" cols="30" rows="10" required></textarea>
                             </div>
                         </div>
                         <div class="col-12">
@@ -90,4 +103,43 @@
             </div>
         </div>
     </div>
+    @endif
+@endsection
+
+@section("js")
+    <script>
+        $(document).on('click', ".suspend-user", function(e){
+            e.preventDefault();
+
+            var user = $(this).data('user');
+
+            if(user === ""){
+                return ;
+            }
+
+            $("#info_m0").html("Suspend User ?");
+            $("#info_m").html("Are you sure you want to suspend this user ?");
+            $("input[name='user']").val(user);
+            $("input[name='status']").val("disable");
+
+            $("#suspendUserModal").modal("toggle");
+        });
+
+        $(document).on('click', ".enable-user", function(e){
+            e.preventDefault();
+
+            var user = $(this).data('user');
+
+            if(user === ""){
+                return ;
+            }
+
+            $("#info_m0").html("Enable User ?");
+            $("#info_m").html("Are you sure you want to enable this user ?");
+            $("input[name='user']").val(user);
+            $("input[name='status']").val("enable");
+
+            $("#suspendUserModal").modal("toggle");
+        });
+    </script>
 @endsection

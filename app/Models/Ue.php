@@ -13,10 +13,15 @@ class Ue extends Model
         'name',
         'code',
         'slug',
+        'photo',
         'description',
         'syllabus',
         'semester_id',
     ];
+
+    public function getPhotoAttribute(){
+        return asset("assets/img/ues/".$this->attributes['photo']);
+    }
 
     public function semester()
     {

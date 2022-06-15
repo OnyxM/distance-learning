@@ -40,7 +40,7 @@
 
                                     <div class="education_block_body">
                                         <h4 class="bl-title"><a href="#">{{ $live->titre }}</a></h4>
-                                        <h5>Begins at: {{ date("d M Y H:i", $live->date_debut) }}</h5>
+                                        <h5>Date: {{ date("d M Y H:i", $live->date_debut) }}</h5>
                                     </div>
 
                                     <div class="cources_info_style3">

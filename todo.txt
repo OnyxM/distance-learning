@@ -1,0 +1,13 @@
+Les cours qui pourront être facilement intégrés pour tester la plateforme : ICT301, ICT303, ICT305, ICT313(découper le cours en chapitres)
+
+
+
+
+
+Structure des cours:
+    - Ue
+        - Introduction Générale (chap0) (nullable)
+        - Chapitre 1..n
+            - document(pdf, pptx)
+            - td (nullable) (pdf, docx)
+            - tp (nullable) (pdf, docx)

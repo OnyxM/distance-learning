@@ -11,27 +11,102 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "test",
+    channel: "htDvARZR+6XnC8AA",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IADr1qK34Ugm2y6EIKSSIDFOrrwa4uBpelDy9gcmXfAHZwx+f9gAAAAAEAB+8cTODWSFYgEAAQAMZIVi",
+    token: "0064495024a2d414911932996a968fc8559IAAjJr8gY7cS7Ig8SP7BayO6cjtEGvOtt8GNF8r1AafF2o08W/MAAAAAEACa6fgNNBWjYgEAAQAxFaNi",
     // Uid
-    uid: 123456,
+    uid: 123456789,
 };
 
 async function startBasicLiveStreaming() {
     // rtc.client = AgoraRTC.createClient({mode: "live",codec: "vp8"});
 
     window.onload = function () {
-        document.getElementById("host-join").onclick = async function () {
 
+        async function userPublished(){
+            rtc.client.on("user-published", async (user, mediaType) => {
+                // Subscribe to a remote user.
+                await rtc.client.subscribe(user, mediaType);
+
+                // Get `RemoteVideoTrack` in the `user` object.
+                const remoteVideoTrack = user.videoTrack;
+                // Dynamically create a container in the form of a DIV element for playing the remote video track.
+                const remotePlayerContainer = document.createElement("div");
+                remotePlayerContainer.id = user.uid.toString();
+                remotePlayerContainer.style.width = "240px";
+                remotePlayerContainer.style.height = "240px";
+                remotePlayerContainer.classList.add('m-2');
+                remotePlayerContainer.style.transform = "rotateY(180deg)";
+                document.getElementById("users_live").append(remotePlayerContainer);
+
+                // Pass the DIV container and the SDK dynamically creates a player in the container for playing the remote video track.
+                remoteVideoTrack.play(remotePlayerContainer);
+
+                user.audioTrack.play();
+            });
+        }
+
+        async function userUpublished(){
+            rtc.client.on("user-unpublished", user => {
+                // Get the dynamically created DIV container.
+                const remotePlayerContainer = document.getElementById(user.uid);
+                // Destroy the container.
+                remotePlayerContainer.remove();
+            });
+        }
+
+        // récupérer les infos des remote users et afficher ...
+        async function publishRemoteUsers(rtc){
+            for (const tmp_user of rtc.client.remoteUsers) {
+                 if(tmp_user.hasVideo){
+                     await rtc.client.subscribe(tmp_user, "video");
+                    // Dynamically create a container in the form of a DIV element for playing the remote video track.
+                    const remotePlayerContainerTemp = document.createElement("div");
+                    // Specify the ID of the DIV container. You can use the `uid` of the remote user.
+                    remotePlayerContainerTemp.id = tmp_user.uid.toString();
+                    remotePlayerContainerTemp.style.width = "240px";
+                    remotePlayerContainerTemp.style.height = "240px";
+                    remotePlayerContainerTemp.classList.add('m-2');
+                    remotePlayerContainerTemp.style.transform = "rotateY(180deg)";
+                    document.getElementById("users_live").append(remotePlayerContainerTemp);
+
+                    tmp_user.videoTrack.play(remotePlayerContainerTemp);
+                }
+
+                 if(tmp_user.hasAudio){
+                     await rtc.client.subscribe(tmp_user, "audio");
+                     tmp_user.audioTrack.play();
+                 }
+            }
+        }
+
+        document.getElementById("join").onclick = async function () {
+            var uid = $(this).data('uid');
+
+            if($(this).data('type') == "host"){
+                await joinLive("host", uid);
+            }else{
+                await joinLive("audience", uid);
+            }
+
+            $("#join").addClass('d-none');
+            $("#leave").removeClass('d-none');
+
+        };
+
+        async function joinLive(role, uid){
             rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
 
-            // rtc.client.setClientRole("host");
+            // register user in db and join live on Agora
+            registerUserToLive();
 
-            await rtc.client.join(options.appId, options.channel, options.token);
+            await rtc.client.join(options.appId, options.channel, options.token, uid);
 
             // Enable dual-stream mode.
             rtc.client.enableDualStream();
+
+            // first show the others
+            await publishRemoteUsers(rtc);
 
             // Create an audio track from the audio sampled by a microphone.
             rtc.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
@@ -49,113 +124,19 @@ async function startBasicLiveStreaming() {
 
             // Specify the ID of the DIV container. You can use the `uid` of the remote user.
             localPlayerContainer.id = options.uid;
-            localPlayerContainer.textContent = "Local user " + options.uid;
-            localPlayerContainer.style.width = "640px";
-            localPlayerContainer.style.height = "480px";
-            document.body.append(localPlayerContainer);
+            localPlayerContainer.style.width = "240px";
+            localPlayerContainer.style.height = "240px";
+            localPlayerContainer.classList.add('m-2');
+            document.getElementById("users_live").append(localPlayerContainer);
 
             rtc.localVideoTrack.play(localPlayerContainer);
 
-            rtc.client.on("user-published", async (user, mediaType) => {
-                // Subscribe to a remote user.
-                await rtc.client.subscribe(user, mediaType);
-
-                // If the subscribed track is video.
-                if (mediaType === "video") {
-                    // Get `RemoteVideoTrack` in the `user` object.
-                    const remoteVideoTrack = user.videoTrack;
-                    // Dynamically create a container in the form of a DIV element for playing the remote video track.
-                    const remotePlayerContainer = document.createElement("div");
-                    // Specify the ID of the DIV container. You can use the `uid` of the remote user.
-                    remotePlayerContainer.id = user.uid.toString();
-                    remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
-                    remotePlayerContainer.style.width = "640px";
-                    remotePlayerContainer.style.height = "480px";
-                    document.body.append(remotePlayerContainer);
-
-                    // Play the remote video track.
-                    // Pass the DIV container and the SDK dynamically creates a player in the container for playing the remote video track.
-                    remoteVideoTrack.play(remotePlayerContainer);
-
-                    // Or just pass the ID of the DIV container.
-                    // remoteVideoTrack.play(playerContainer.id);
-                }
-
-                // If the subscribed track is audio.
-                if (mediaType === "audio") {
-                    // Get `RemoteAudioTrack` in the `user` object.
-                    const remoteAudioTrack = user.audioTrack;
-                    // Play the audio track. No need to pass any DOM element.
-                    remoteAudioTrack.play();
-                }
-            });
-
-            rtc.client.on("user-unpublished", user => {
-                // Get the dynamically created DIV container.
-                const remotePlayerContainer = document.getElementById(user.uid);
-                // Destroy the container.
-                remotePlayerContainer.remove();
-            });
-
-            rtc.// Customize the video profile of the low-quality stream. Set the video profile as 160 × 120, 15 fps, 120 Kbps.
-                client.setLowStreamParameter({
-                width: 160,
-                height: 120,
-                framerate: 15,
-                bitrate: 120,
-            });
-        };
-
-        document.getElementById("audience-join").onclick = async function () {
-            rtc.client = new AgoraRTC.createClient({mode: "live",codec: "vp8"});
-
-            rtc.client.setClientRole("audience");
-            await rtc.client.join(options.appId, options.channel, options.token);
-            rtc.client.on("user-published", async (user, mediaType) => {
-                // Subscribe to a remote user.
-                await rtc.client.subscribe(user, mediaType);
-                alert(user.uid);
-
-                // If the subscribed track is video.
-                if (mediaType === "video") {
-                    // Get `RemoteVideoTrack` in the `user` object.
-                    const remoteVideoTrack = user.videoTrack;
-                    // Dynamically create a container in the form of a DIV element for playing the remote video track.
-                    const remotePlayerContainer = document.createElement("div");
-                    // Specify the ID of the DIV container. You can use the `uid` of the remote user.
-                    remotePlayerContainer.id = user.uid.toString();
-                    remotePlayerContainer.textContent = "Remote user " + user.uid.toString();
-                    remotePlayerContainer.style.width = "640px";
-                    remotePlayerContainer.style.height = "480px";
-                    document.body.append(remotePlayerContainer);
-
-                    // Play the remote video track.
-                    // Pass the DIV container and the SDK dynamically creates a player in the container for playing the remote video track.
-                    remoteVideoTrack.play(remotePlayerContainer);
-
-                    // Or just pass the ID of the DIV container.
-                    // remoteVideoTrack.play(playerContainer.id);
-                }
-
-                // If the subscribed track is audio.
-                if (mediaType === "audio") {
-                    // Get `RemoteAudioTrack` in the `user` object.
-                    const remoteAudioTrack = user.audioTrack;
-                    // Play the audio track. No need to pass any DOM element.
-                    remoteAudioTrack.play();
-                }
-            });
-
-            rtc.client.on("user-unpublished", user => {
-                // Get the dynamically created DIV container.
-                const remotePlayerContainer = document.getElementById(user.uid);
-                // Destroy the container.
-                remotePlayerContainer.remove();
-            });
-        };
+            await userPublished();
+            await userUpublished();
+        }
 
         document.getElementById("leave").onclick = async function () {
-            rtc.client = AgoraRTC.createClient({mode: "live",codec: "vp8"});
+            rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
 
             // Close all the local tracks.
             rtc.localAudioTrack.close();
@@ -169,7 +150,39 @@ async function startBasicLiveStreaming() {
 
             // Leave the channel.
             await rtc.client.leave();
+
+            disconectUserFromLive();
+            // savoir que c'est l'admin et supprimé le live
+
+            window.location = $('#prev').html();
         };
+
+        async function registerUserToLive(){
+            let current_url = window.location.href;
+            current_url = current_url.split("/");
+
+            let live_id = current_url.at('-1');
+
+            $.ajax({
+                url: "/beta-test/"+live_id,
+                success: async function(result){
+                    // await rtc.client.join(options.appId, options.channel, options.token, result.user_id);
+                }
+            });
+        }
+
+        async function disconectUserFromLive(){
+            let current_url = window.location.href;
+            current_url = current_url.split("/");
+
+            let live_id = current_url.at('-1');
+
+            $.ajax({
+                url: "/beta-test-disconnect/"+live_id,
+                success: async function(result){
+                }
+            });
+        }
     };
 }
 
