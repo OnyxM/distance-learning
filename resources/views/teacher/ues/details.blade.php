@@ -73,7 +73,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-12 col-md-12">
+                <div class="col-lg-8 col-md-8">
 
                     <!-- Overview -->
                     <div class="edu_wraper">
@@ -297,6 +297,56 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4 col-md-4">
+
+                    <div class="ed_view_box style_2">
+
+                        <div class="ed_author">
+                            <div class="ed_author_thumb">
+                                <img class="img-fluid" src="assets/img/user-5.jpg" alt="7.jpg">
+                            </div>
+                            <div class="ed_author_box">
+                                <h4>Michael Russell</h4>
+                                <span>Web Designer in Canada</span>
+                            </div>
+                        </div>
+
+                        <div class="ed_view_price pl-4">
+                            <span>Acctual Price</span>
+                            <h2 class="theme-cl">$ 149.00</h2>
+                        </div>
+                        <div class="ed_view_features pl-4">
+                            <span>Course Features</span>
+                            <ul>
+                                <li><i class="ti-angle-right"></i>Fully Programming</li>
+                                <li><i class="ti-angle-right"></i>Help Code to Code</li>
+                                <li><i class="ti-angle-right"></i>Free Trial 7 Days</li>
+                                <li><i class="ti-angle-right"></i>Unlimited Videos</li>
+                                <li><i class="ti-angle-right"></i>24x7 Support</li>
+                            </ul>
+                        </div>
+                        <div class="ed_view_link">
+                            <a href="#" class="btn btn-theme enroll-btn">Enroll Now<i class="ti-angle-right"></i></a>
+                        </div>
+
+                    </div>
+
+                    <div class="edu_wraper">
+                        <h4 class="edu_title">Course Features</h4>
+                        <ul class="edu_list right">
+                            <li><i class="ti-user"></i>Student Enrolled:<strong>1740</strong></li>
+                            <li><i class="ti-files"></i>lectures:<strong>10</strong></li>
+                            <li><i class="ti-game"></i>Quizzes:<strong>4</strong></li>
+                            <li><i class="ti-time"></i>Duration:<strong>60 hours</strong></li>
+                            <li><i class="ti-tag"></i>Skill Level:<strong>Beginner</strong></li>
+                            <li><i class="ti-flag-alt"></i>Language:<strong>English</strong></li>
+                            <li><i class="ti-shine"></i>Assessment:<strong>Yes</strong></li>
+                        </ul>
                     </div>
 
                 </div>
