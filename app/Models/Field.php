@@ -15,6 +15,12 @@ class Field extends Model
         'description'
     ];
 
+
+
+    public function getPhotoAttribute(){
+        return asset("assets/img/fields/".$this->attributes['photo']);
+    }
+
     public function levels()
     {
         return $this->hasMany(Level::class);

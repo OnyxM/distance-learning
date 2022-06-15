@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FieldController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LevelController;
+use App\Http\Controllers\UeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +21,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, "index"])->name("index");
 Route::get('/courses', [HomeController::class, 'courses'])->name("courses");
 Route::post('/courses', [HomeController::class, 'filterCourses'])->name("courses.filter");
+
+Route::get('/field', [FieldController::class, 'list'])->name("fields.list");
+Route::get('/field/{field}', [FieldController::class, 'field_infos'])->name("fields.info");
+Route::get('/field/{field}/{level}', [LevelController::class, 'level_infos'])->name("levels.info");
+Route::get('/field/{field}/{level}/{ue}', [UeController::class, 'ue_infos'])->name("ue.info");
+
 Route::get('/course/{id}-{slug_course}', [HomeController::class, "course_details"])->name("course.details")->middleware(['user']);
 Route::get('/about', [HomeController::class, "about"])->name("about");
+
+
+
+
+// visio-conférence
 Route::get('/lives', [HomeController::class, "lives"])->name("lives");
 Route::get('/beta-test/{live_id}', [HomeController::class, "test"])->name("beta-test");
 Route::get('/beta-test-disconnect/{live_id}', [HomeController::class, "disconnectUserFromLive"])->name("beta-test-disconnect");

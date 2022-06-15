@@ -108,4 +108,30 @@ class FieldController extends Controller
         return view("admin.levels.index", $data);
 
     }
+
+    public function list()
+    {
+        $data = [
+            'title' => "Our Fields - ",
+            'fields' => Field::all(),
+        ];
+
+        return view("fields", $data);
+    }
+
+    public function field_infos($field)
+    {
+        $field = Field::whereSlug($field)->first();
+
+        if(is_null($field)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "$field->name - ",
+            'field' => $field
+        ];
+
+        return view("field_infos", $data);
+    }
 }

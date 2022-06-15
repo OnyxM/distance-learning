@@ -102,4 +102,25 @@ class LevelController extends Controller
         return view("admin.levels.index", $data);
 
     }
+
+    public function level_infos($field, $level)
+    {
+        $field = Field::whereSlug($field)->first();
+        if(is_null($field)){
+            abort(404);
+        }
+
+        $level = $field->levels()->whereSlug($level)->first();
+        if(is_null($level)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "$level->name of $field->name - ",
+            'field' => $field,
+            'level' => $level,
+        ];
+
+        return view("level_infos", $data);
+    }
 }

@@ -17,6 +17,7 @@ class CreateFieldsTable extends Migration
             $table->id();
             $table->string("name");
             $table->string("slug");
+            $table->string("photo")->default("co-5.jpg");
             $table->text("description")->nullable();
             $table->timestamps();
         });

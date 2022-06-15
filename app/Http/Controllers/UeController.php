@@ -189,4 +189,32 @@ class UeController extends Controller
         return redirect()->back();
 //        return redirect()->route("teacher.ue.details", ['ue_code' => $ue->code]);
     }
+
+    public function ue_infos($field, $level, $ue)
+    {
+        $field = Field::whereSlug($field)->first();
+        if(is_null($field)){
+            abort(404);
+        }
+
+        $level = $field->levels()->whereSlug($level)->first();
+        if(is_null($level)){
+            abort(404);
+        }
+
+        $ue = $level->ues()->where('ues.code', $ue)->first();
+        if(is_null($ue)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "$ue->name | $level->name of $field->name - ",
+            'field' => $field,
+            'level' => $level,
+            'ue' => $ue,
+        ];
+
+        return view("ue_infos", $data);
+
+    }
 }

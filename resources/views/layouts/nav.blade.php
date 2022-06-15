@@ -9,6 +9,7 @@
         <div class="nav-menus-wrapper" style="transition-property: none;">
             <ul class="nav-menu">
 
+                <li><a href="{{route('fields.list')}}">Fields</a></li>
                 <li><a href="{{route('courses')}}">Courses</a></li>
                 <li><a href="{{route('lives')}}">Lives</a></li>
                 <li><a href="{{route('about')}}">Contact</a></li>
