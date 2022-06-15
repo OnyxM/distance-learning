@@ -169,28 +169,6 @@
                         </div>
                     </div>
 
-                    <!-- instructor -->
-                    <div class="single_instructor">
-                        <div class="single_instructor_thumb">
-                            <a href="#"><img src="{{ $ue->teachers[0]->user->photo }}" class="img-fluid" alt=""></a>
-                        </div>
-                        <div class="single_instructor_caption">
-                            <h4><a href="#">{{ $ue->teachers[0]->fullname }}</a></h4>
-                            <ul class="instructor_info">
-                                <li><i class="ti-video-camera"></i>72 Videos</li>
-                                <li><i class="ti-control-forward"></i>102 Lectures</li>
-                                <li><i class="ti-user"></i>Exp. 4 Year</li>
-                            </ul>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi.</p>
-                            <ul class="social_info">
-                                <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                <li><a href="#"><i class="ti-twitter"></i></a></li>
-                                <li><a href="#"><i class="ti-linkedin"></i></a></li>
-                                <li><a href="#"><i class="ti-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <!-- Reviews -->
                     <div class="list-single-main-item fl-wrap">
                         <div class="list-single-main-item-title fl-wrap">
@@ -308,46 +286,45 @@
 
                         <div class="ed_author">
                             <div class="ed_author_thumb">
-                                <img class="img-fluid" src="assets/img/user-5.jpg" alt="7.jpg">
+                                <img class="img-fluid" src="{{ $ue->teachers[0]->user->photo }}" alt="7.jpg">
                             </div>
                             <div class="ed_author_box">
-                                <h4>Michael Russell</h4>
-                                <span>Web Designer in Canada</span>
+                                <h4>{{ $ue->teachers[0]->user->name }}</h4>
                             </div>
                         </div>
 
                         <div class="ed_view_price pl-4">
                             <span>Acctual Price</span>
-                            <h2 class="theme-cl">$ 149.00</h2>
+                            <h2 class="theme-cl">{{ number_format($ue->semester->level->pension) }} XAF</h2>
                         </div>
-                        <div class="ed_view_features pl-4">
-                            <span>Course Features</span>
-                            <ul>
-                                <li><i class="ti-angle-right"></i>Fully Programming</li>
-                                <li><i class="ti-angle-right"></i>Help Code to Code</li>
-                                <li><i class="ti-angle-right"></i>Free Trial 7 Days</li>
-                                <li><i class="ti-angle-right"></i>Unlimited Videos</li>
-                                <li><i class="ti-angle-right"></i>24x7 Support</li>
-                            </ul>
-                        </div>
+{{--                        <div class="ed_view_features pl-4">--}}
+{{--                            <span>Course Features</span>--}}
+{{--                            <ul>--}}
+{{--                                <li><i class="ti-angle-right"></i>Fully Programming</li>--}}
+{{--                                <li><i class="ti-angle-right"></i>Help Code to Code</li>--}}
+{{--                                <li><i class="ti-angle-right"></i>Free Trial 7 Days</li>--}}
+{{--                                <li><i class="ti-angle-right"></i>Unlimited Videos</li>--}}
+{{--                                <li><i class="ti-angle-right"></i>24x7 Support</li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
                         <div class="ed_view_link">
-                            <a href="#" class="btn btn-theme enroll-btn">Enroll Now<i class="ti-angle-right"></i></a>
+                            <a href="#" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></a>
                         </div>
 
                     </div>
 
-                    <div class="edu_wraper">
-                        <h4 class="edu_title">Course Features</h4>
-                        <ul class="edu_list right">
-                            <li><i class="ti-user"></i>Student Enrolled:<strong>1740</strong></li>
-                            <li><i class="ti-files"></i>lectures:<strong>10</strong></li>
-                            <li><i class="ti-game"></i>Quizzes:<strong>4</strong></li>
-                            <li><i class="ti-time"></i>Duration:<strong>60 hours</strong></li>
-                            <li><i class="ti-tag"></i>Skill Level:<strong>Beginner</strong></li>
-                            <li><i class="ti-flag-alt"></i>Language:<strong>English</strong></li>
-                            <li><i class="ti-shine"></i>Assessment:<strong>Yes</strong></li>
-                        </ul>
-                    </div>
+{{--                    <div class="edu_wraper">--}}
+{{--                        <h4 class="edu_title">Course Features</h4>--}}
+{{--                        <ul class="edu_list right">--}}
+{{--                            <li><i class="ti-user"></i>Student Enrolled:<strong>1740</strong></li>--}}
+{{--                            <li><i class="ti-files"></i>lectures:<strong>10</strong></li>--}}
+{{--                            <li><i class="ti-game"></i>Quizzes:<strong>4</strong></li>--}}
+{{--                            <li><i class="ti-time"></i>Duration:<strong>60 hours</strong></li>--}}
+{{--                            <li><i class="ti-tag"></i>Skill Level:<strong>Beginner</strong></li>--}}
+{{--                            <li><i class="ti-flag-alt"></i>Language:<strong>English</strong></li>--}}
+{{--                            <li><i class="ti-shine"></i>Assessment:<strong>Yes</strong></li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
 
                 </div>
 
