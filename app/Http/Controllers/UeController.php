@@ -35,11 +35,11 @@ class UeController extends Controller
     {
         $field = Field::whereSlug($field_slug)->first();
         if(is_null($field)){
-            return redirect()->route('admin.levels');
+            abort(404);
         }
         $level = Level::whereSlug($level_slug)->first();
         if(is_null($level)){
-            return redirect()->route('admin.fields', ['field_slug' => $field_slug]);
+            abort(404);
         }
 
         $data = [
@@ -168,22 +168,25 @@ class UeController extends Controller
             'description' => "required"
         ]);
 
-        $ue = auth()->user()->teacher->ues()->where('id', $request->ue)->first();
+        $ue = auth()->user()->teacher->ues()->where('ues.id', $request->ue)->first();
 
         $ue->name = $request->name;
         $ue->slug = Str::slug($request->name);
         $ue->code = $request->code;
         $ue->description = $request->description;
 
-        if(is_null($request->photo)){
+        if(!is_null($request->photo)){
            // upload de la tof ...
-           $tof = null;
+            $image_file = $request->photo;
+            $image_name = $image_file->getClientOriginalName();
+            $image_file->move("assets/img/ues/", $image_name);
 
-           $ue->photo = $tof;
+           $ue->photo = $image_name;
         }
 
         $ue->save();
 
-        return redirect()->route("teacher.ue.details", ['ue_code' => $ue->code]);
+        return redirect()->back();
+//        return redirect()->route("teacher.ue.details", ['ue_code' => $ue->code]);
     }
 }

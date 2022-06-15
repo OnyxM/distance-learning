@@ -18,8 +18,6 @@ class Admin
     {
         $user_priority = auth()->user()->priority;
 
-        dd($user_priority);
-
         if(!in_array($user_priority, [\App\Models\User::USER_PRIORITY['manager'], \App\Models\User::USER_PRIORITY['admin']])){
             return redirect()->route("login");
         }
