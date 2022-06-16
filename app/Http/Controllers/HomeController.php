@@ -111,20 +111,25 @@ class HomeController extends Controller
     {
         $live = Live::where('uuid', $live_id)->first();
 
-        $user = User::find(auth()->user()->id);
-
-        if(is_null($live) || is_null($user)){
+        if(is_null($live)){
             return null;
         }
 
-        $live->participants()->detach($user);
+        if(in_array(auth()->user()->id, $live->participants()->pluck('users.id')->toArray())){
+            return response()->json([
+                'status' => 500,
+                'message' => "User is already in this session"
+            ]);
+        }
 
-        $live->participants()->attach($user, [
+//        $live->participants()->detach($user);
+
+        $live->participants()->attach(auth()->user(), [
             'date_adhésion' => time()
         ]);
 
         return[
-            'user_id' => auth()->user()->id,
+            'status' => 200,
             'live_uuid' => $live_id
         ];
     }

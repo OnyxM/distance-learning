@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-bordered" data-assets-path="../../assets/" data-template="vertical-menu-template-bordered">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed " dir="ltr" data-theme="theme-bordered" data-assets-path="../../../../../../assets/" data-template="vertical-menu-template-bordered">
 
 
 <head>
@@ -80,6 +79,18 @@
                         <i class="menu-icon tf-icons bx bx-home-circle"></i> Home
                     </a>
                 </li>
+                <br>
+                <li class="menu-item">
+                    <a href="{{route('admin.fields')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i> System Management
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{route('admin.teachers')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user"></i> Teachers
+                    </a>
+                </li>
+                <br>
                 <li class="menu-item">
                     <a href="{{route('admin.users')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-user"></i> Users
@@ -180,8 +191,8 @@
 
             <!-- Content wrapper -->
             <div class="content-wrapper">
-                @yield("container-xxl")
-                <!-- / Content -->
+            @yield("container-xxl")
+            <!-- / Content -->
             </div>
             <!-- Content wrapper -->
         </div>

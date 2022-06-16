@@ -25,6 +25,16 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
+            'firstname' => "Manager", 'lastname' => "Account",
+            'email' => "manager@domain.com",
+            'email_verified_at' => time(),
+            'password' => bcrypt("passwd1234"),
+            'date_naissance' => "1995-06-25",
+            'lieu_naissance' => "HomeCity",
+            'priority' => User::USER_PRIORITY['manager'],
+        ]);
+
+        User::create([
             'firstname' => "User", 'lastname' => "Account",
             'email' => "user@domain.com",
             'email_verified_at' => time(),

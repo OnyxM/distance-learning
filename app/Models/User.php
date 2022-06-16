@@ -22,6 +22,7 @@ class User extends Authenticatable
         'date_naissance',
         'lieu_naissance',
         'photo',
+        'teacher_id',
         'priority',
         'deleted_at',
     ];
@@ -41,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const USER_PRIORITY = ['user' => '0', 'manager' => '2', 'admin' => '3'];
+    const USER_PRIORITY = ['user' => '0', 'teacher' => '2', 'manager' => '4', 'admin' => '5'];
 
     protected $appends = [
         'name',
@@ -55,10 +56,10 @@ class User extends Authenticatable
         return asset("assets/img/".$this->attributes['photo']);
     }
 
-    public function assists()
-    {
-        return $this->belongsToMany(Course::class);
-    }
+//    public function assists()
+//    {
+//        return $this->belongsToMany(Course::class);
+//    }
     public function courses()
     {
         return $this->hasMany(Course::class);
@@ -71,5 +72,15 @@ class User extends Authenticatable
     public function lives()
     {
         return $this->hasMany(Live::class);
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    public function classes()
+    {
+        return $this->belongsToMany(Level::class);
     }
 }
