@@ -14,7 +14,7 @@ class ChapterController extends Controller
         $this->validate($request, [
             'ue' => "required|exists:ues,id",
             'chapter_name' => "required",
-            'document' => ['required','mimes:pdf,pptx']
+            'document' => ['required','mimes:pdf']
         ]);
 
         // on check que le auth est teacher et est lié à ce cours ...
@@ -53,8 +53,12 @@ class ChapterController extends Controller
         return redirect()->back();
     }
 
-    public function delete(Request $request)
+    public function delete($chap)
     {
+        $chap = Chapter::find($chap);
 
+        $chap->delete();
+
+        return redirect()->back();
     }
 }

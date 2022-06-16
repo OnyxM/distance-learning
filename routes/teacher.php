@@ -26,7 +26,7 @@ Route::group(['prefix' => "ues"], function(){
 
     Route::group(['prefix' => "chapter"], function(){
         Route::post("add", [ChapterController::class, "create"])->name('chapter.add');
-        Route::post("delete", [ChapterController::class, "delete"])->name('chapter.delete');
+        Route::get("delete/{chap}", [ChapterController::class, "delete"])->name('chapter.delete');
     });
 
 //    Route::get('create', [CourseController::class, 'add'])->name('course.add');

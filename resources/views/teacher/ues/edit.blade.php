@@ -88,7 +88,7 @@
                                     <span class="text-left col-9"><a href="#" class="d-block position-relative text-dark py-2">{{ $chap->name }}</a></span>
                                     <span class="text-right col-3">
                                         <a href="#" class="d-block position-relative text-dark py-2"><i class="ti-edit"></i></a>
-                                        <a href="javascript:void(0);" class="d-block position-relative text-danger py-2 deleteChapter" data-id="{{$chap->id}}"><i class="ti-trash"></i></a>
+                                        <a href="{{ route('chapter.delete', ['chap' => $chap->id]) }}" class="d-block position-relative text-danger py-2 deleteChapter" data-id="{{$chap->id}}"><i class="ti-trash"></i></a>
                                     </span>
                                 </h6>
                             </div>

@@ -42,7 +42,7 @@
                                     <div class="card">
                                         <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
                                             <h6 class="mb-0">
-                                                <a href="{{route('class.follow_course', ['ue' =>$ue->code, 'chapter'=>$chap->id])}}" class="d-block position-relative text-dark py-2">
+                                                <a class="d-block position-relative text-center py-2 @if($chapter->id==$chap->id) text-danger @endif" href="{{route('class.follow_course', ['ue' =>$ue->code, 'chapter'=>$chap->id])}}">
                                                     {{$chap->name}}
                                                 </a>
                                             </h6>
@@ -56,12 +56,12 @@
 
                 <div class="col-lg-8 col-md-8">
 
-                    <!-- Overview -->
-                    <div class="edu_wraper">
-                        <h4 class="edu_title row">
-                            <span class="text-left col-md-6">{!! $chapter->name !!}</span>
-                        </h4>
-                    </div>
+{{--                    <!-- Overview -->--}}
+{{--                    <div class="edu_wraper">--}}
+{{--                        <h4 class="edu_title row">--}}
+{{--                            <span class="text-left col-md-6">{!! $chapter->name !!}</span>--}}
+{{--                        </h4>--}}
+{{--                    </div>--}}
 
                     <div class="container-frame">
                         <embed class="responsive-iframe" src="{{ asset($chapter->document) }}">
