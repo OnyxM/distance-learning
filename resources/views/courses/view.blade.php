@@ -41,8 +41,8 @@
                                 @foreach($ue->chapters as $chap)
                                     <div class="card">
                                         <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                                            <h6 class="mb-0 accordion_title">
-                                                <a class="d-block position-relative text-dark collapsible-link py-2">
+                                            <h6 class="mb-0">
+                                                <a href="{{route('class.follow_course', ['ue' =>$ue->code, 'chapter'=>$chap->id])}}" class="d-block position-relative text-dark py-2">
                                                     {{$chap->name}}
                                                 </a>
                                             </h6>
