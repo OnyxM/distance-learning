@@ -81,9 +81,24 @@ async function startBasicLiveStreaming() {
         }
 
         document.getElementById("join").onclick = async function () {
-            var uid = $(this).data('uid');
+            const uid = $(this).data('uid'),
+                data_type = $(this).data('type');
 
-            await registerUserToLive($(this).data('type'));
+            await registerUserToLive();
+
+            if(!localStorage.getItem("is_registered")){
+                return ;
+            }
+
+            alert(localStorage.getItem("is_registered"))
+            if (data_type == "host") {
+                await joinLive("host", uid);
+            } else {
+                await joinLive("audience", uid);
+            }
+
+            $("#join").addClass('d-none');
+            $("#leave").removeClass('d-none');
 
         };
 
@@ -149,29 +164,26 @@ async function startBasicLiveStreaming() {
             window.location = $('#prev').html();
         };
 
-        async function registerUserToLive(data_type){
+        async function registerUserToLive(){
             let current_url = window.location.href;
+
             current_url = current_url.split("/");
 
             let live_id = current_url.at('-1');
 
             $.ajax({
                 url: "/beta-test/"+live_id,
-                success: async function(response){
-                    if(response.status != 200){
-                        alert(response.message);
-                        throw new Error(response.message);
-                        return;
-                    }
+                success: function (response) {
+                    localStorage.clear();
 
-                    if(data_type == "host"){
-                        await joinLive("host", uid);
+                    if (response.status != 200) {
+                        throw new Error("User already registered");
+                        localStorage.setItem('is_registered', true)
                     }else{
-                        await joinLive("audience", uid);
+                        localStorage.setItem('is_registered', false)
                     }
 
-                    $("#join").addClass('d-none');
-                    $("#leave").removeClass('d-none');
+                    new Promise(r => setTimeout(r, 2000));
                 }
             });
         }
