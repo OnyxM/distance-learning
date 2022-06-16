@@ -219,7 +219,7 @@
                                 <h2 class="">{{ number_format($ue->semester->level->pension) }} XAF</h2>
                             </div>
                             <div class="ed_view_link">
-                                <a href="#" class="btn btn-theme enroll-btn">Follow Course<i class="ti-angle-right"></i></a>
+                                <a href="{{ route('class.follow_course', ['ue'=>$ue->code]) }}" class="btn btn-theme enroll-btn">Follow Course<i class="ti-angle-right"></i></a>
                             </div>
                         @endif
                     </div>

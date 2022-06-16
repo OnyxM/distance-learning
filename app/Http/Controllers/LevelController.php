@@ -148,6 +148,8 @@ class LevelController extends Controller
             $level->participants()->attach($user_id, ['registration_date' => time()]);
         }
 
-        return redirect()->route('class.index');
+        // return redirect()->route('class.index');
+
+        return redirect()->back();
     }
 }

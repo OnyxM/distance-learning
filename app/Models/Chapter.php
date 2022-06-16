@@ -21,4 +21,9 @@ class Chapter extends Model
     {
         return $this->belongsTo(Ue::class);
     }
+
+    public function getDocumentAttribute()
+    {
+        return "uploads/chapters/" . $this->attributes['document'];
+    }
 }
