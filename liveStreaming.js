@@ -11,9 +11,9 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "htDvARZR+6XnC8AA",
+    channel: "EGvOtt8GNF8r1AafF2",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IAAjJr8gY7cS7Ig8SP7BayO6cjtEGvOtt8GNF8r1AafF2o08W/MAAAAAEACa6fgNNBWjYgEAAQAxFaNi",
+    token: "0064495024a2d414911932996a968fc8559IAC8XaUaahAuHy7OuUmA3T1iX8yDtYNS2yK+J6+akFpJF+A8QTkAAAAAEAC5bVGzFQCsYgEAAQAUAKxi",
     // Uid
     uid: 123456789,
 };
@@ -83,14 +83,7 @@ async function startBasicLiveStreaming() {
         document.getElementById("join").onclick = async function () {
             var uid = $(this).data('uid');
 
-            if($(this).data('type') == "host"){
-                await joinLive("host", uid);
-            }else{
-                await joinLive("audience", uid);
-            }
-
-            $("#join").addClass('d-none');
-            $("#leave").removeClass('d-none');
+            await registerUserToLive($(this).data('type'));
 
         };
 
@@ -98,7 +91,6 @@ async function startBasicLiveStreaming() {
             rtc.client = AgoraRTC.createClient({mode: "rtc",codec: "vp8"});
 
             // register user in db and join live on Agora
-            registerUserToLive();
 
             await rtc.client.join(options.appId, options.channel, options.token, uid);
 
@@ -157,7 +149,7 @@ async function startBasicLiveStreaming() {
             window.location = $('#prev').html();
         };
 
-        async function registerUserToLive(){
+        async function registerUserToLive(data_type){
             let current_url = window.location.href;
             current_url = current_url.split("/");
 
@@ -165,8 +157,21 @@ async function startBasicLiveStreaming() {
 
             $.ajax({
                 url: "/beta-test/"+live_id,
-                success: async function(result){
-                    // await rtc.client.join(options.appId, options.channel, options.token, result.user_id);
+                success: async function(response){
+                    if(response.status != 200){
+                        alert(response.message);
+                        throw new Error(response.message);
+                        return;
+                    }
+
+                    if(data_type == "host"){
+                        await joinLive("host", uid);
+                    }else{
+                        await joinLive("audience", uid);
+                    }
+
+                    $("#join").addClass('d-none');
+                    $("#leave").removeClass('d-none');
                 }
             });
         }
