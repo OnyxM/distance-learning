@@ -66,52 +66,58 @@
                 <div class="col-lg-4 col-md-4">
 
                     <div class="ed_view_box style_2">
-                        <div class="ed_view_price pl-4 text-center">
-                            <span>Acctual Price</span>
-                            <h2 class="theme-cl">{{ number_format($level->pension) }} XAF</h2>
-                        </div>
+                        @if(!in_array($level->id, auth()->user()->classes()->pluck('levels.id')->toArray()))
+                            <div class="ed_view_price pl-4 text-center">
+                                <span>Acctual Price</span>
+                                <h2 class="theme-cl">{{ number_format($level->pension) }} XAF</h2>
+                            </div>
 
-                        <div class="ed_view_link">
-                            @if(!in_array($level->id, auth()->user()->classes()->pluck('levels.id')->toArray()))
-                            <form action="{{ route('field.attend') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="field" value="{{ $field->slug }}" required>
-                                <input type="hidden" name="level" value="{{ $level->slug }}" required>
-                                <button data-toggle="modal" data-target="#payForLevel" type="button" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
-                            </form>
+                            <div class="ed_view_link">
+                                <form action="{{ route('field.attend') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="field" value="{{ $field->slug }}" required>
+                                    <input type="hidden" name="level" value="{{ $level->slug }}" required>
+                                    <button data-toggle="modal" data-target="#payForLevel" type="button" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
+                                </form>
 
-                            <div class="modal fade" id="payForLevel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <form class="modal-content" action="{{ route('chapter.delete') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="field" value="{{$field->id}}" required>
-                                        <input type="hidden" name="level" value="{{$level->id}}" required>
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Make Payment</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>You are about to pay {{number_format($level->pension)}} XAF to attend this class</label>
+                                <div class="modal fade" id="payForLevel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <form class="modal-content" action="{{ route('chapter.delete') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="field" value="{{$field->id}}" required>
+                                            <input type="hidden" name="level" value="{{$level->id}}" required>
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Make Payment</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
                                             </div>
-                                            <div class="form-group">
-                                                <label>Phone Number <sup class="text-danger">*</sup></label>
-                                                <input type="text" class="form-control" name="phone" required value="" placeholder="678955362">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label>You are about to pay {{number_format($level->pension)}} XAF to attend this class</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone Number <sup class="text-danger">*</sup></label>
+                                                    <input type="text" class="form-control" name="phone" required value="" placeholder="678955362">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Pay</button>
-                                        </div>
-                                    </form>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Pay</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            @else
+                        @else
+                            <div class="ed_view_price pl-4 text-center">
+                                <span>Actual Price</span>
+                                <h2 class="">{{ number_format($level->pension) }} XAF</h2>
+                            </div>
+                            <div class="ed_view_link">
                                 <a href="#lessons" class="btn btn-theme enroll-btn">View Lessons<i class="ti-angle-right"></i></a>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
