@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Chapter;
 use App\Models\Ue;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -53,9 +54,21 @@ class ChapterController extends Controller
         return redirect()->back();
     }
 
-    public function delete($chap)
+    public function delete(Request $request)
     {
-        $chap = Chapter::find($chap);
+        $this->validate($request, [
+            'ue' => "required",
+            'del_chap' => "required",
+        ]);
+
+        $ue = auth()->user()->teacher->ues()->where('ues.id', $request->ue)->first();
+        if(is_null($ue)){
+            abort(404);
+        }
+        $chap = $ue->chapters()->where('chapters.id', $request->del_chap)->first();
+        if(is_null($chap)){
+            abort(404);
+        }
 
         $chap->delete();
 

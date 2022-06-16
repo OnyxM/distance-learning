@@ -88,21 +88,35 @@
                                     <span class="text-left col-9"><a href="#" class="d-block position-relative text-dark py-2">{{ $chap->name }}</a></span>
                                     <span class="text-right col-3">
                                         <a href="#" class="d-block position-relative text-dark py-2"><i class="ti-edit"></i></a>
-                                        <a href="{{ route('chapter.delete', ['chap' => $chap->id]) }}" class="d-block position-relative text-danger py-2 deleteChapter" data-id="{{$chap->id}}"><i class="ti-trash"></i></a>
+                                        <a href="javascript:void(0);" class="d-block position-relative text-danger py-2 deleteChapter" data-id="{{$chap->id}}">
+                                            <i class="ti-trash"></i>
+                                        </a>
                                     </span>
                                 </h6>
                             </div>
-{{--                            <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample" class="collapse">--}}
-{{--                                <div class="card-body pl-3 pr-3">--}}
-{{--                                    <ul class="lectures_lists">--}}
-{{--                                        <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 01</div>Web Designing Beginner</li>--}}
-{{--                                        <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 02</div>Startup Designing with HTML5 & CSS3</li>--}}
-{{--                                        <li><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 03</div>How To Call Google Map iFrame</li>--}}
-{{--                                        <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 04</div>Create Drop Down Navigation Using CSS3</li>--}}
-{{--                                        <li class="unview"><div class="lectures_lists_title"><i class="ti-control-play"></i>Lecture: 05</div>How to Create Sticky Navigation Using JS</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+
+                            <div class="modal fade" id="deleteChapterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <form class="modal-content" action="{{ route('chapter.delete') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="ue" value="{{$ue->id}}" required>
+                                        <input type="hidden" name="del_chap" value="" required>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Sure to delete the Chapter ?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Yes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
 
@@ -178,16 +192,24 @@
 @section("js")
     <script src="{{ asset('assets/summernote/summernote-bs4.js') }}"></script>
 
-    <script>
-        $(document).ready(function(){
-            $(".summernote-simple").summernote();
-        });
+<script>
+    $(document).ready(function(){
+        $(".summernote-simple").summernote();
+    });
 
-        $(document).on('click', "#addChapterButton", function(e){
-            e.preventDefault();
+    $(document).on('click', "#addChapterButton", function(e){
+        e.preventDefault();
 
-            $("#addChapter").removeClass("d-none");
-            $("input[name='chapter_name']").focus();
-        });
-    </script>
+        $("#addChapter").removeClass("d-none");
+        $("input[name='chapter_name']").focus();
+    });
+
+    $(document).on('click', ".deleteChapter", function(e){
+        e.preventDefault();
+        var chap = $(this).data('id')
+
+        $("input[name='del_chap']").val(chap)
+        $("#deleteChapterModal").modal('toggle')
+    });
+</script>
 @endsection
