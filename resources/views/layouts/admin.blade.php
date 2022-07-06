@@ -80,7 +80,7 @@
             <div class="menu-inner-shadow"></div>
 
             <ul class="menu-inner py-1">
-                <li class="menu-item">
+                <li class="menu-item {{ activeLiApp('admin', []) }}">
                     <a href="{{route('admin.index')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i> Home
                     </a>

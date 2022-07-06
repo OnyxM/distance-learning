@@ -13,8 +13,13 @@ if (! function_exists('activeLiApp')) {
 
         $active = $parts[1];
 
-        foreach ($availableURL as $item) {
-            return (strstr("$active", $item)) ? " active" : null;
+        if(empty($availableURL) && $active==""){
+            return " active";
+        }
+        else{
+            foreach ($availableURL as $item) {
+                return ($active==$item || strstr($active, $item)) ? " active" : null;
+            }
         }
     }
 }
