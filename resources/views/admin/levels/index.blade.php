@@ -3,12 +3,12 @@
 @section("container-xxl")
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
                 List of levels
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="{{ route('admin.levels.new', ['field_slug' => $field->slug]) }}" class="btn btn-info">Add level</a>
+                <a href="{{ route('admin.levels.new', ['field_slug' => $field->slug]) }}" class="btn btn-primary">Add level</a>
             </div>
         </div>
         <div class="row">

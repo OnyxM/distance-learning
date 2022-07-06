@@ -3,15 +3,19 @@
 @section("container-xxl")
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <div class="row">
+        <div class="row mb-4">
+            <div class="col-md-10 col-lg-10 mb-4 mb-md-0"></div>
+            <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
+                <a href="{{ route('admin.ues.new', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" class="btn btn-primary">Add Ue</a>
+            </div>
+        </div>
+
+        <div class="row mb-4">
             <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
                 List of UEs for Semester I
             </div>
-            <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="{{ route('admin.ues.new', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" class="btn btn-info">Add Ue</a>
-            </div>
         </div>
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
                 <div class="card">
                     <div class="table-responsive text-nowrap">
@@ -25,9 +29,9 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
-                            <?php $i = 1; ?>
+                            <?php $i = 1; $sem_1 = $level->semesters[0]; $sem_2 = $level->semesters[1]; ?>
                             <tbody class="table-border-bottom-0">
-                            @foreach($level->semesters[0]->ues as $ue)
+                            @foreach($sem_1->ues as $ue)
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{$ue->name}}</td>
@@ -75,7 +79,7 @@
                             </thead>
                             <?php $i = 1; ?>
                             <tbody class="table-border-bottom-0">
-                            @foreach($level->semesters[1]->ues as $ue)
+                            @foreach($sem_2->ues as $ue)
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{$ue->name}}</td>

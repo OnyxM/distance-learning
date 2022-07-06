@@ -3,12 +3,12 @@
 @section("container-xxl")
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <div class="row">
+        <div class="row mb-4">
             <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
                 List of fields
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="{{ route('admin.fields.new') }}" class="btn btn-info">Add field</a>
+                <a href="{{ route('admin.fields.new') }}" class="btn btn-primary">Add field</a>
             </div>
         </div>
         <div class="row">
@@ -35,7 +35,7 @@
                                             <a href="{{ route('admin.levels', ['field_slug' => $field->slug])}}"><i class="bx bx-street-view"></i></a>
                                         </span>
                                         <span class="text-danger">
-                                            <a href="{{ route('admin.fields.delete', ['id' => $field->id]) }}"><i class="bx bx-trash"></i></a>
+                                            <a href="{{ route('admin.fields.delete', ['id' => $field->id]) }}"><i class="text-danger bx bx-trash"></i></a>
                                         </span>
                                     </td>
                                 </tr>

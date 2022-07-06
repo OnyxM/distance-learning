@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
                 <div class="card">
-                    <form action="{{ route('admin.levels.create', ['field_slug' => $field->slug]) }}" method="POST">
+                    <form class="card-body" action="{{ route('admin.levels.create', ['field_slug' => $field->slug]) }}" method="POST">
                         @csrf
                         <input type="hidden" name="field" value="{{$field->id}}" required>
 
@@ -36,7 +36,8 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn btn-success" value="Save">
+                        <input type="submit" class="btn btn-primary" value="Save">
+                        <a href="{{ route('admin.levels', ['field_slug' => $field->slug]) }}" class="btn btn-outline-primary">Cancel</a>
                     </form>
                 </div>
             </div>
