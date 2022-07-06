@@ -19,7 +19,7 @@
                         <th>N°</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Priority</th>
+{{--                        <th>Priority</th>--}}
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -31,15 +31,15 @@
                                 <td>{{ $cpt }}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>
-                                    @if($user->priority=='0')
-                                        <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span> User
-                                    @elseif($user->priority=='2')
-                                        <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="bx bx-pie-chart-alt bx-xs"></i></span> Manager
-                                    @elseif($user->priority=='3')
-                                        <span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span> Admin
-                                    @endif
-                                </td>
+{{--                                <td>--}}
+{{--                                    @if($user->priority=='0')--}}
+{{--                                        <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span> User--}}
+{{--                                    @elseif($user->priority=='2')--}}
+{{--                                        <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="bx bx-pie-chart-alt bx-xs"></i></span> Manager--}}
+{{--                                    @elseif($user->priority=='3')--}}
+{{--                                        <span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span> Admin--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
                                 <td>
                                     @if($user->id != auth()->user()->id)
                                         @if(is_null($user->deleted_at))

@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $data = [
             'title' => "All Users - ",
-            'users' => User::withTrashed()->get(),
+            'users' => User::withTrashed()->where('priority', User::USER_PRIORITY['user'])->get(),
         ];
 
         return view("admin.users", $data);
@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function setStatus(Request $request)
     {
-        if(auth()->user()->priority !== "3"){
+        if(auth()->user()->priority !== User::USER_PRIORITY['admin']){
             auth()->logout();
             return redirect()->route('login');
         }

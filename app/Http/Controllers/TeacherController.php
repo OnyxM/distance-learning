@@ -31,7 +31,7 @@ class TeacherController extends Controller
     {
         $data = [
             'title' => "Add a Lecturer - ",
-            'users' => User::where('priority', '2')->whereNotIn('id', Teacher::pluck('user_id')->toArray())->get(),
+            'users' => User::where('priority', User::USER_PRIORITY['user'])->get(),
         ];
 
         return view("admin.teachers.new", $data);
@@ -41,16 +41,39 @@ class TeacherController extends Controller
     {
         $this->validate($request, [
             'title' => "required",
-            'name' => "required",
-            'user' => "required|exists:users,id",
             'poste' => "required",
         ]);
 
+        if($request->account == 1){
+            $this->validate($request, [
+                'user' => "required|exists:users,id",
+            ]);
+
+            $user = User::find($request->user);
+            $user->priority = User::USER_PRIORITY['teacher'];
+            $user->save();
+        }else{
+            $this->validate($request, [
+                'firstname' => "required",
+                'lastname' => "required",
+                'email' => "required",
+                'password' => "required",
+            ]);
+
+            $user = User::create([
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'priority' => User::USER_PRIORITY['teacher'],
+            ]);
+        }
+
         Teacher::create([
             'title' => $request->title,
-            'name' => $request->name,
+            'name' => $user->name,
             'poste' => $request->poste,
-            'user_id' => $request->user,
+            'user_id' => $user->id,
         ]);
 
         return redirect()->route('admin.teachers');
