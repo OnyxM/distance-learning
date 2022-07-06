@@ -203,7 +203,7 @@
                         @php
                             $user_classes = [];
                         @endphp
-                        @auth $user_classes = auth()->user()->classes()->pluck('levels.id')->toArray(); @endauth
+                        @auth <?php $user_classes = auth()->user()->classes()->pluck('levels.id')->toArray(); ?> @endauth
 
                         @if(!in_array($level->id, $user_classes))
                         <div class="ed_view_price pl-4 text-center">
