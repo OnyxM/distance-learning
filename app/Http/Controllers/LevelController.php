@@ -54,7 +54,7 @@ class LevelController extends Controller
         $this->validate($request, [
             'field' => "required",
             'name' => "required",
-            'description' => "required",
+//            'description' => "required",
             'pension' => "required",
         ]);
 
@@ -67,6 +67,34 @@ class LevelController extends Controller
         ]);
 
         return redirect()->route('admin.levels', ['field_slug' => $field->slug]);
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'field' => "required",
+            'level' => "required",
+            'name' => "required",
+//            'description' => "required",
+            'pension' => "required",
+        ]);
+
+        $field = Field::find($request->field);
+        if(is_null($field)){
+            return redirect()->route('admin.fields');
+        }
+
+        $level = Level::find($request->level);
+
+        $level->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+            'description' => $request->description,
+            'pension' => $request->pension,
+        ]); $level->save();
+
+        return redirect()->back();
+
     }
 
     public function delete($field_slug, $level_id)

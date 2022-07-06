@@ -34,6 +34,7 @@ Route::group(['prefix' => "system"], function(){
             Route::get('/', [LevelController::class, "index"])->name("admin.levels");
             Route::get('/new', [LevelController::class, "new"])->name("admin.levels.new");
             Route::post('/create', [LevelController::class, "create"])->name("admin.levels.create");
+            Route::post('/edit', [LevelController::class, "update"])->name("admin.levels.edit");
             Route::get('/delete/{id}', [LevelController::class, "delete"])->name("admin.levels.delete");
 
             Route::group(['prefix' => "{level_slug}"], function(){
