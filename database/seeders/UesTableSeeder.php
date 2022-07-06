@@ -32,7 +32,7 @@ class UesTableSeeder extends Seeder
 //
 //        $ue->teachers()->attach($teacher->id);
 
-        $path = 'database/sql/ues.sql';
-        DB::unprepared(file_get_contents($path));
+//        $path = 'database/sql/ues.sql';
+//        DB::unprepared(file_get_contents($path));
     }
 }
