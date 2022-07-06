@@ -26,15 +26,17 @@
                     </li>
                 @else
                     @if(auth()->user()->priority == \App\Models\User::USER_PRIORITY['teacher'])
-                        <li class=""><a href="{{route('teacher.index')}}"><i class="ti-user"></i> Hi, Teacher {{ auth()->user()->name }}</a></li>
+                        <li class=""><a href="{{route('teacher.index')}}"><i class="ti-user"></i> Welcome <strong>{{ auth()->user()->name }}</strong> </a></li>
                         <li><a href="{{route('teacher.ues')}}">My Courses</a></li>
                         <li><a href="{{route('user.lives')}}">My Lives</a></li>
+                    @elseif(auth()->user()->priority == \App\Models\User::USER_PRIORITY['admin'])
+                        <li class=""><a href="{{route('admin.index')}}"><i class="ti-user"></i> Welcome <strong>{{ auth()->user()->name }}</strong> </a></li>
                     @else
-                        <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Hi, Student {{ auth()->user()->name }}</a></li>
+                        <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Welcome <strong>{{ auth()->user()->name }}</strong> </a></li>
                         <li><a href="{{route('class.index')}}">My Class</a></li>
                     @endif
 
-                    <li><a href="javascript:void(0);">Settings</a></li>
+{{--                    <li><a href="javascript:void(0);">Settings</a></li>--}}
 
                     <li class="login_click theme-bg">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
