@@ -30,14 +30,16 @@
     <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
     <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/typeahead-js/typeahead.css')}}" />
     <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/apex-charts/apex-charts.css')}}" />
-    <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
-    <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}">
-    <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}">
     <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/select2/select2.css')}}" />
     <link rel="stylesheet" href="{{asset('manager/assets/vendor/libs/formvalidation/dist/css/formValidation.min.css')}}" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="{{asset('manager/assets/vendor/css/pages/card-analytics.css')}}" />
+    <link rel="stylesheet" href="{{ asset('manager/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('manager/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('manager/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}">
+    <link rel="stylesheet" href="{{ asset('manager/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('manager/assets/vendor/css/pages/card-analytics.css') }}" />
+    <link rel="stylesheet" href="{{ asset('manager/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}">
     <!-- Helpers -->
     <script src="{{asset('manager/assets/vendor/js/helpers.js')}}"></script>
 
@@ -244,11 +246,17 @@
 <script src="{{asset('manager/assets/vendor/libs/cleavejs/cleave.js')}}"></script>
 <script src="{{asset('manager/assets/vendor/libs/cleavejs/cleave-phone.js')}}"></script>
 
+<script src="{{ asset('manager/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js') }}"></script>
+
 <!-- Main JS -->
 <script src="{{asset('manager/assets/js/main.js')}}"></script>
 
+<script src="{{ asset('manager/assets/vendor/libs/datatables-rowgroup/datatables.rowgroup.js') }}"></script>
+<script src="{{ asset('manager/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.js') }}"></script>
+
 <!-- Page JS -->
-<script src="{{asset('manager/assets/js/dashboards-ecommerce.js')}}"></script>
+<script src="{{ asset('manager/assets/js/dashboards-ecommerce.js')}}"></script>
+<script src="{{ asset('manager/assets/js/tables-datatables-basic.js') }}"></script>
 
 @yield('js')
 
