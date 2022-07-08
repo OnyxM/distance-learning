@@ -13,7 +13,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="mt-auto">
-                                    <h2 class="mb-2">50</h2>
+                                    <h2 class="mb-2">{{ count($users) }}</h2>
                                 </div>
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="mt-auto">
-                                    <h2 class="mb-2">23</h2>
+                                    <h2 class="mb-2">{{ count($courses) }}</h2>
                                 </div>
                             </div>
                         </div>

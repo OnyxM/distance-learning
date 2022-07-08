@@ -538,7 +538,7 @@ class CourseController extends Controller
         if(!is_null($chapter)){
             $chapter = $ue->chapters()->where('chapters.id', $chapter)->first();
         }else{
-            $chapter = $ue->chapters[0];
+            $chapter = @$ue->chapters[0];
         }
 
         $data = [

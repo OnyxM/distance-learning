@@ -63,9 +63,11 @@
 {{--                        </h4>--}}
 {{--                    </div>--}}
 
+                    @if(!is_null($chapter))
                     <div class="container-frame">
                         <embed class="responsive-iframe" src="{{ asset($chapter->document) }}">
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

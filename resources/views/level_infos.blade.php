@@ -66,12 +66,15 @@
                 <div class="col-lg-4 col-md-4">
 
                     <div class="ed_view_box style_2">
-                            @php
-                                $user_classes = [];
-                            @endphp
-                            @auth $user_classes = auth()->user()->classes()->pluck('levels.id')->toArray(); @endauth
+                        @php
+                            $user_classes = [];
 
-                            @if(!in_array($level->id, $user_classes))
+                            if(auth()->user()){
+                                $user_classes = auth()->user()->classes()->pluck('levels.id')->toArray();
+                            }
+                        @endphp
+
+                        @if(!in_array($level->id, $user_classes))
                             <div class="ed_view_price pl-4 text-center">
                                 <span>Acctual Price</span>
                                 <h2 class="theme-cl">{{ number_format($level->pension) }} XAF</h2>
