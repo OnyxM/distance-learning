@@ -217,4 +217,19 @@ class UeController extends Controller
         return view("ue_infos", $data);
 
     }
+
+    public function check(Request $request)
+    {
+        $ue = Ue::where('code', $request->ue)->first();
+
+        $exists = true;
+
+        if(is_null($ue)){
+            $exists = false;
+        }
+
+        return response()->json([
+            'status' => !$exists
+        ]);
+    }
 }

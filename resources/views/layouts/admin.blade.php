@@ -55,6 +55,9 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @yield('css')
 
 </head>
@@ -258,6 +261,14 @@
 <script src="{{ asset('manager/assets/js/dashboards-ecommerce.js')}}"></script>
 <script src="{{ asset('manager/assets/js/tables-datatables-basic.js') }}"></script>
 
+<script>
+    var stockage = localStorage;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 @yield('js')
 
 </body>

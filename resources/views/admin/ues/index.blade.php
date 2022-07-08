@@ -10,11 +10,8 @@
             </div>
         </div>
 
-        <div class="row mb-4">
-            <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
-                List of UEs for Semester I
-            </div>
-        </div>
+        <?php $sem_1 = $level->semesters[0]; $sem_2 = $level->semesters[1]; ?>
+
         <div class="row mb-4">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
                 <div class="card">
@@ -29,8 +26,11 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
-                            <?php $i = 1; $sem_1 = $level->semesters[0]; $sem_2 = $level->semesters[1]; ?>
+                            <?php $i = 1; ?>
                             <tbody class="table-border-bottom-0">
+                            <tr>
+                                <td colspan="5" class="text-center"><strong>UEs of Semester I</strong></td>
+                            </tr>
                             @foreach($sem_1->ues as $ue)
                                 <tr>
                                     <td>{{ $i }}</td>
@@ -51,37 +51,15 @@
                                 </tr>
                                 <?php $i++; ?>
                             @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
-                List of UEs for Semester II
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
-                <div class="card">
-                    <div class="table-responsive text-nowrap">
-                        <table class="table text-nowrap">
-                            <thead>
                             <tr>
-                                <th>N°</th>
-                                <th>Name</th>
-                                <th>Code</th>
-                                <th>Lecturer</th>
-                                <th>Actions</th>
+                                <td colspan="5" class="text-center"><strong>UEs of Semester II</strong></td>
                             </tr>
-                            </thead>
-                            <?php $i = 1; ?>
-                            <tbody class="table-border-bottom-0">
+
+                            <?php $p = 1; ?>
                             @foreach($sem_2->ues as $ue)
                                 <tr>
-                                    <td>{{ $i }}</td>
+                                    <td>{{ $p }}</td>
                                     <td>{{$ue->name}}</td>
                                     <td>{{$ue->code}}</td>
                                     <td>{{$ue->teachers[0]->fullname}}</td>
@@ -97,7 +75,7 @@
                                         </span>
                                     </td>
                                 </tr>
-                                <?php $i++; ?>
+                                <?php $p++; ?>
                             @endforeach
                             </tbody>
                         </table>

@@ -20,6 +20,7 @@ class CreateUesTable extends Migration
             $table->string("slug");
             $table->string("photo")->default("co-1.jpg");
             $table->text("description")->nullable();
+            $table->text("requirements")->nullable();
             $table->text("syllabus")->nullable();
             $table->integer("semester_id");
             $table->timestamps();

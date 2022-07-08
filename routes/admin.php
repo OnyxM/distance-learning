@@ -21,6 +21,7 @@ Route::group(['prefix' => "teachers"], function(){
     Route::get('/new', [TeacherController::class, "new"])->name("admin.teachers.new");
     Route::post('/create', [TeacherController::class, "create"])->name("admin.teachers.create");
     Route::get('/delete/{id}', [TeacherController::class, "delete"])->name("admin.teachers.delete");
+    Route::post('/get-json', [TeacherController::class, "allTeachersJson"])->name("admin.teachers.api_json");
 });
 
 Route::group(['prefix' => "system"], function(){
@@ -46,3 +47,5 @@ Route::group(['prefix' => "system"], function(){
         });
     });
 });
+
+Route::post('/check-ue', [UeController::class, "check"])->name("admin.ues.check");

@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Code</label>
-                                    <input type="text" name="code" required placeholder="ICT313" class="form-control @error('code') is-invalid @enderror" value="{{old('code')}}">
+                                    <input type="text" name="code" id="code" required placeholder="ICT313" class="form-control @error('code') is-invalid @enderror" value="{{old('code')}}">
                                 </div>
                             </div>
                         </div>
@@ -40,8 +40,10 @@
 
                         <div class="row">
                             <div class="form-group">
-                                Select Teacher / Lecturer
-                                <select name="teacher" id="teacher" class="form-control" required>
+                                Select Teacher / Lecturer <span>
+                                    <span id="refreshTeachers"><i class="menu-icon tf-icons bx bx-refresh"></i></span>
+                                </span>
+                                <select name="teacher" id="teachers" class="form-control" required>
                                     <option value="">Choose a lecturer for this Course</option>
                                     @foreach($teachers as $teacher)
                                         <option value="{{$teacher->id}}">{{$teacher->fullname}}</option>
@@ -61,11 +63,56 @@
                             </div>
                         </div>
 
-                        <input type="submit" class="btn btn-primary" value="Save">
+                        <input type="submit" class="btn btn-primary" value="Save" id="submitBtn">
                         <a href="{{ route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" class="btn btn-outline-primary">Cancel</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section("js")
+    <script>
+        $(document).on('click', "#refreshTeachers", function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'post',
+                url: "{{ route('admin.teachers.api_json') }}",
+                datatype: 'json',
+                success: function (response) {
+                    $("#teachers").empty();
+                    $("#teachers").append('<option value="">Choose a lecturer for this Course</option>');
+                   $(response.teachers).each(function(index, teacher){
+                        $("#teachers").append('<option value="'+teacher.id+'">'+teacher.fullname+'</option>')
+                    });
+                }
+            });
+        });
+
+        $("#code").keyup(function(e){
+            e.preventDefault();
+
+            let val = $(this).val();
+
+            if(val.length <= 3) return;
+
+            $.ajax({
+                type: 'post',
+                url: "{{ route('admin.ues.check') }}",
+                data: "ue="+val,
+                datatype: 'json',
+                success: function (response) {
+                    if(response.status){
+                        $("#code").removeClass('is-invalid');
+                        $("#submitBtn").removeAttr('disabled')
+                    }else{
+                        $("#code").addClass('is-invalid');
+                        $("#submitBtn").attr('disabled', 'true')
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

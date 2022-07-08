@@ -89,4 +89,11 @@ class TeacherController extends Controller
 
         return redirect()->back();
     }
+
+    public function allTeachersJson(Request $request)
+    {
+        return response()->json([
+            'teachers' => Teacher::orderBy('name', "asc")->get(),
+        ]);
+    }
 }

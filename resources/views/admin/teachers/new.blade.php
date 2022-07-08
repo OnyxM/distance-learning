@@ -41,11 +41,6 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-fullname">Full Name</label>
-                        <input type="text" class="form-control" id="basic-default-fullname" placeholder="John Doe" />
-                    </div>
-
                     <div class="account_no row d-none">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -53,9 +48,9 @@
                                 <input type="text" class="form-control text-center @error('firstname') is-invalid @enderror" placeholder="Firstname" name="firstname" value="{{ old('firstname') }}" >
                                 @error('firstname')
                                 <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                @enderror
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -64,8 +59,8 @@
                                 <input type="text" class="form-control text-center @error('lastname') is-invalid @enderror" placeholder="Lastname" name="lastname" value="{{ old('lastname') }}" >
                                 @error('lastname')
                                 <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -77,8 +72,8 @@
                                 <input type="email" class="form-control text-center @error('email') is-invalid @enderror" placeholder="email@domain.com" name="email" value="{{ old('email') }}" >
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -88,8 +83,8 @@
                                 <input type="text" class="form-control text-center @error('password') is-invalid @enderror" placeholder="Password" name="password" >
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>

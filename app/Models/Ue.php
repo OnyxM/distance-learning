@@ -15,6 +15,7 @@ class Ue extends Model
         'slug',
         'photo',
         'description',
+        'requirements',
         'syllabus',
         'semester_id',
     ];
