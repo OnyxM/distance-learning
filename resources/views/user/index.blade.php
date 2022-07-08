@@ -7,14 +7,20 @@
 
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="dashboard_stats_wrap widget-1">
-                <div class="dashboard_stats_wrap_content"><h4>607</h4> <span>My Classes</span></div>
+                <div class="dashboard_stats_wrap_content"><h4>{{ auth()->user()->classes->count() }}</h4> <span>My Classes</span></div>
                 <div class="dashboard_stats_wrap-icon"><i class="ti-location-pin"></i></div>
             </div>
         </div>
 
         <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="dashboard_stats_wrap widget-2">
-                <div class="dashboard_stats_wrap_content"><h4>102</h4> <span>My Courses</span></div>
+                <?php
+                    $courses_count = 0;
+                    foreach (auth()->user()->classes as $class) {
+                        foreach ($class->ues as $ue) $courses_count++;
+                    }
+                ?>
+                <div class="dashboard_stats_wrap_content"><h4>{{ $courses_count }}</h4> <span>My Courses</span></div>
                 <div class="dashboard_stats_wrap-icon"><i class="ti-pie-chart"></i></div>
             </div>
         </div>
