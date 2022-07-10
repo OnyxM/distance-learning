@@ -4,7 +4,9 @@
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <div class="row mb-4">
-            <div class="col-md-10 col-lg-10 mb-4 mb-md-0"></div>
+            <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
+                <strong>UEs of <a href="{{ route('admin.levels', ['field_slug' => $level->field->slug]) }}">{{ $level->field->name }}</a> - {{ $level->name }}</strong>
+            </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
                 <a href="{{ route('admin.ues.new', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" class="btn btn-primary">Add Ue</a>
             </div>
@@ -44,8 +46,8 @@
                                                 <i class="bx bx-street-view"></i>
                                             </a>
                                         </span>
-                                        <span class="text-danger">
-                                            <a href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
+                                        <span>
+                                            <a class="text-danger" href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
                                         </span>
                                     </td>
                                 </tr>
@@ -70,8 +72,8 @@
                                                 <i class="bx bx-street-view"></i>
                                             </a>
                                         </span>
-                                        <span class="text-danger">
-                                            <a href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
+                                        <span>
+                                            <a class="text-danger" href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
                                         </span>
                                     </td>
                                 </tr>

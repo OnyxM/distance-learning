@@ -5,7 +5,7 @@
 
         <div class="row mb-4">
             <div class="col-md-10 col-lg-10 mb-4 mb-md-0">
-                List of levels
+                <strong>Levels of <a href="{{ route('admin.levels', ['field_slug' => $field->slug]) }}">{{ $field->name }}</a></strong>
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
                 <a href="{{ route('admin.levels.new', ['field_slug' => $field->slug]) }}" class="btn btn-primary">Add level</a>

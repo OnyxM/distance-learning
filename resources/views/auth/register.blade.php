@@ -6,10 +6,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-md-12">
 
-                    <div class="row no-gutters position-relative log_rads">
-                        @include("auth.partial_auth_view")
+                    <div class="row no-gutters position-relative log_rads justify-content-center">
+{{--                        @include("auth.partial_auth_view")--}}
 
-                        <div class="col-lg-6 col-md-7 position-static p-4">
+                        <div class="col-lg-10 col-md-7 position-static p-4">
                             <form action="{{route('register')}}" method="POST" class="log_wraps">
                                 @csrf
                                 <a href="{{route('index')}}" class="log-logo_head"><img src="{{asset('assets/img/logo.png')}}" class="img-fluid" width="80" alt="" /></a>
