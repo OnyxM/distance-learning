@@ -84,13 +84,23 @@
                         <form action="{{route('user.lives.new')}}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label>Title</label>
+                                <label>Title <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" placeholder="Title of the livestream" name="title" required autofocus autocomplete="off">
                             </div>
 
                             <div class="form-group">
-                                <label>Start time</label>
-                                <input type="datetime-local" class="form-control" placeholder="" required name="start_time">
+                                <label>Start time <span class="text-danger">*</span></label>
+                                <input type="datetime-local" class="form-control" placeholder="" required name="start_time" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Choose concerned course <span class="text-danger">*</span></label>
+                                <select name="ue" id="ue" class="form-control" required>
+                                    <option value="">Choose UE</option>
+                                    @foreach(auth()->user()->teacher->ues as $ue)
+                                    <option value="{{ $ue->id }}">{{ $ue->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">

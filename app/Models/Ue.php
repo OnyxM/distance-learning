@@ -38,4 +38,9 @@ class Ue extends Model
     {
         return $this->hasMany(Chapter::class);
     }
+
+    public function lives()
+    {
+        return $this->hasMany(Live::class);
+    }
 }

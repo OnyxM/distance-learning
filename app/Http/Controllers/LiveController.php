@@ -43,7 +43,8 @@ class LiveController extends Controller
     {
         $this->validate($request, [
             'title' => "string",
-            'start_time' => "date"
+            'start_time' => "date",
+            'ue' => "required|exists:ues,id",
         ]);
 
         Live::create([
@@ -51,6 +52,7 @@ class LiveController extends Controller
             'titre' => $request->title,
             'date_debut' => strtotime($request->start_time),
             'user_id' => auth()->user()->id,
+            'ue_id' => $request->ue
         ]);
 
         return redirect()->back();

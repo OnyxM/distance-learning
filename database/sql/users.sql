@@ -55,7 +55,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `email_verified_at`
 (3, 'Dan', 'Account', 'dan@domain.com', '2022-07-06 10:50:26', '$2y$10$i6tDt.eYp47wfTbhnM7.ie2xy/FHNSX/RQIObenR..pTs1zl0blcK', '1995-06-25', 'HomeCity', '0', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:50:26', '2022-07-06 10:50:26'),
 (4, 'Leonel', 'MOYOU', 'moyouleonel@gmail.com', NULL, '$2y$10$5TRk.XkmhSZNtyqasgfJD..uE9LkZZYNA5ohQuO2HN3TRX9nisQBW', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:52:35', '2022-07-06 10:52:35'),
 (5, 'Alidou', 'AMINOU', 'alidouamino@gmail.com', NULL, '$2y$10$mFQt0hDW5BQFML/XCeEWueYX.ukTZnI3Mr7shKSAloh2jisaodEWC', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:54:09', '2022-07-06 10:54:09'),
-(6, 'Corneille', 'TCIHO', 'corneilletchio@gmail.com', NULL, '$2y$10$Z/A2IbVOHsRxNDy3jIuKP.JIFF/H89LS3vijAOkP7vxO3EV2.gx/2', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:54:43', '2022-07-06 10:54:43'),
+(6, 'Corneille', 'TCHIO', 'corneilletchio@gmail.com', NULL, '$2y$10$Z/A2IbVOHsRxNDy3jIuKP.JIFF/H89LS3vijAOkP7vxO3EV2.gx/2', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:54:43', '2022-07-06 10:54:43'),
 (7, 'Thomas', 'MESSI', 'thomasmessi@gmail.com', NULL, '$2y$10$nr5d3AWKzXrlIyACX6QYXeDncSEMvN9cV78N4Tk12D0.WcX.d7Kbu', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:56:12', '2022-07-06 10:56:12'),
 (8, 'Mike', 'TAPAMO', 'miketapamo@gmail.com', NULL, '$2y$10$4h4f/gkcERbpLPw4VfBX2.5dE.Bf8bG80QeuRZu/34jzMOEoQ5sey', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:57:28', '2022-07-06 10:57:28');
 

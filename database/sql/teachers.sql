@@ -44,7 +44,7 @@ CREATE TABLE `teachers` (
 INSERT INTO `teachers` (`id`, `title`, `name`, `poste`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'Ing', 'Leonel MOYOU', 'Teacher', 4, '2022-07-06 10:52:35', '2022-07-06 10:52:35'),
 (2, 'Dr', 'Alidou AMINOU', 'Teacher', 5, '2022-07-06 10:54:09', '2022-07-06 10:54:09'),
-(3, 'Ing', 'Corneille TCIHO', 'Teacher', 6, '2022-07-06 10:54:43', '2022-07-06 10:54:43'),
+(3, 'Ing', 'Corneille TCHIO', 'Teacher', 6, '2022-07-06 10:54:43', '2022-07-06 10:54:43'),
 (4, 'Dr', 'Thomas MESSI', 'Teacher', 7, '2022-07-06 10:56:12', '2022-07-06 10:56:12'),
 (5, 'Dr', 'Mike TAPAMO', 'Teacher', 8, '2022-07-06 10:57:28', '2022-07-06 10:57:28');
 

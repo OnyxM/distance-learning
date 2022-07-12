@@ -20,6 +20,7 @@ class CreateLivesTable extends Migration
             $table->string("titre");
             $table->string("date_debut");
             $table->integer("user_id");
+            $table->integer("ue_id");
             $table->timestamps();
         });
     }

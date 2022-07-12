@@ -33,13 +33,6 @@ Route::group(['prefix'=>"course"], function(){
     Route::get('/{id}-{slug_course}/{module}/{section}', [CourseController::class, "course_details_section"])->name("course.details.module.section");
 });
 
-Route::group(['prefix'=>"live"], function(){
-    Route::get('',  [LiveController::class, 'getUserLives'])->name("user.lives");
-//    Route::post('/nbre-users',  [LiveController::class, 'getNbreConectedUsers'])->name("user.lives.count_users");
-    Route::post('/new',  [LiveController::class, 'create'])->name("user.lives.new");
-    Route::post('/delete',  [LiveController::class, 'delete'])->name("user.lives.delete");
-    Route::get('{live_code}',  [LiveController::class, 'live'])->name("user.lives.assist");
-});
 
 Route::post('register-to-class', [LevelController::class, "registerToClass"])->name('field.attend');
 

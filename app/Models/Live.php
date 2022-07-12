@@ -10,13 +10,17 @@ class Live extends Model
     use HasFactory;
 
     protected $fillable=[
-        'stream_code', 'uuid', 'titre', 'date_debut', 'user_id'
+        'stream_code', 'uuid', 'titre', 'date_debut', 'user_id', 'ue_id',
     ];
 
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function ue()
+    {
+        return $this->belongsTo(Ue::class);
     }
 
     public function participants()
