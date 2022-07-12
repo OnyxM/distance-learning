@@ -33,7 +33,7 @@
                             <tr>
                                 <td colspan="5" class="text-center"><strong>UEs of Semester I</strong></td>
                             </tr>
-                            @foreach($sem_1->ues as $ue)
+                            @foreach($sem_1->ues()->orderBy('code', 'asc')->get() as $ue)
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{$ue->name}}</td>
@@ -59,7 +59,7 @@
                             </tr>
 
                             <?php $p = 1; ?>
-                            @foreach($sem_2->ues as $ue)
+                            @foreach($sem_2->ues()->orderBy('code', 'asc')->get() as $ue)
                                 <tr>
                                     <td>{{ $p }}</td>
                                     <td>{{$ue->name}}</td>

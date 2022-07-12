@@ -39,7 +39,7 @@ class ChapterController extends Controller
         if(!is_null($request->tp)){
             $tp_file= $request->tp;
             $tp_name = explode(".", $tp_file->getClientOriginalName());
-            $td_name = Str::uuid().".".end($tp_name);
+            $tp_name = Str::uuid().".".end($tp_name);
             $tp_file->move("uploads/chapters/", $tp_name);
         }
 

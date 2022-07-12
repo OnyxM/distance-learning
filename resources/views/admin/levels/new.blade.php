@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
-                Add a new level to the system
+                Add a new level to <a href="{{ route('admin.levels', ['field_slug' => $field->slug]) }}">{{ $field->name }}</a>
             </div>
         </div>
         <div class="row">
@@ -18,7 +18,7 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" name="name" required placeholder="ICT For Development" class="form-control @error('name') is-invalid @enderror">
+                                <input type="text" name="name" required placeholder="Master II" class="form-control @error('name') is-invalid @enderror">
                             </div>
                         </div>
 
