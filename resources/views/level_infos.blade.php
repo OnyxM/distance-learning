@@ -49,15 +49,7 @@
                     <!-- Overview -->
                     <div class="edu_wraper">
                         <h4 class="edu_title">Class Overview</h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                        <h6>Requirements</h6>
-                        <ul class="lists-3">
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                            <li>At vero eos et accusamus et iusto odio dignissimos ducimus</li>
-                        </ul>
+                        <p>{!! $level->description !!}</p>
                     </div>
 
                 </div>
@@ -153,16 +145,16 @@
     <section class="pt-0">
         <div class="container">
             <!-- Onclick Sidebar -->
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div id="filter-sidebar" class="filter-sidebar">
-                        <div class="filt-head">
-                            <h4 class="filt-first">Advance Options</h4>
-                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close <i class="ti-close"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="row">--}}
+{{--                <div class="col-md-12 col-lg-12">--}}
+{{--                    <div id="filter-sidebar" class="filter-sidebar">--}}
+{{--                        <div class="filt-head">--}}
+{{--                            <h4 class="filt-first">Advance Options</h4>--}}
+{{--                            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">Close <i class="ti-close"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -170,18 +162,23 @@
                         <div class="trips_wrap">
                             <div class="row m-0">
                                 @foreach($level->semesters as $sem)
-                                @foreach($sem->ues as $ue)
-                                    <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <div class="trips">
-                                            <div class="trips_icons">
-                                                <i class="ti-video-camera"></i>
-                                            </div>
-                                            <div class="trips_detail">
-                                                <h4><a href="{{route('ue.info', ['field' => $field->slug, 'level' => $level->slug, 'ue' => $ue->code])}}">{{ $ue->name }}</a></h4>
-                                            </div>
-                                        </div>
+                                    <div class="row m-1 col-12 justify-content-center">
+                                        <h6 class="text-muted">{{ $sem->name }}</h6>
                                     </div>
-                                @endforeach
+                                    <div class="row">
+                                        @foreach($sem->ues()->orderBy('code', 'asc')->get() as $ue)
+                                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                                <div class="trips">
+                                                    <div class="trips_icons">
+                                                        <i class="ti-video-camera"></i>
+                                                    </div>
+                                                    <div class="trips_detail">
+                                                        <h4><a href="{{route('ue.info', ['field' => $field->slug, 'level' => $level->slug, 'ue' => $ue->code])}}">{{ $ue->name }}</a></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
