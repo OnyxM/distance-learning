@@ -94,7 +94,7 @@
 
                                     <div class="education_block_footer">
                                         <div class="education_block_author">
-                                            <h5>{{ $ue->teachers[0]->fullname }}</h5>
+                                            <h5>{{ @$ue->teachers[0]->fullname }}</h5>
                                         </div>
                                         <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>{{ $ue->chapters()->count(). " lectures" }}</div>
                                     </div>

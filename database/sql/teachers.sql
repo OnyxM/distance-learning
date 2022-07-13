@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 06 juil. 2022 à 13:57
+-- Généré le : jeu. 14 juil. 2022 à 00:22
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.1
 
@@ -42,11 +42,14 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `title`, `name`, `poste`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Ing', 'Leonel MOYOU', 'Teacher', 4, '2022-07-06 10:52:35', '2022-07-06 10:52:35'),
-(2, 'Dr', 'Alidou AMINOU', 'Teacher', 5, '2022-07-06 10:54:09', '2022-07-06 10:54:09'),
-(3, 'Ing', 'Corneille TCHIO', 'Teacher', 6, '2022-07-06 10:54:43', '2022-07-06 10:54:43'),
-(4, 'Dr', 'Thomas MESSI', 'Teacher', 7, '2022-07-06 10:56:12', '2022-07-06 10:56:12'),
-(5, 'Dr', 'Mike TAPAMO', 'Teacher', 8, '2022-07-06 10:57:28', '2022-07-06 10:57:28');
+(1, 'Ing', 'Leonel MOYOU', 'Teacher', 4, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(2, 'Dr', 'Alidou AMINOU', 'Teacher', 5, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(3, 'Ing', 'Corneille TCHIO', 'Teacher', 6, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(4, 'Dr', 'Thomas MESSI', 'Teacher', 7, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(5, 'Dr', 'Mike TAPAMO', 'Teacher', 8, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(6, 'Dr', 'Xaveira Kimbi', 'Poste', 9, '2022-07-13 21:15:29', '2022-07-13 21:15:29'),
+(7, 'Dr', 'Valéry Monthe', 'Lecturer', 10, '2022-07-13 21:17:38', '2022-07-13 21:17:38'),
+(8, 'Ing', 'Njine Chuangueu', 'Lecturer', 11, '2022-07-13 21:19:41', '2022-07-13 21:19:41');
 
 --
 -- Index pour les tables déchargées
@@ -66,7 +69,7 @@ ALTER TABLE `teachers`
 -- AUTO_INCREMENT pour la table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

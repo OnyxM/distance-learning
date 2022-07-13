@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 06 juil. 2022 à 14:00
+-- Généré le : jeu. 14 juil. 2022 à 00:21
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.1
 
@@ -50,14 +50,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `email_verified_at`, `password`, `date_naissance`, `lieu_naissance`, `priority`, `photo`, `teacher_id`, `remember_token`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Account', 'admin@domain.com', '2022-07-06 10:50:26', '$2y$10$GwlBhNEVXG.R.Wuq7.WRZ.V5D78j.LiEQfcgPaD1FvR.P.6BNYI..', '1995-06-25', 'HomeCity', '5', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:50:26', '2022-07-06 10:50:26'),
-(2, 'User', 'Account', 'user@domain.com', '2022-07-06 10:50:26', '$2y$10$AtTKUn8WMp6UZFcRQb3LBeGKJAPjCkvGq28q5C0jfCz3LiNG67UYu', '1995-06-25', 'HomeCity', '0', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:50:26', '2022-07-06 10:50:26'),
-(3, 'Dan', 'Account', 'dan@domain.com', '2022-07-06 10:50:26', '$2y$10$i6tDt.eYp47wfTbhnM7.ie2xy/FHNSX/RQIObenR..pTs1zl0blcK', '1995-06-25', 'HomeCity', '0', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:50:26', '2022-07-06 10:50:26'),
-(4, 'Leonel', 'MOYOU', 'moyouleonel@gmail.com', NULL, '$2y$10$5TRk.XkmhSZNtyqasgfJD..uE9LkZZYNA5ohQuO2HN3TRX9nisQBW', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:52:35', '2022-07-06 10:52:35'),
-(5, 'Alidou', 'AMINOU', 'alidouamino@gmail.com', NULL, '$2y$10$mFQt0hDW5BQFML/XCeEWueYX.ukTZnI3Mr7shKSAloh2jisaodEWC', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:54:09', '2022-07-06 10:54:09'),
-(6, 'Corneille', 'TCHIO', 'corneilletchio@gmail.com', NULL, '$2y$10$Z/A2IbVOHsRxNDy3jIuKP.JIFF/H89LS3vijAOkP7vxO3EV2.gx/2', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:54:43', '2022-07-06 10:54:43'),
-(7, 'Thomas', 'MESSI', 'thomasmessi@gmail.com', NULL, '$2y$10$nr5d3AWKzXrlIyACX6QYXeDncSEMvN9cV78N4Tk12D0.WcX.d7Kbu', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:56:12', '2022-07-06 10:56:12'),
-(8, 'Mike', 'TAPAMO', 'miketapamo@gmail.com', NULL, '$2y$10$4h4f/gkcERbpLPw4VfBX2.5dE.Bf8bG80QeuRZu/34jzMOEoQ5sey', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-06 10:57:28', '2022-07-06 10:57:28');
+(1, 'Admin', 'Account', 'admin@domain.com', '2022-07-13 21:09:49', '$2y$10$rXb7NTlWNM5vFWmedafnve3JJxDjHW4wvTxPqVt4TWeQajRD4EdKS', '1995-06-25', 'HomeCity', '5', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(2, 'User', 'Account', 'user@domain.com', '2022-07-13 21:09:49', '$2y$10$wHgB9pL9fBjJ7ed4mbXA.Ou./aeL1o5tc964tBZFCC96Ck7ktzSEm', '1995-06-25', 'HomeCity', '0', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(3, 'Dan', 'Account', 'dan@domain.com', '2022-07-13 21:09:49', '$2y$10$Y.byy3vbyv7Lp712P.L42uJcpiK1WwFQMMpHRg6FCG5FywQWN1Jc.', '1995-06-25', 'HomeCity', '0', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(4, 'Leonel', 'MOYOU', 'moyouleonel@gmail.com', '2022-07-13 21:09:49', '$2y$10$N.lLgQ4z74lHLJRACS/MQeImWuveuMcpOiQJzkI5yNkLaNKkwyFLm', '1995-06-25', 'HomeCity', '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(5, 'Alidou', 'AMINOU', 'alidouamino@gmail.com', '2022-07-13 21:09:49', '$2y$10$Tm1G0y/SGCDJh1xjDKd.yeZAIlUxm0p/acGL7VGv0rRs6B7yTKOpq', '1995-06-25', 'HomeCity', '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(6, 'Corneille', 'TCHIO', 'corneilletchio@gmail.com', '2022-07-13 21:09:49', '$2y$10$pov/v/h5Il3UuW0gzSjCquU6QqvQomLkb7KbDuPozTP5i75M918Eu', '1995-06-25', 'HomeCity', '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(7, 'Thomas', 'MESSI', 'thomasmessi@gmail.com', '2022-07-13 21:09:50', '$2y$10$ioQKHUuzSmVx.T/.coHJj.5QHRQRYuWzyOEci1CK6fXUokJhflhA.', '1995-06-25', 'HomeCity', '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(8, 'Mike', 'TAPAMO', 'miketapamo@gmail.com', '2022-07-13 21:09:50', '$2y$10$lMa3U5wxBgu340u.Z68KCOxH6FPUR0a6ppvLzQBMcwT/O0GjPmEsC', '1995-06-25', 'HomeCity', '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
+(9, 'Xaveira', 'Kimbi', 'xaveirakimbi@gmail.com', NULL, '$2y$10$Uq59UR7KjadFHQIJeTinQO80s6HmVuj3l57GTFzjLfkMwsV7gP9Gu', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:15:29', '2022-07-13 21:15:29'),
+(10, 'Valéry', 'Monthe', 'valerymonthe@gmail.com', NULL, '$2y$10$QqeY4oLbwglmb3gP.38KCuhQYy6oNgeaZPglNGVBgfuFHdQGSPZIu', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:17:38', '2022-07-13 21:17:38'),
+(11, 'Njine', 'Chuangueu', 'njinechuangueu@gmail.com', NULL, '$2y$10$LoM08J..tfhnKlDWw3AfBOLTBjXbxEU2thtLyjD7OLyjue/gzGTnu', NULL, NULL, '2', 'avatar.png', NULL, NULL, NULL, '2022-07-13 21:19:41', '2022-07-13 21:19:41');
 
 --
 -- Index pour les tables déchargées
@@ -78,7 +81,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
