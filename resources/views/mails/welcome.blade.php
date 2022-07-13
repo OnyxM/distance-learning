@@ -11,8 +11,7 @@
 Hello {{$name}}, <br><br>
 
 Thanks for signing up on our platform. <br>
-You can now take a course by going to {{$courses_link}} <br>
-But if you're here to post your own courses, go to {{$new_course_link}} <br><br><br><br><br>
+You can now take a course by going to {{ route('fields.list') }} <br><br><br><br><br><br>
 
 Kind Regards, Smart Learning 237
 </body>
