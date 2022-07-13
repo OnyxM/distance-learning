@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
             'lieu_naissance' => "HomeCity",
         ]);
         User::create([
-            'firstname' => "Onyx", 'lastname' => "AcGrantcount",
+            'firstname' => "Onyx", 'lastname' => "Grant",
             'email' => "onyx.dev27@gmail.com",
             'email_verified_at' => time(),
             'password' => bcrypt("passwd1234"),
