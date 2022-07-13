@@ -17,7 +17,7 @@ class TeachersTableSeeder extends Seeder
     public function run()
     {
 
-        \DB::insert("INSERT INTO `teachers` (`id`, `title`, `name`, `poste`, `user_id`, `created_at`, `updated_at`) VALUES
+        \DB::insert("INSERT INTO teachers (id, title, name, poste, user_id, created_at, updated_at) VALUES
 (1, 'Ing', 'Leonel MOYOU', 'Teacher', 4, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
 (2, 'Dr', 'Alidou AMINOU', 'Teacher', 5, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
 (3, 'Ing', 'Corneille TCHIO', 'Teacher', 6, '2022-07-13 21:09:50', '2022-07-13 21:09:50'),
