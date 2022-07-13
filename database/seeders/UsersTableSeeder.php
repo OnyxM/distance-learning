@@ -24,10 +24,17 @@ class UsersTableSeeder extends Seeder
 //            'lieu_naissance' => "HomeCity",
 //            'priority' => User::USER_PRIORITY['admin']
 //        ]);
-//
 //        User::create([
-//            'firstname' => "User", 'lastname' => "Account",
-//            'email' => "user@domain.com",
+//            'firstname' => "Onesime", 'lastname' => "Moffo",
+//            'email' => "onesimemoffo@gmail.com",
+//            'email_verified_at' => time(),
+//            'password' => bcrypt("passwd1234"),
+//            'date_naissance' => "1995-06-25",
+//            'lieu_naissance' => "HomeCity",
+//        ]);
+//        User::create([
+//            'firstname' => "Onyx", 'lastname' => "AcGrantcount",
+//            'email' => "onyx.dev27@gmail.com",
 //            'email_verified_at' => time(),
 //            'password' => bcrypt("passwd1234"),
 //            'date_naissance' => "1995-06-25",
