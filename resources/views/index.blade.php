@@ -17,40 +17,40 @@
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <div class="banner-search shadow_high">
                         <div class="search_hero_wrapping">
-                            <div class="row">
+                            <form class="row" action="{{route('ues.search')}}#featured_courses" method="post">
+                                @csrf
 
-                                <div class="col-lg-5 col-md-5 col-sm-12 br-right">
+                                <div class="col-lg-10 col-md-5 col-sm-12 br-right">
                                     <div class="form-group">
                                         <div class="input-with-icon">
-                                            <input type="text" class="form-control" placeholder="Keyword" />
-                                            <img src="assets/img/search.svg" class="search-icon" alt="" />
+                                            <input type="text" class="form-control" placeholder="Keyword" name="name" value="{{ $filter_ues }}" required/>
+                                            <img src="{{ asset('assets/img/search.svg') }}" class="search-icon" alt="" />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-lg-5 col-md-4 col-sm-12 small-pad">
-                                    <div class="form-group">
-                                        <div class="input-with-icon">
-                                            <select id="c-category" class="form-control">
-                                                <option value="">&nbsp;</option>
-                                                <option value="1">Web Designing</option>
-                                                <option value="2">Business</option>
-                                                <option value="3">Accounting</option>
-                                                <option value="3">Development</option>
-                                                <option value="3">Art & Culture</option>
-                                            </select>
-                                            <img src="assets/img/pin.svg" class="search-icon" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                <div class="col-lg-5 col-md-4 col-sm-12 small-pad">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <div class="input-with-icon">--}}
+{{--                                            <select id="c-category" class="form-control">--}}
+{{--                                                <option value="">&nbsp;</option>--}}
+{{--                                                <option value="1">Web Designing</option>--}}
+{{--                                                <option value="2">Business</option>--}}
+{{--                                                <option value="3">Accounting</option>--}}
+{{--                                                <option value="3">Development</option>--}}
+{{--                                                <option value="3">Art & Culture</option>--}}
+{{--                                            </select>--}}
+{{--                                            <img src="assets/img/pin.svg" class="search-icon" alt="" />--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
                                 <div class="col-lg-2 col-md-3 col-sm-12 pl-0">
                                     <div class="form-group none">
-                                        <a href="#" class="btn search-btn full-width">Search</a>
+                                        <button type="submit" class="btn search-btn full-width">Search</button>
                                     </div>
                                 </div>
-
-                            </div>
+                            </form>
 
                         </div>
                     </div>
@@ -60,58 +60,11 @@
     </div>
     <!-- ============================ Hero Banner End ================================== -->
 
-    <!-- ============================ Trips Facts Start ================================== -->
-    <section class="p-0 trips_top">
+    <!-- ============================ Featured Courses Start ================================== -->
+
+    <section class="min-sec" id="featured_courses">
+    @if(count($recent_courses) > 0)
         <div class="container">
-            <div class="trips_wrap">
-                <div class="row m-0">
-
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="trips">
-                            <div class="trips_icons">
-                                <i class="ti-video-camera"></i>
-                            </div>
-                            <div class="trips_detail">
-                                <h4>100,000 online courses</h4>
-                                <p>Nor again is there anyone who loves or pursues or desires</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="trips">
-                            <div class="trips_icons">
-                                <i class="ti-medall"></i>
-                            </div>
-                            <div class="trips_detail">
-                                <h4>Expert instruction</h4>
-                                <p>Nam libero tempore, cum soluta and nobis est eligendi optio</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="trips none">
-                            <div class="trips_icons">
-                                <i class="ti-infinite"></i>
-                            </div>
-                            <div class="trips_detail">
-                                <h4>Lifetime access</h4>
-                                <p>These cases are perfectly simple and easy to distinguish</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ============================ Trips Facts Start ================================== -->
-
-    <!-- ============================ Featured Courcses Start ================================== -->
-    <section class="min-sec">
-        <div class="container">
-
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-md-12 mb-3">
                     <div class="sec-heading2">
@@ -125,42 +78,48 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 p-0">
                     <div class="arrow_slide three_slide arrow_middle">
-                        @foreach($recent_courses as $rec_course)
+                    @foreach($recent_courses as $ue)
                         <!-- Single Slide -->
-                        <div class="singles_items">
-                            <div class="education_block_grid style_2">
-                                <div class="education_block_thumb n-shadow">
-                                    <a href="course-detail.html"><img src="{{$rec_course->photo}}" class="img-fluid" alt=""></a>
-                                    <div class="cources_price">$520</div>
-                                </div>
-
-                                <div class="education_block_body">
-                                    <h4 class="bl-title"><a href="course-detail.html">{{ucwords($rec_course->title)}}</a></h4>
-                                </div>
-
-                                <div class="cources_info_style3">
-                                    <ul>
-                                        <li><i class="ti-eye mr-2"></i>8682 Views</li>
-                                        <li><i class="ti-time mr-2"></i>6h 40min</li>
-                                        <li><i class="ti-star text-warning mr-2"></i>4.7 Reviews</li>
-                                    </ul>
-                                </div>
-
-                                <div class="education_block_footer">
-                                    <div class="education_block_author">
-                                        <div class="path-img"><a href="instructor-detail.html"><img src="assets/img/user-1.jpg" class="img-fluid" alt=""></a></div>
-                                        <h5><a href="instructor-detail.html">Robert Wilson</a></h5>
+                            <div class="singles_items">
+                                <div class="education_block_grid style_2">
+                                    <div class="education_block_thumb n-shadow">
+                                        <a href="{{route('ue.info', ['field' => $ue->semester->level->field->slug, 'level' => $ue->semester->level->slug, 'ue' => $ue->code])}}"><img src="{{$ue->photo}}" class="img-fluid" alt=""></a>
+                                        <div class="cources_price">{{ number_format($ue->semester->level->pension)." XAF" }}</div>
                                     </div>
-                                    <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>54 lectures</div>
+
+                                    <div class="education_block_body">
+                                        <h3 class="bl-title">{{ strtoupper($ue->code)." - ".$ue->name}}</h3>
+                                        <h6 class="text-secondary">{{ $ue->semester->level->field->name." ".$ue->semester->level->name }}</h6>
+                                    </div>
+
+                                    <div class="education_block_footer">
+                                        <div class="education_block_author">
+                                            <h5>{{ $ue->teachers[0]->fullname }}</h5>
+                                        </div>
+                                        <div class="foot_lecture"><i class="ti-control-skip-forward mr-2"></i>{{ $ue->chapters()->count(). " lectures" }}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Single Slide -->
+
+                            <!-- Single Slide -->
                         @endforeach
+                    </div>
+                    </div>
+                </div>
+            </div>
+    @else
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 col-md-12 mb-3">
+                    <div class="">
+                        <div class="text-center">
+                            <h3>We found no results with <strong>{{ $filter_ues }}</strong></h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    @endif
     </section>
     <!-- ============================ Featured Courcses End ================================== -->
 @endsection

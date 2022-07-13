@@ -14,6 +14,6 @@ class ModulesTableSeeder extends Seeder
      */
     public function run()
     {
-        Module::factory()->count(200)->create();
+//        Module::factory()->count(200)->create();
     }
 }

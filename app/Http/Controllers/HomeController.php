@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Live;
+use App\Models\Ue;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,23 @@ class HomeController extends Controller
     public function index(){
         $data = [
             'title' => "",
-            'recent_courses' => Course::orderBy('id', "desc")->limit(5)->get(),
+            'recent_courses' => Ue::orderBy('updated_at', "desc")->limit(5)->get(),
+//            'recent_courses' => Course::orderBy('id', "desc")->limit(5)->get(),
+            'filter_ues' => "",
+        ];
+
+        return view("index", $data);
+    }
+
+    public function filterUes(Request $request)
+    {
+        $filter_name = $request->name;
+        $ues = Ue::where("name", "like", "%$filter_name%")->orWhere("code", "like", "%$filter_name%")->paginate(10);
+
+        $data = [
+            'title' => "Filter Courses - ",
+            'filter_ues' => $request->name,
+            'recent_courses' => $ues
         ];
 
         return view("index", $data);
@@ -100,10 +117,10 @@ class HomeController extends Controller
     public function lives()
     {
 //        $lives = auth()->user()->classes;
-//        dd($lives);
+
         $data =[
             'title' => "Available Lives - ",
-            'lives' => null,
+//            'lives' => null,
 //            'lives' => Live::orderBy('date_debut', 'desc')->get(),
         ];
 

@@ -30,6 +30,8 @@ Route::get('/field/{field}/{level}/{ue}', [UeController::class, 'ue_infos'])->na
 Route::get('/course/{id}-{slug_course}', [HomeController::class, "course_details"])->name("course.details")->middleware(['user']);
 Route::get('/about', [HomeController::class, "about"])->name("about");
 
+Route::post('/search', [HomeController::class, "filterUes"])->name("ues.search");
+
 
 
 
