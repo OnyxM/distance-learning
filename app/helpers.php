@@ -23,3 +23,24 @@ if (! function_exists('activeLiApp')) {
         }
     }
 }
+
+if (! function_exists('getStudentLives')) {
+    function getStudentLives($user = null) {
+
+        $user = $user ?? \Illuminate\Support\Facades\Auth::user();
+
+        $lives = [];
+
+        foreach ($user->classes as $class) {
+            foreach ($class->semesters as $semester) {
+                foreach ($semester->ues as $ue) {
+                    foreach ($ue->lives as $live) {
+                        $lives[] = $live;
+                    }
+                }
+            }
+        }
+
+        return $lives;
+    }
+}

@@ -26,7 +26,22 @@
                     @else
                         <li class=""><a href="{{route('user.index')}}"><i class="ti-user"></i> Welcome <strong>{{ auth()->user()->name }}</strong> </a></li>
                         <li><a href="{{route('class.index')}}">My Class</a></li>
-                        <li><a href="{{route('lives')}}">Lives</a></li>
+                        <li><a href="{{route('lives')}}">
+                                Lives
+                                @php $count_lives = count(getStudentLives()) @endphp
+
+                                @if($count_lives > 0)
+                                    <style>
+                                        sup {
+                                            background-color: #000000;
+                                            display: inline-block;
+                                            border-radius: 3px;
+                                            padding: 0 6px;
+                                        }
+                                    </style>
+                                <sup class="text-danger">{{ $count_lives }}</sup>
+                                @endif
+                            </a></li>
                     @endif
 {{--                        <li><a href="javascript:void(0);">Settings</a></li>--}}
                     <li class="login_click theme-bg">

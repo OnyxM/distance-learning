@@ -34,7 +34,6 @@ Route::get('/about', [HomeController::class, "about"])->name("about");
 
 
 // visio-conférence
-Route::get('/lives', [HomeController::class, "lives"])->name("lives");
 Route::get('/beta-test/{live_id}', [HomeController::class, "test"])->name("beta-test");
 Route::get('/beta-test-disconnect/{live_id}', [HomeController::class, "disconnectUserFromLive"])->name("beta-test-disconnect");
 

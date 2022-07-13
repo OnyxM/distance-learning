@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\LiveController;
 use App\Http\Controllers\UserController;
@@ -40,3 +41,5 @@ Route::group(['prefix'=>"my-classes"], function(){
     Route::get('', [ClassController::class, "index"])->name('class.index');
     Route::get('/follow_course/{ue}/{chapter?}', [CourseController::class, "follow_course"])->name('class.follow_course');
 });
+
+Route::get('/lives', [HomeController::class, "lives"])->name("lives");

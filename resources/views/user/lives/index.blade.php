@@ -30,16 +30,18 @@
                 <div class="dashboard_container_body">
                     <div class="row">
                         @foreach($lives as $live)
-                            <div class="col-lg-4 col-md-6">
+                            <div class="m-2 col-lg-4 col-md-6">
                                 <div class="education_block_grid style_2">
 
                                     <div class="education_block_thumb">
                                         <a href="#"><img src="{{asset('assets/img/course-1.jpg')}}" class="img-fluid" alt=""></a>
-                                        {{--                                    <div class="education_ratting"><i class="fa fa-star"></i>4.8 (70)</div>--}}
                                     </div>
 
                                     <div class="education_block_body">
-                                        <h4 class="bl-title"><a href="#">{{ $live->titre }}</a></h4>
+                                        <h4 class="bl-title">{{ $live->titre }}</h4>
+                                        <hr>
+                                        <h6 class="">{{ $live->ue->code . " - " . $live->ue->name }}</h6>
+                                        <hr>
                                         <h5>Date: {{ date("d M Y H:i", $live->date_debut) }}</h5>
                                     </div>
 

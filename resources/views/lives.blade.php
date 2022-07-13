@@ -35,8 +35,9 @@
 
                     <div class="row">
                         <!-- Cource Grid -->
-                        @foreach($lives as $live)
-                            <div class="col-lg-4 col-md-6">
+
+                        @foreach(getStudentLives() as $live)
+                            <div class="m-2 col-lg-4 col-md-6">
                                 <div class="education_block_grid style_2">
 
                                     <div class="education_block_thumb">
@@ -44,8 +45,11 @@
                                     </div>
 
                                     <div class="education_block_body">
-                                        <h4 class="bl-title"><a href="#">{{ $live->titre }}</a></h4>
-                                        <h5>Begins at: {{ date("d M Y H:i", $live->date_debut) }}</h5>
+                                        <h4 class="bl-title">{{ $live->titre }}</h4>
+                                        <hr>
+                                        <h6 class="">{{ $live->ue->code . " - " . $live->ue->name }}</h6>
+                                        <hr>
+                                        <h5>Date: {{ date("d M Y H:i", $live->date_debut) }}</h5>
                                     </div>
 
                                     <div class="education_block_footer">

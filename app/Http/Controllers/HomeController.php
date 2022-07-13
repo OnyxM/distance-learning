@@ -99,9 +99,12 @@ class HomeController extends Controller
 
     public function lives()
     {
+//        $lives = auth()->user()->classes;
+//        dd($lives);
         $data =[
             'title' => "Available Lives - ",
-            'lives' => Live::orderBy('date_debut', 'desc')->get(),
+            'lives' => null,
+//            'lives' => Live::orderBy('date_debut', 'desc')->get(),
         ];
 
         return view("lives", $data);
