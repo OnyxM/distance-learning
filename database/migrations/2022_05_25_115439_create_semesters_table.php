@@ -13,13 +13,13 @@ class CreateSemestersTable extends Migration
      */
     public function up()
     {
-//        Schema::create('semesters', function (Blueprint $table) {
-//            $table->id();
-//            $table->string("name");
-//            $table->string("slug");
-//            $table->integer("level_id");
-//            $table->timestamps();
-//        });
+        Schema::create('semesters', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->string("slug");
+            $table->integer("level_id");
+            $table->timestamps();
+        });
     }
 
     /**

@@ -13,14 +13,14 @@ class CreateFieldsTable extends Migration
      */
     public function up()
     {
-//        Schema::create('fields', function (Blueprint $table) {
-//            $table->id();
-//            $table->string("name");
-//            $table->string("slug");
-//            $table->string("photo")->default("co-5.jpg");
-//            $table->text("description")->nullable();
-//            $table->timestamps();
-//        });
+        Schema::create('fields', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->string("slug");
+            $table->string("photo")->default("co-5.jpg");
+            $table->text("description")->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
