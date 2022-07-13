@@ -50,5 +50,4 @@ Route::group(['prefix'=>"live"], function(){
 //    Route::post('/nbre-users',  [LiveController::class, 'getNbreConectedUsers'])->name("user.lives.count_users");
     Route::post('/new',  [LiveController::class, 'create'])->name("user.lives.new");
     Route::post('/delete',  [LiveController::class, 'delete'])->name("user.lives.delete");
-    Route::get('{live_code}',  [LiveController::class, 'live'])->name("user.lives.assist");
 });

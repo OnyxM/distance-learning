@@ -43,3 +43,4 @@ Route::group(['prefix'=>"my-classes"], function(){
 });
 
 Route::get('/lives', [HomeController::class, "lives"])->name("lives");
+Route::get('live/{live_code}',  [LiveController::class, 'live'])->name("user.lives.assist");

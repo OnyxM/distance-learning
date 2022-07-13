@@ -90,7 +90,6 @@ async function startBasicLiveStreaming() {
                 return ;
             }
 
-            alert(localStorage.getItem("is_registered"))
             if (data_type == "host") {
                 await joinLive("host", uid);
             } else {
@@ -177,7 +176,7 @@ async function startBasicLiveStreaming() {
                     localStorage.clear();
 
                     if (response.status != 200) {
-                        throw new Error("User already registered");
+                        // throw new Error("User already registered");
                         localStorage.setItem('is_registered', true)
                     }else{
                         localStorage.setItem('is_registered', false)
