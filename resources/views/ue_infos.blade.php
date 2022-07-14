@@ -67,87 +67,46 @@
                         </div>
                     </div>
 
+                @if($ue->comments()->count() > 0)
                     <!-- Reviews -->
                     <div class="list-single-main-item fl-wrap">
                         <div class="list-single-main-item-title fl-wrap">
-                            <h3>Item Reviews -  <span> 3 </span></h3>
+                            <h3>Item Reviews</h3>
                         </div>
-                        <div class="reviews-comments-wrap">
+                        <div class="">
+                            @foreach($ue->comments as $user)
                             <!-- reviews-comments-item -->
-                            <div class="reviews-comments-item">
-                                <div class="review-comments-avatar">
-                                    <img src="assets/img/user-1.jpg" class="img-fluid" alt="">
-                                </div>
+                            <div class="mb-4">
                                 <div class="reviews-comments-item-text">
-                                    <h4><a href="#">Josaph Manrty</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>27 Oct 2019</span></h4>
+                                    <h5>
+                                        <strong>{{ $user->name }}</strong>
+                                        <span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>{{ $user->pivot->created_at }}</span>
+                                    </h5>
 
-                                    <div class="listing-rating high" data-starrating2="5"><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><span class="review-count">4.9</span> </div>
                                     <div class="clearfix"></div>
-                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
-                                    <div class="pull-left reviews-reaction">
-                                        <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 12</a>
-                                        <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                        <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
-                                    </div>
+                                    <p>{{ $user->pivot->comment }}</p>
                                 </div>
                             </div>
                             <!--reviews-comments-item end-->
-
-                            <!-- reviews-comments-item -->
-                            <div class="reviews-comments-item">
-                                <div class="review-comments-avatar">
-                                    <img src="assets/img/user-2.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="reviews-comments-item-text">
-                                    <h4><a href="#">Rita Chawla</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>2 Nov May 2019</span></h4>
-
-                                    <div class="listing-rating mid" data-starrating2="5"><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star"></i><span class="review-count">3.7</span> </div>
-                                    <div class="clearfix"></div>
-                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
-                                    <div class="pull-left reviews-reaction">
-                                        <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 12</a>
-                                        <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                        <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--reviews-comments-item end-->
-
-                            <!-- reviews-comments-item -->
-                            <div class="reviews-comments-item">
-                                <div class="review-comments-avatar">
-                                    <img src="assets/img/user-3.jpg" class="img-fluid" alt="">
-                                </div>
-                                <div class="reviews-comments-item-text">
-                                    <h4><a href="#">Adam Wilsom</a><span class="reviews-comments-item-date"><i class="ti-calendar theme-cl"></i>10 Nov 2019</span></h4>
-
-                                    <div class="listing-rating good" data-starrating2="5"><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star active"></i><i class="ti-star"></i> <span class="review-count">4.2</span> </div>
-                                    <div class="clearfix"></div>
-                                    <p>" Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris. "</p>
-                                    <div class="pull-left reviews-reaction">
-                                        <a href="#" class="comment-like active"><i class="ti-thumb-up"></i> 12</a>
-                                        <a href="#" class="comment-dislike active"><i class="ti-thumb-down"></i> 1</a>
-                                        <a href="#" class="comment-love active"><i class="ti-heart"></i> 07</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--reviews-comments-item end-->
-
+                            @endforeach
                         </div>
                     </div>
+                @endif
 
                     @php
                         $user_classes = [];
                     @endphp
                     @auth <?php $user_classes = auth()->user()->classes()->pluck('levels.id')->toArray(); ?> @endauth
 
-                    @if(!in_array($level->id, $user_classes))
+                    @if(in_array($level->id, $user_classes))
                     <!-- Submit Reviews -->
+                    @if(!in_array(auth()->user()->id, $ue->comments()->pluck('user_id')->toArray()))
                     <div class="edu_wraper">
                         <h4 class="edu_title">Submit Reviews</h4>
                         <div class="review-form-box form-submit">
-                            <form method="post">
+                            <form method="post" action="{{ route('ue.post_comment') }}" id="postComment">
                                 @csrf
+                                <input type="hidden" name="ue" value="{{ $ue->code }}" required>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
                                         <div class="form-group">
@@ -166,7 +125,7 @@
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Review</label>
-                                            <textarea class="form-control ht-140" placeholder="Review"></textarea>
+                                            <textarea class="form-control ht-140" placeholder="Review" name="review" required></textarea>
                                         </div>
                                     </div>
 
@@ -179,6 +138,7 @@
                             </form>
                         </div>
                     </div>
+                    @endif
                     @endif
 
                 </div>

@@ -83,4 +83,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Level::class);
     }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Ue::class);
+    }
 }

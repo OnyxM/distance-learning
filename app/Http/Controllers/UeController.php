@@ -232,4 +232,32 @@ class UeController extends Controller
             'status' => !$exists
         ]);
     }
+
+    public function comment(Request $request)
+    {
+        $this->validate($request, [
+            'ue' => "required|exists:ues,code",
+            'review' => "required|min:20"
+        ]);
+
+        $ue = Ue::whereCode($request->ue)->first();
+        if(is_null($ue)){
+            abort(404);
+        }
+
+        $user_classes = auth()->user()->classes()->pluck('levels.id')->toArray();
+
+        // il n'a pas accès à ce cours donc...
+        if(!in_array($ue->semester->level->id, $user_classes)){
+            auth()->logout();
+            return redirect()->route('login');
+        }
+
+        $ue->comments()->attach(auth()->user()->id, [
+            'comment' => $request->review
+        ]);
+
+        return redirect()->back();
+
+    }
 }

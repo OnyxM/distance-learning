@@ -43,4 +43,9 @@ class Ue extends Model
     {
         return $this->hasMany(Live::class);
     }
+
+    public function comments()
+    {
+        return $this->belongsToMany(User::class)->withPivot("comment", "created_at")->withTimestamps();
+    }
 }

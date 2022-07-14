@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\LiveController;
+use App\Http\Controllers\UeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +45,4 @@ Route::group(['prefix'=>"my-classes"], function(){
 
 Route::get('/lives', [HomeController::class, "lives"])->name("lives");
 Route::get('live/{live_code}',  [LiveController::class, 'live'])->name("user.lives.assist");
+Route::post('ue/post-comment', [UeController::class, "comment"])->name("ue.post_comment");
