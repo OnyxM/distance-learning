@@ -83,6 +83,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 p-0">
                     <div class="arrow_slide three_slide arrow_middle">
                     @foreach($recent_courses as $ue)
+                        @php $ue = \App\Models\Ue::find($ue->id) @endphp
                         <!-- Single Slide -->
                             <div class="singles_items">
                                 <div class="education_block_grid style_2">

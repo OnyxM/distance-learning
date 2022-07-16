@@ -8,6 +8,7 @@ use App\Models\Live;
 use App\Models\Ue;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,9 +26,21 @@ class HomeController extends Controller
     public function filterUes(Request $request)
     {
         $filter_name = $request->name;
-        $ues = Ue::where(strtolower("name"), "like", strtolower("%%$filter_name%%"))
-                // ->orWhere(strtolower("code"), "like", strtolower("%$filter_name%"))
-                ->paginate(20);
+
+//        $query = DB::table("ues");
+//        $query->whereRaw('LOWER(name) LIKE ?', ['%'.$filter_name.'%'])->get();
+//
+//        dd($query);
+
+//        $ues = Ue::where(LOWER(name), "like", strtolower("%%$filter_name%%"))
+//                // ->orWhere(strtolower("code"), "like", strtolower("%$filter_name%"))
+//                ->paginate(20);
+
+        $ues = DB::select("select *
+                            from ues
+                            where LOWER(name) LIKE LOWER('%$filter_name%');");
+
+        // dd($ues);
 
         $data = [
             'title' => "Filter Courses - ",
