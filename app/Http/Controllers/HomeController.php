@@ -27,20 +27,9 @@ class HomeController extends Controller
     {
         $filter_name = $request->name;
 
-//        $query = DB::table("ues");
-//        $query->whereRaw('LOWER(name) LIKE ?', ['%'.$filter_name.'%'])->get();
-//
-//        dd($query);
-
-//        $ues = Ue::where(LOWER(name), "like", strtolower("%%$filter_name%%"))
-//                // ->orWhere(strtolower("code"), "like", strtolower("%$filter_name%"))
-//                ->paginate(20);
-
         $ues = DB::select("select *
                             from ues
                             where LOWER(name) LIKE LOWER('%$filter_name%');");
-
-        // dd($ues);
 
         $data = [
             'title' => "Filter Courses - ",
