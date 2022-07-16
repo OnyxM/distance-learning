@@ -69,7 +69,11 @@
                 <div class="col-lg-12 col-md-12 mb-3">
                     <div class="sec-heading2">
                         <div class="sec-left">
+                            @if($filter_ues == "")
                             <h3>Featured Courses</h3>
+                            @else
+                                <h3>We found {{ count($recent_courses) }} result(s) with <strong>{{ $filter_ues }}</strong></h3>
+                            @endif
                         </div>
                     </div>
                 </div>
