@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function filterUes(Request $request)
     {
         $filter_name = $request->name;
-        $ues = Ue::where("name", "like", strtolower("%$filter_name%"))->orWhere("code", "like", "%$filter_name%")->paginate(10);
+        $ues = Ue::where("name", "like", strtolower("%$filter_name"))->orWhere("code", "like", "%$filter_name%")->paginate(10);
 
         $data = [
             'title' => "Filter Courses - ",
