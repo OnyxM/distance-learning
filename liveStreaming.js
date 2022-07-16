@@ -58,20 +58,21 @@ async function startBasicLiveStreaming() {
         // récupérer les infos des remote users et afficher ...
         async function publishRemoteUsers(rtc){
             for (const tmp_user of rtc.client.remoteUsers) {
+                alert("tmp_user");
                  if(tmp_user.hasVideo){
                      await rtc.client.subscribe(tmp_user, "video");
-                    // Dynamically create a container in the form of a DIV element for playing the remote video track.
-                    const remotePlayerContainerTemp = document.createElement("div");
-                    // Specify the ID of the DIV container. You can use the `uid` of the remote user.
-                    remotePlayerContainerTemp.id = tmp_user.uid.toString();
-                    remotePlayerContainerTemp.style.width = "240px";
-                    remotePlayerContainerTemp.style.height = "240px";
-                    remotePlayerContainerTemp.classList.add('m-2');
-                    remotePlayerContainerTemp.style.transform = "rotateY(180deg)";
-                    document.getElementById("users_live").append(remotePlayerContainerTemp);
+                     // Dynamically create a container in the form of a DIV element for playing the remote video track.
+                     const remotePlayerContainerTemp = document.createElement("div");
+                     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
+                     remotePlayerContainerTemp.id = tmp_user.uid.toString();
+                     remotePlayerContainerTemp.style.width = "240px";
+                     remotePlayerContainerTemp.style.height = "240px";
+                     remotePlayerContainerTemp.classList.add('m-2');
+                     remotePlayerContainerTemp.style.transform = "rotateY(180deg)";
+                     document.getElementById("users_live").append(remotePlayerContainerTemp);
 
-                    tmp_user.videoTrack.play(remotePlayerContainerTemp);
-                }
+                     tmp_user.videoTrack.play(remotePlayerContainerTemp);
+                 }
 
                  if(tmp_user.hasAudio){
                      await rtc.client.subscribe(tmp_user, "audio");
