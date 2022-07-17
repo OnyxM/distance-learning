@@ -43,6 +43,7 @@ Route::group(['prefix' => "system"], function(){
                 Route::get('/new', [UeController::class, "new"])->name("admin.ues.new");
                 Route::post('/create', [UeController::class, "create"])->name("admin.ues.create");
                 Route::get('/delete/{id}', [UeController::class, "delete"])->name("admin.ues.delete");
+                Route::post('/bulk-upload', [UeController::class, "uploadBulkUes"])->name("admin.ues.bulk_create");
             });
         });
     });

@@ -8,7 +8,7 @@
                 <strong>UEs of <a href="{{ route('admin.levels', ['field_slug' => $level->field->slug]) }}">{{ $level->field->name }}</a> - {{ $level->name }}</strong>
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="javascript:void(0);" class="btn btn-outline-primary">Bulk add</a>
+                <a href="javascript:void(0);" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addBulkUesModal">Bulk add</a>
                 <a href="{{ route('admin.ues.new', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" class="btn btn-primary">Add Ue</a>
             </div>
         </div>
@@ -87,4 +87,49 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="addBulkUesModal" tabindex="-1" style="display: none;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered1 modal-simple modal-add-new-cc">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center mb-4">
+                        <h3>Add Bulk Ues</h3>
+                    </div>
+                    <form id="addNewCCForm" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('admin.ues.bulk_create', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" method="POST"enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="field" value="{{ $field->id }}" required>
+                        <input type="hidden" name="level" value="{{ $level->id }}" required>
+
+                        <div class="col-12 fv-plugins-icon-container">
+                            <label class="form-label w-100" for="modalUesFile">Choose csv file</label>
+                            <div class="input-group input-group-merge has-validation">
+                                <input id="modalUesFile" name="ues_file" class="form-control credit-card-mask" type="file" placeholder="1356 3215 6548 7898" aria-describedby="modalAddCard2" required>
+                                <span class="input-group-text cursor-pointer p-1" id="modalAddCard2"><span class="card-type"></span></span>
+                            </div><div class="fv-plugins-message-container invalid-feedback"></div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input" name="clear_old_ues">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                  </span>
+                                <span class="switch-label">Clear old ues?</span>
+                            </label>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary me-sm-3 me-1 mt-3">Submit</button>
+                            <button type="reset" class="btn btn-label-secondary btn-reset mt-3" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
+                        </div>
+                        <div></div><input type="hidden"></form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+
+{{--admin.ues.bulk_create--}}

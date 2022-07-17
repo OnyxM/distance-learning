@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UesImport;
 use App\Models\Field;
 use App\Models\Level;
 use App\Models\Teacher;
 use App\Models\Ue;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UeController extends Controller
 {
@@ -259,5 +261,29 @@ class UeController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function uploadBulkUes(Request $request)
+    {
+        $field = Field::find($request->field);
+        if(is_null($field)){
+            return redirect()->route('admin.fields');
+        }
+        $level = Level::find($request->level);
+        if(is_null($level)){
+            return redirect()->route('admin.levels', ['field_slug']);
+        }
+
+        if($request->clear_old_ues=="on"){
+            foreach ($level->semesters as $semester) {
+                foreach ($semester->ues as $ue) {
+                    $ue->delete();
+                }
+            }
+        }
+
+        Excel::import(new UesImport($level), $request->ues_file);
+
+        return redirect()->back()->with('success', 'User Imported Successfully');
     }
 }
