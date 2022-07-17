@@ -11,9 +11,9 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "tYNS2yK+J6+akFpJF+A",
+    channel: "yLhrao8f56Sbt5URjoFh",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IAC7h485M8yzLpgN3yLhrao8f56Sbt5URjoFh3hrmRm55stmF9oAAAAAEAAh21UYnDjQYgEAAQCaONBi",
+    token: "0064495024a2d414911932996a968fc8559IAC5Kc4lXxExUaDGitSny+I7f/zOpozJGQ2CCYDJVk9v0E7yFjAAAAAAEACPl0pW1/7TYgEAAQDT/tNi",
     // Uid
     uid: 123456789,
 };
@@ -56,22 +56,23 @@ async function startBasicLiveStreaming() {
         }
 
         // récupérer les infos des remote users et afficher ...
+        //APPELER CETTE FONCTION CHAQUE 5 SEC POUR VOIR SI CELA VA RESOUDRE LE PROBLEME
         async function publishRemoteUsers(rtc){
             for (const tmp_user of rtc.client.remoteUsers) {
                  if(tmp_user.hasVideo){
                      await rtc.client.subscribe(tmp_user, "video");
-                    // Dynamically create a container in the form of a DIV element for playing the remote video track.
-                    const remotePlayerContainerTemp = document.createElement("div");
-                    // Specify the ID of the DIV container. You can use the `uid` of the remote user.
-                    remotePlayerContainerTemp.id = tmp_user.uid.toString();
-                    remotePlayerContainerTemp.style.width = "240px";
-                    remotePlayerContainerTemp.style.height = "240px";
-                    remotePlayerContainerTemp.classList.add('m-2');
-                    remotePlayerContainerTemp.style.transform = "rotateY(180deg)";
-                    document.getElementById("users_live").append(remotePlayerContainerTemp);
+                     // Dynamically create a container in the form of a DIV element for playing the remote video track.
+                     const remotePlayerContainerTemp = document.createElement("div");
+                     // Specify the ID of the DIV container. You can use the `uid` of the remote user.
+                     remotePlayerContainerTemp.id = tmp_user.uid.toString();
+                     remotePlayerContainerTemp.style.width = "240px";
+                     remotePlayerContainerTemp.style.height = "240px";
+                     remotePlayerContainerTemp.classList.add('m-2');
+                     remotePlayerContainerTemp.style.transform = "rotateY(180deg)";
+                     document.getElementById("users_live").append(remotePlayerContainerTemp);
 
-                    tmp_user.videoTrack.play(remotePlayerContainerTemp);
-                }
+                     tmp_user.videoTrack.play(remotePlayerContainerTemp);
+                 }
 
                  if(tmp_user.hasAudio){
                      await rtc.client.subscribe(tmp_user, "audio");
