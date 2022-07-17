@@ -56,9 +56,9 @@ async function startBasicLiveStreaming() {
         }
 
         // récupérer les infos des remote users et afficher ...
+        //APPELER CETTE FONCTION CHAQUE 5 SEC POUR VOIR SI CELA VA RESOUDRE LE PROBLEME
         async function publishRemoteUsers(rtc){
             for (const tmp_user of rtc.client.remoteUsers) {
-                alert("tmp_user");
                  if(tmp_user.hasVideo){
                      await rtc.client.subscribe(tmp_user, "video");
                      // Dynamically create a container in the form of a DIV element for playing the remote video track.

@@ -8,6 +8,7 @@
                 <strong>UEs of <a href="{{ route('admin.levels', ['field_slug' => $level->field->slug]) }}">{{ $level->field->name }}</a> - {{ $level->name }}</strong>
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
+                <a href="javascript:void(0);" class="btn btn-outline-primary">Bulk add</a>
                 <a href="{{ route('admin.ues.new', ['field_slug' => $field->slug, 'level_slug' => $level->slug]) }}" class="btn btn-primary">Add Ue</a>
             </div>
         </div>
