@@ -37,19 +37,14 @@
                             @foreach($sem_1->ues()->orderBy('code', 'asc')->get() as $ue)
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{$ue->name}}</td>
-                                    <td>{{$ue->code}}</td>
-                                    <td>{{$ue->teachers[0]->fullname}}</td>
+                                    <td>{{ $ue->name }}</td>
+                                    <td>{{ $ue->code }}</td>
+                                    <td>{{ @$ue->teachers[0]->fullname }}</td>
 
                                     <td>
-                                        <span class="text-info">
-                                            <a href="javascript:void(0);">
-                                                <i class="bx bx-street-view"></i>
-                                            </a>
-                                        </span>
-                                        <span>
-                                            <a class="text-danger" href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
-                                        </span>
+                                        <a href="{{ route('ue.info', ['field'=>$field->slug, 'level'=>$level->slug, 'ue'=>$ue->code]) }}" target="_blank" ref="noopener"><i class="bx bx-book"></i></a>
+                                        <a class="text-primary" href="{{ route('admin.ues.edit', ['field_slug' =>$field->slug, 'level_slug' => $level->slug, 'id' => $ue->id]) }}"><i class="bx bx-edit"></i></a>
+                                        <a class="text-danger" href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
@@ -63,19 +58,14 @@
                             @foreach($sem_2->ues()->orderBy('code', 'asc')->get() as $ue)
                                 <tr>
                                     <td>{{ $p }}</td>
-                                    <td>{{$ue->name}}</td>
-                                    <td>{{$ue->code}}</td>
-                                    <td>{{$ue->teachers[0]->fullname}}</td>
+                                    <td>{{ $ue->name }}</td>
+                                    <td>{{ $ue->code }}</td>
+                                    <td>{{ @$ue->teachers[0]->fullname }}</td>
 
                                     <td>
-                                        <span class="text-info">
-                                            <a href="javascript:void(0);">
-                                                <i class="bx bx-street-view"></i>
-                                            </a>
-                                        </span>
-                                        <span>
-                                            <a class="text-danger" href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
-                                        </span>
+                                        <a href="{{ route('ue.info', ['field'=>$field->slug, 'level'=>$level->slug, 'ue'=>$ue->code]) }}" target="_blank" ref="noopener"><i class="bx bx-book"></i></a>
+                                        <a class="text-primary" href="{{ route('admin.ues.edit', ['field_slug' =>$field->slug, 'level_slug' => $level->slug, 'id' => $ue->id]) }}"><i class="bx bx-edit"></i></a>
+                                        <a class="text-danger" href="{{ route('admin.levels.delete', ['field_slug' =>$field->slug ,'id' => $level->id]) }}"><i class="bx bx-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php $p++; ?>

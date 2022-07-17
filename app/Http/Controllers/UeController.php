@@ -277,6 +277,7 @@ class UeController extends Controller
         if($request->clear_old_ues=="on"){
             foreach ($level->semesters as $semester) {
                 foreach ($semester->ues as $ue) {
+                    $ue->teachers()->detach();
                     $ue->delete();
                 }
             }

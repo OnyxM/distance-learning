@@ -23,15 +23,22 @@ class UesImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         if(in_array($row['semester'], [1,2])){ // Si le num du semestre n'est pas bon on passe
-            return new Ue([
-                'name' => $row['name'],
-                'slug' => Str::slug($row['name']),
-                'code' => $row['code'],
-                'description' => $row['description'],
-                'requirements' => $row['requirements'],
-                'syllabus' => $row['syllabus'],
-                'semester_id' => $this->level->semesters[$row['semester']-1]->id,
-            ]);
+
+            // Si ce code existe déjà, on passe
+            $code = $row['code'];
+            $ue = Ue::whereCode($code)->first();
+
+            if(is_null($ue)){
+                return new Ue([
+                    'name' => $row['name'],
+                    'slug' => Str::slug($row['name']),
+                    'code' => $code,
+                    'description' => $row['description'],
+                    'requirements' => $row['requirements'],
+                    'syllabus' => $row['syllabus'],
+                    'semester_id' => $this->level->semesters[$row['semester']-1]->id,
+                ]);
+            }
         }
     }
 }
