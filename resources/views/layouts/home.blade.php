@@ -15,6 +15,7 @@
 
     <!-- Custom Color Option -->
     <link href="{{asset('assets/css/colors.css')}}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('css')
 
@@ -227,8 +228,7 @@
                     </div>
 
                     <div class="text-center">
-                        <p class="mt-3"><i class="ti-user mr-1"></i>Already Have An Account? <a href="#" class="link">Go
-                                For LogIn</a></p>
+                        <p class="mt-3"><i class="ti-user mr-1"></i>Already Have An Account? <a href="#" class="link">Go For LogIn</a></p>
                     </div>
                 </div>
             </div>
@@ -254,6 +254,13 @@
 <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
 <script src="{{asset('assets/js/counterup.min.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+<script>
+    let loader = '<span class="loader"><i class="spinner-grow" role="status"></i></span>';
+
+    $.ajaxSetup({
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+    });
+</script>
 @yield("js")
 <!-- ============================================================== -->
 <!-- This page plugins -->

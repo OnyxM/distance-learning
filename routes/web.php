@@ -4,7 +4,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LevelController;
-use App\Http\Controllers\MoMoController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UeController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,4 +43,4 @@ Route::get('/beta-test-disconnect/{live_id}', [HomeController::class, "disconnec
 Auth::routes();
 
 
-Route::get('test-momo', [MoMoController::class, "test"]);
+//Route::get('test', [\App\Http\Controllers\TransactionController::class, "test"]);

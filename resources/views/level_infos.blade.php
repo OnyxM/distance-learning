@@ -77,12 +77,16 @@
                                     @csrf
                                     <input type="hidden" name="field" value="{{ $field->slug }}" required>
                                     <input type="hidden" name="level" value="{{ $level->slug }}" required>
+                                    @auth
                                     <button data-toggle="modal" data-target="#payForLevel" type="button" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
+                                    @else
+                                        <a href="{{route('login')}}" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></a>
+                                    @endif
                                 </form>
 
                                 <div class="modal fade" id="payForLevel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <form class="modal-content" action="{{ route('chapter.delete') }}" method="POST">
+                                        <form class="modal-content" action="{{ route('init-payment') }}" method="POST" id="placePaymentForm">
                                             @csrf
                                             <input type="hidden" name="field" value="{{$field->id}}" required>
                                             <input type="hidden" name="level" value="{{$level->id}}" required>
@@ -94,13 +98,15 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label>You are about to pay {{number_format($level->pension)}} XAF to attend this class</label>
+                                                    <h3>{{ $field->name. " - ". $level->name }}</h3>
+                                                    <label>You are about to pay <strong>{{ number_format($level->pension) }} XAF</strong> to attend this class</label><br>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Phone Number <sup class="text-danger">*</sup></label>
                                                     <input type="text" class="form-control" name="phone" required value="" placeholder="678955362">
                                                 </div>
                                             </div>
+                                            <div class="error-container text-center" id="info-container">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis dolor eligendi impedit, omnis praesentium sit. Animi, consequatur dignissimos eaque fuga libero magnam mollitia nesciunt quasi, quod sequi veritatis, voluptatum.</div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Pay</button>
@@ -191,4 +197,60 @@
         </div>
     </section>
     <!-- ============================ Full Width Courses End ================================== -->
+@endsection
+
+@section("js")
+    <script>
+        $(document).on('submit', "#placePaymentForm", function(evt){
+            evt.preventDefault();
+
+            let fa = $(this),
+                infoContainer = $("#info-container");
+
+            infoContainer.removeClass("text-danger"); infoContainer.removeClass("text-success"); infoContainer.empty();
+
+            infoContainer.html(loader);
+
+            $.ajax({
+                type: 'post',
+                url: fa.attr('action'),
+                data: fa.serialize(),
+                datatype: 'json',
+                statusCode: {
+                    422: function(e){
+                        infoContainer.empty();
+                        let errors = e.responseJSON.message;
+
+                        infoContainer.addClass("text-danger");
+                        infoContainer.html(errors);
+
+                    },
+                    200: function(response){
+                        infoContainer.empty();
+                        infoContainer.addClass("text-success");
+                        infoContainer.html(response.message);
+
+                        yourFunction(response.paymentId);
+                    },
+                }
+            });
+        });
+
+        function yourFunction(paymentId){
+
+            $.ajax({
+                type: 'post',
+                url: "{{ route('check-payment') }}",
+                data: "payment_id="+paymentId,
+                datatype: 'json',
+                statusCode: {
+                    200: function(response){
+                        console.log(response);
+                    },
+                }
+            });
+
+            setTimeout(yourFunction(paymentId), 5000);
+        }
+    </script>
 @endsection
