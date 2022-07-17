@@ -46,7 +46,7 @@ async function startBasicLiveStreaming() {
             });
         }
 
-        async function userUpublished(){
+        async function userUnpublished(){
             rtc.client.on("user-unpublished", user => {
                 // Get the dynamically created DIV container.
                 const remotePlayerContainer = document.getElementById(user.uid);
@@ -139,7 +139,8 @@ async function startBasicLiveStreaming() {
             rtc.localVideoTrack.play(localPlayerContainer);
 
             await userPublished();
-            await userUpublished();
+
+            await userUnpublished();
         }
 
         document.getElementById("leave").onclick = async function () {
@@ -200,6 +201,14 @@ async function startBasicLiveStreaming() {
                 }
             });
         }
+
+        async function yourFunction(){
+            setTimeout(yourFunction, 2000);
+            console.log('hey')
+            await publishRemoteUsers(rtc);
+        }
+
+        yourFunction();
     };
 }
 
