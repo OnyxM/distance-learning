@@ -287,4 +287,66 @@ class UeController extends Controller
 
         return redirect()->back()->with('success', 'User Imported Successfully');
     }
+
+    public function edit($field_slug, $level_slug, $ue_slug)
+    {
+        $field = Field::whereSlug($field_slug)->first();
+        if(is_null($field)){
+            abort(404);
+        }
+        $level = Level::whereSlug($level_slug)->first();
+        if(is_null($level)){
+            abort(404);
+        }
+        $ue = Ue::whereSlug($ue_slug)->first();
+        if(is_null($ue)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "Upade an ue - ",
+            'field' => $field,
+            'level' => $level,
+            'ue' => $ue,
+            'teachers' => Teacher::all(),
+        ];
+
+        return view("admin.ues.edit", $data);
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+            'field' => "required|exists:fields,id",
+            'level' => "required|exists:levels,id",
+            'ue' => "required|exists:ues,id",
+            'name' => "required",
+            'teacher' => "required",
+            'semester_id' => "required|exists:semesters,id",
+        ]);
+
+        $field = Field::find($request->field);
+        if(is_null($field)){
+            return redirect()->route('admin.fields');
+        }
+        $level = Level::find($request->level);
+        if(is_null($level)){
+            return redirect()->route('admin.levels', ['field_slug']);
+        }
+
+        $ue = Ue::find($request->ue);
+
+        $ue->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+            'code' => $request->code,
+            'description' => $request->description,
+            'semester_id' => $request->semester_id,
+        ]);
+
+        $ue->teachers()->detach();
+        $ue->teachers()->attach($request->teacher);
+
+        return redirect()->route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug]);
+    }
 }
