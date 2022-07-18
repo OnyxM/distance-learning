@@ -9,49 +9,10 @@ use Illuminate\Support\Str;
 
 class TransactionController extends Controller
 {
-//    public function test()
-//    {
-//        $pay_id = "22071800163968454442";
-//
-//        $trans = Transaction::where(['payment_id'=>$request->payment_id, 'status'=>"REQUEST_ACCEPTED"])->first();
-//
-//        if(is_null($trans)){
-//            return response()->json([
-//                'message' => "Payment not found",
-//            ]);
-//        }
-//
-//        $check_payment = PaymentController::checkPayment($pay_id);
-//
-//        if($check_payment->status == "failed"){
-//            $status = "failed";
-//            $message = "Payment failed";
-//        }else if($check_payment->status == "canceled"){
-//            $status = "CANCELED";
-//            $message = "Payment canceled";
-//        }else if($check_payment->status == "success"){
-//            $status = "SUCCESS";
-//            $message = "Payment succeeded";
-//
-//            // on va activer le level pour cet user
-//            $user = $trans->user;
-//            $level = $trans->level;
-//
-//            if(!in_array($user->id, $level->participants()->pluck('user_id')->toArray())){
-//                $level->participants()->attach($user->id, ['registration_date' => time()]);
-//            }
-//        }else{
-//            $status = "FAILED";
-//            $message = "Unknown error. Please try again later or contact admin...";
-//        }
-//
-//        $trans->status = $status;
-//        $trans->save();
-//
-//        return response()->json([
-//            'message' => $message
-//        ]);
-//    }
+    public function test($id)
+    {
+        return PaymentController::checkPayment($id);
+    }
 
     public function initPayment(Request $request)
     {
@@ -98,13 +59,20 @@ class TransactionController extends Controller
         // On check le statut chez Monetbill
         $check_payment = PaymentController::checkPayment($request->payment_id);
 
-        if($check_payment->status == "failed"){
+        //dd($check_payment);
+
+        $check_payment_status = json_decode($check_payment->content())->status; // hum ...
+
+        if($check_payment_status == "failed"){
             $status = "failed";
             $message = "Payment failed";
-        }else if($check_payment->status == "canceled"){
+        }else if($check_payment_status == "canceled"){
             $status = "CANCELED";
             $message = "Payment canceled";
-        }else if($check_payment->status == "success"){
+        }else if($check_payment_status == "pending"){
+            $status = "REQUEST_ACCEPTED";
+            $message = "Payment pending";
+        }else if($check_payment_status == "success"){
             $status = "SUCCESS";
             $message = "Payment succeeded";
 

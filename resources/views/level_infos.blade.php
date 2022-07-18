@@ -103,10 +103,10 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Phone Number <sup class="text-danger">*</sup></label>
-                                                    <input type="text" class="form-control" name="phone" required value="" placeholder="678955362">
+                                                    <input type="text" class="form-control text-center" name="phone" required placeholder="699508197">
                                                 </div>
                                             </div>
-                                            <div class="error-container text-center" id="info-container">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis dolor eligendi impedit, omnis praesentium sit. Animi, consequatur dignissimos eaque fuga libero magnam mollitia nesciunt quasi, quod sequi veritatis, voluptatum.</div>
+                                            <div class="error-container text-center" id="info-container"></div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Pay</button>
@@ -227,10 +227,12 @@
                     },
                     200: function(response){
                         infoContainer.empty();
-                        infoContainer.addClass("text-success");
+                        infoContainer.addClass("text-primary");
                         infoContainer.html(response.message);
 
-                        yourFunction(response.paymentId);
+                        if(response.paymentId != undefined){
+                            yourFunction(response.paymentId);
+                        }
                     },
                 }
             });
@@ -245,12 +247,32 @@
                 datatype: 'json',
                 statusCode: {
                     200: function(response){
-                        console.log(response);
+                        if(response.message == "Payment pending"){
+                            setTimeout(yourFunction(paymentId), 5000);
+                        }
+                        else if(response.message == "Payment succeeded"){
+                            let infoContainer = $("#info-container");
+
+                            infoContainer.empty();
+                            infoContainer.addClass("text-success");
+                            infoContainer.removeClass("text-danger");
+                            infoContainer.html(response.message);
+
+                            setTimeout(location.reload(), 5000);
+                        }
+                        else {
+                            let infoContainer = $("#info-container");
+
+                            infoContainer.empty();
+                            infoContainer.addClass("text-danger");
+                            infoContainer.removeClass("text-success");
+                            infoContainer.html(response.message);
+
+                            setTimeout(location.reload(), 5000);
+                        }
                     },
                 }
             });
-
-            setTimeout(yourFunction(paymentId), 5000);
         }
     </script>
 @endsection

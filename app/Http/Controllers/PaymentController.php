@@ -42,7 +42,7 @@ class PaymentController extends Controller
     public static function checkPayment($payment_id)
     {
         $data = array(
-            'paymentId' => $payment_id
+            'paymentId' => "$payment_id"
         );
 
         $ch = curl_init();
@@ -66,10 +66,10 @@ class PaymentController extends Controller
                 // Successful payment
                 $status = "success";
             }
-            elseif ($status == - 1)
+            elseif ($status == -1)
             {
                 // Transaction cancelled
-                $status = "cancelled";
+                $status = "canceled";
             }
             else
             {
@@ -79,5 +79,21 @@ class PaymentController extends Controller
 
             return response()->json(['status' => $status]);
         }
+        else if(isset($jsonArry) and array_key_exists("message", $jsonArry)){
+
+            if($jsonArry['message']=="payment not found"){
+                return response()->json([
+                    'status' => "canceled"
+                ]);
+            }elseif($jsonArry['message']=="payment pending"){
+                return response()->json([
+                    'status' => "pending"
+                ]);
+            }
+        }
+
+//        return response()->json([
+//            'status' => "canceled"
+//        ]);
     }
 }

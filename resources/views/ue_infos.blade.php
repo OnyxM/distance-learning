@@ -150,10 +150,10 @@
 
                         <div class="ed_author">
                             <div class="ed_author_thumb">
-                                <img class="img-fluid" src="{{ $ue->teachers[0]->user->photo }}" alt="7.jpg">
+                                <img class="img-fluid" src="{{ @$ue->teachers[0]->user->photo }}" alt="7.jpg">
                             </div>
                             <div class="ed_author_box">
-                                <h4>{{ $ue->teachers[0]->user->name }}</h4>
+                                <h4>{{ @$ue->teachers[0]->user->name }}</h4>
                             </div>
                         </div>
 

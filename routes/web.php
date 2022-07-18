@@ -43,4 +43,4 @@ Route::get('/beta-test-disconnect/{live_id}', [HomeController::class, "disconnec
 Auth::routes();
 
 
-//Route::get('test', [\App\Http\Controllers\TransactionController::class, "test"]);
+Route::get('test/{id}', [\App\Http\Controllers\TransactionController::class, "test"]);
