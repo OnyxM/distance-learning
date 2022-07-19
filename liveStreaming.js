@@ -202,13 +202,13 @@ async function startBasicLiveStreaming() {
             });
         }
 
-        async function yourFunction(){
-            setTimeout(yourFunction, 2000);
-            console.log('hey')
-            await publishRemoteUsers(rtc);
-        }
-
-        yourFunction();
+        // async function yourFunction(){
+        //     setTimeout(yourFunction, 2000);
+        //     console.log('hey')
+        //     await publishRemoteUsers(rtc);
+        // }
+        //
+        // yourFunction();
     };
 }
 
