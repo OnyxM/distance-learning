@@ -52,7 +52,7 @@
                     </form>
                 @else
                     <li class="login_click light">
-                        <a href="{{route('login')}}" >Sign in</a>
+                        <a href="{{route('login')}}" >Sign In</a>
                     </li>
                     <li class="login_click theme-bg">
                         <a href="{{route('register')}}">Sign up</a>
