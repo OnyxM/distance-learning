@@ -9,13 +9,13 @@ let rtc = {
 
 let options = {
     // Pass your app ID here.
-    appId: "itSny+I7f/zOpozJ",
+    appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "yLhrao8f56Sbt5URjoFh",
+    channel: "0064495024a2d4149",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IAC14tQOtqQBpQ9I48wtZoxIXSLl1mWPfFlEAvsB3w34s+lpeSsAAAAAEAB0/t05i+/XYgEAAQCE79di",
+    token: "0064495024a2d414911932996a968fc8559IABbwUWGis6q8BrcLHwJuj91FiUvXazE1Z4K/Q2Lp0eE4RhR4pUAAAAAEAB0/t053PPXYgEAAQDU89di",
     // Uid
-    uid: 123456789,
+    uid: 6010203,
 };
 
 async function startBasicLiveStreaming() {
