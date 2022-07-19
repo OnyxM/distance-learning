@@ -162,14 +162,18 @@
                             <span>Acctual Price</span>
                             <h2 class="theme-cl">{{ number_format($ue->semester->level->pension) }} XAF</h2>
                         </div>
-                        <div class="ed_view_link">
-                            <form action="{{ route('field.attend') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="field" value="{{ $field->slug }}" required>
-                                <input type="hidden" name="level" value="{{ $level->slug }}" required>
-                                <button type="submit" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
-                            </form>
-                        </div>
+                            <div class="ed_view_link">
+                                <form action="{{ route('field.attend') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="field" value="{{ $field->slug }}" required>
+                                    <input type="hidden" name="level" value="{{ $level->slug }}" required>
+                                    @auth
+                                        <button data-toggle="modal" data-target="#payForLevel" type="button" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></button>
+                                    @else
+                                        <a href="{{route('login')}}" class="btn btn-theme enroll-btn">Enroll Class Now<i class="ti-angle-right"></i></a>
+                                    @endif
+                                </form>
+                            </div>
                         @else
                             <div class="ed_view_price pl-4 text-center">
                                 <span>Acctual Price</span>
@@ -187,4 +191,8 @@
         </div>
     </section>
     <!-- ============================ Course Detail ================================== -->
+@endsection
+
+@section("js")
+    @include("layouts.payment")
 @endsection
