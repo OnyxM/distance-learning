@@ -41,7 +41,7 @@ class TeacherController extends Controller
     {
         $this->validate($request, [
             'title' => "required",
-            'poste' => "required",
+            // 'poste' => "required",
         ]);
 
         if($request->account == 1){
@@ -72,7 +72,7 @@ class TeacherController extends Controller
         Teacher::create([
             'title' => $request->title,
             'name' => $user->name,
-            'poste' => $request->poste,
+            // 'poste' => $request->poste,
             'user_id' => $user->id,
         ]);
 

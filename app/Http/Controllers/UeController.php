@@ -304,7 +304,7 @@ class UeController extends Controller
         }
 
         $data = [
-            'title' => "Upade an ue - ",
+            'title' => "Upate an ue - ",
             'field' => $field,
             'level' => $level,
             'ue' => $ue,

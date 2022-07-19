@@ -20,7 +20,7 @@
                             <tr>
                                 <th>N°</th>
                                 <th>Name</th>
-                                <th>Poste</th>
+{{--                                <th>Poste</th>--}}
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -30,7 +30,7 @@
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>{{$teacher->fullname}}</td>
-                                    <td>{{$teacher->poste}}</td>
+{{--                                    <td>{{$teacher->poste}}</td>--}}
 
                                     <td>
                                         <span class="text-info">
