@@ -11,7 +11,7 @@ if (! function_exists('activeLiApp')) {
 
         $parts = explode("/$prefix", $urlPage);
 
-        $active = $parts[1];
+        $active = @$parts[1];
 
         if(empty($availableURL) && $active==""){
             return " active";
