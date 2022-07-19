@@ -532,7 +532,7 @@ class CourseController extends Controller
 
         // he has not paid for this level
         if(!in_array(auth()->user()->id, $ue->semester->level->participants()->pluck('user_id')->toArray())){
-            abort(404);
+            // abort(404);
         }
 
         if(!is_null($chapter)){

@@ -28,13 +28,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4 col-md-4">
-
-                    <div class="ed_view_box style_2">
-                        <div class="ed_author">
-                            <div class="ed_author_box">
-                                <h4>Course Content</h4>
-                            </div>
-                        </div>
+                    <div class="row justify-content-center mb-4">
+                        <strong class="h4"><u>{{ strtoupper($ue->code) . " : " . $ue->name }}</u></strong>
+                    </div>
+                    <div class=" style_2">
+{{--                        <div class="ed_author">--}}
+{{--                            <div class="ed_author_box">--}}
+{{--                                <h4>Course Content</h4>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div class="ed_view_price pl-4" style="overflow-y: auto;max-height: 100vh;">
                             <div class="edu_wraper" style="padding: 1rem!important;">
@@ -42,7 +44,7 @@
                                     <div class="card">
                                         <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
                                             <h6 class="mb-0">
-                                                <a class="d-block position-relative text-center py-2 @if($chapter->id==$chap->id) text-danger @endif" href="{{route('class.follow_course', ['ue' =>$ue->code, 'chapter'=>$chap->id])}}">
+                                                <a class="d-block position-relative py-2 @if($chapter->id==$chap->id) text-danger @endif" href="{{route('class.follow_course', ['ue' =>$ue->code, 'chapter'=>$chap->id])}}">
                                                     {{$chap->name}}
                                                 </a>
                                             </h6>

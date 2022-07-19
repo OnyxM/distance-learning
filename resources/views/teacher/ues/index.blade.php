@@ -47,7 +47,8 @@
                                 <img src="{{ $ue->photo }}" class="img-fluid" alt="" />
                                 <div class="dashboard_action">
                                     <a href="{{ route('teacher.ue.edit', ['ue_code' => strtolower($ue->code)]) }}" class="btn btn-ect">Edit</a>
-                                    <a href="{{ route('teacher.ue.details', ['ue_code' => strtolower($ue->code)]) }}" class="btn btn-ect">View</a>
+                                    <a href="{{ route('ue.info', ['field'=>$ue->semester->level->field->slug, 'level'=>$ue->semester->level->slug, 'ue' => strtolower($ue->code)]) }}" class="btn btn-ect" target="_blank" rel="noopener">View</a>
+{{--                                    <a href="{{ route('teacher.ue.details', ['ue_code' => strtolower($ue->code)]) }}" class="btn btn-ect" target="_blank" rel="noopener">View</a>--}}
                                 </div>
                             </div>
                             <div class="dashboard_single_course_caption">
