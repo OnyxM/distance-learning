@@ -9,11 +9,11 @@ let rtc = {
 
 let options = {
     // Pass your app ID here.
-    appId: "4495024a2d414911932996a968fc8559",
+    appId: "itSny+I7f/zOpozJ",
     // Set the channel name.
     channel: "yLhrao8f56Sbt5URjoFh",
     // Use a temp token
-    token: "0064495024a2d414911932996a968fc8559IAC5Kc4lXxExUaDGitSny+I7f/zOpozJGQ2CCYDJVk9v0E7yFjAAAAAAEACPl0pW1/7TYgEAAQDT/tNi",
+    token: "0064495024a2d414911932996a968fc8559IAC14tQOtqQBpQ9I48wtZoxIXSLl1mWPfFlEAvsB3w34s+lpeSsAAAAAEAB0/t05i+/XYgEAAQCE79di",
     // Uid
     uid: 123456789,
 };
