@@ -30,6 +30,10 @@ class UsersTableSeeder extends Seeder
             (11, \'Njine\', \'Chuangueu\', \'njinechuangueu@gmail.com\', NULL, \'$2y$10$LoM08J..tfhnKlDWw3AfBOLTBjXbxEU2thtLyjD7OLyjue/gzGTnu\', NULL, NULL, \'2\', \'avatar.png\', NULL, NULL, NULL, \'2022-07-13 21:19:41\', \'2022-07-13 21:19:41\')
         ');
 
+        \DB::statement("ALTER TABLE `users`
+                    MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+                    COMMIT;");
+
 //        User::create([
 //            'firstname' => "Admin", 'lastname' => "Account",
 //            'email' => "admin@domain.com",
