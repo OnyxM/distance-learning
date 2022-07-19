@@ -13,6 +13,8 @@ if (! function_exists('activeLiApp')) {
 
         $active = @$parts[1];
 
+        dump($active);
+
         if(empty($availableURL) && $active==""){
             return " active";
         }
