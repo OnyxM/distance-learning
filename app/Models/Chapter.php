@@ -26,4 +26,14 @@ class Chapter extends Model
     {
         return "uploads/chapters/" . $this->attributes['document'];
     }
+
+    public function getTdAttribute()
+    {
+        return is_null($this->attributes['td']) ? null : "uploads/chapters/".$this->attributes['td'];
+    }
+
+    public function getTpAttribute()
+    {
+        return is_null($this->attributes['tp']) ? null : "uploads/chapters/".$this->attributes['tp'];
+    }
 }

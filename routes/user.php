@@ -42,6 +42,7 @@ Route::post('register-to-class', [LevelController::class, "registerToClass"])->n
 Route::group(['prefix'=>"my-classes"], function(){
     Route::get('', [ClassController::class, "index"])->name('class.index');
     Route::get('/follow_course/{ue}/{chapter?}', [CourseController::class, "follow_course"])->name('class.follow_course');
+    Route::get('/follow_course/{ue}/{chapter?}/{resource}', [CourseController::class, "follow_course_resource"])->name('class.follow_course.resource');
 });
 
 Route::get('/lives', [HomeController::class, "lives"])->name("lives");

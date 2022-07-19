@@ -549,4 +549,40 @@ class CourseController extends Controller
 
         return view('courses.view', $data);
     }
+    public function follow_course_resource($code, $chapter, $resource)
+    {
+        // The UE does not exists
+        $ue = Ue::whereCode($code)->first();
+        if(is_null($ue)){
+            abort(404);
+        }
+
+        // he has not paid for this level
+        if(!in_array(auth()->user()->id, $ue->semester->level->participants()->pluck('user_id')->toArray())){
+            // abort(404);
+        }
+
+        if(!is_null($chapter)){
+            $chapter = $ue->chapters()->where('chapters.id', $chapter)->first();
+        }else{
+            $chapter = @$ue->chapters[0];
+        }
+
+        if(!in_array($resource, ['td', 'tp'])){
+            abort(404);
+        }
+
+        if(is_null($chapter->$resource)){
+            abort(404);
+        }
+
+        $data = [
+            'title' => "$ue->name",
+            'ue'=> $ue,
+            'chapter'=> $chapter,
+            'resource' => $resource,
+        ];
+
+        return view('courses.view', $data);
+    }
 }

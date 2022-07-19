@@ -47,6 +47,24 @@
                                                 <a class="d-block position-relative py-2 @if($chapter->id==$chap->id) text-danger @endif" href="{{route('class.follow_course', ['ue' =>$ue->code, 'chapter'=>$chap->id])}}">
                                                     {{$chap->name}}
                                                 </a>
+                                                @if($chapter->id==$chap->id)
+                                                    <ul>
+                                                        @if(!is_null($chapter->td))
+                                                            <li>
+                                                                <a class="ml-4 d-block position-relative py-2 @if(isset($resource) && $resource=="td") text-danger @endif" href="{{route('class.follow_course.resource', ['ue' =>$ue->code, 'chapter'=>$chap->id, 'resource' => "td"])}}">
+                                                                    Tutorial File (TD)
+                                                                </a>
+                                                            </li>
+                                                        @endif
+                                                        @if(!is_null($chapter->tp))
+                                                            <li>
+                                                                <a class="ml-4 d-block position-relative py-2 @if(isset($resource) && $resource=="tp") text-danger @endif" href="{{route('class.follow_course.resource', ['ue' =>$ue->code, 'chapter'=>$chap->id, 'resource' => "tp"])}}">
+                                                                    Practical Work File (TP)
+                                                                </a>
+                                                            </li>
+                                                        @endif
+                                                    </ul>
+                                                @endif
                                             </h6>
                                         </div>
                                     </div>
@@ -67,7 +85,11 @@
 
                     @if(!is_null($chapter))
                     <div class="container-frame">
+                        @if(!isset($resource) || !in_array($resource, ['td', 'tp']))
                         <embed class="responsive-iframe" src="{{ asset($chapter->document) }}">
+                        @else
+                        <embed class="responsive-iframe" src="{{ asset($chapter->$resource) }}">
+                        @endif
                     </div>
                     @endif
                 </div>
