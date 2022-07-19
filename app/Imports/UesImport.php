@@ -32,7 +32,7 @@ class UesImport implements ToModel, WithHeadingRow
                 return new Ue([
                     'name' => $row['name'],
                     'slug' => Str::slug($row['name']),
-                    'code' => $code,
+                    'code' => strtolower($code),
                     'description' => $row['description'],
                     'requirements' => $row['requirements'],
                     'syllabus' => $row['syllabus'],
