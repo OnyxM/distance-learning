@@ -10,6 +10,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
+        return redirect()->route("teacher.ues");
         $data = [
             'title' => "",
         ];
