@@ -25,14 +25,14 @@ class UesImport implements ToModel, WithHeadingRow
         if(in_array($row['semester'], [1,2])){ // Si le num du semestre n'est pas bon on passe
 
             // Si ce code existe déjà, on passe
-            $code = $row['code'];
+            $code = strtolower($row['code']);
             $ue = Ue::whereCode($code)->first();
 
             if(is_null($ue)){
                 return new Ue([
                     'name' => $row['name'],
                     'slug' => Str::slug($row['name']),
-                    'code' => strtolower($code),
+                    'code' => $code,
                     'description' => $row['description'],
                     'requirements' => $row['requirements'],
                     'syllabus' => $row['syllabus'],
