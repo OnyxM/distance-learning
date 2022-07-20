@@ -349,4 +349,13 @@ class UeController extends Controller
 
         return redirect()->route('admin.ues', ['field_slug' => $field->slug, 'level_slug' => $level->slug]);
     }
+
+//    public function delete($ue)
+//    {
+//        $ue = Ue::find($ue);
+//
+//        $ue->delete();
+//
+//        return redirect()->back();
+//    }
 }

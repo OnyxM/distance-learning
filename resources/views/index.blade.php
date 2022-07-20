@@ -88,8 +88,8 @@
                             <div class="singles_items">
                                 <div class="education_block_grid style_2">
                                     <div class="education_block_thumb n-shadow">
-                                        <a href="{{route('ue.info', ['field' => $ue->semester->level->field->slug, 'level' => $ue->semester->level->slug, 'ue' => $ue->code])}}"><img src="{{$ue->photo}}" class="img-fluid" alt=""></a>
-                                        <div class="cources_price">{{ number_format($ue->semester->level->pension)." XAF" }}</div>
+                                        <a href="{{route('ue.info', ['field' => @$ue->semester->level->field->slug, 'level' => @$ue->semester->level->slug, 'ue' => $ue->code])}}"><img src="{{$ue->photo}}" class="img-fluid" alt=""></a>
+                                        <div class="cources_price">{{ number_format(@$ue->semester->level->pension)." XAF" }}</div>
                                     </div>
 
                                     <div class="education_block_body">
