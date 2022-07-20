@@ -8,7 +8,7 @@
                 List of Lecturers in the platform
             </div>
             <div class="col-md-2 col-lg-2 mb-4 mb-md-0">
-                <a href="{{route('admin.teachers.new')}}" class="btn btn-primary">Add a Lecturer</a>
+                <a href="{{route('admin.teachers.new')}}" class="btn btn-primary">Add a Teacher</a>
             </div>
         </div>
         <div class="row">

@@ -1,8 +1,8 @@
 <div class="container">
     <nav id="navigation" class="navigation navigation-landscape">
         <div class="nav-header">
-            <a class="nav-brand" href="{{route('index')}}">
-                <img src="{{asset('assets/img/logo.png')}}" class="logo" alt="" />
+            <a class="nav-brand" style="padding:0!important;" href="{{route('index')}}">
+                <img src="{{asset('assets/img/dl237.png')}}" class="logo" alt="" />
             </a>
             <div class="nav-toggle"></div>
         </div>

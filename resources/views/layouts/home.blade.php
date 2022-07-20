@@ -76,11 +76,10 @@
 
                         <div class="col-lg-3 col-md-3">
                             <div class="footer-widget">
-                                <img src="{{asset('assets/img/logo-light.png')}}" class="img-footer" alt=""/>
+                                <img src="{{asset('assets/img/dl237-light.png')}}" class="img-footer" alt=""/>
                                 <div class="footer-add">
-                                    <p>4967 Sardis Sta, Victoria 8007, Montreal.</p>
-                                    <p>+1 246-345-0695</p>
-                                    <p>info@learnup.com</p>
+                                    <p>Universié de Yaoundé I</p>
+                                    <p>BP 812 Yaounde - Cameroon</p>
                                 </div>
 
                             </div>
