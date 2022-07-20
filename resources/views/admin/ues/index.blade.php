@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <?php $sem_1 = @$level->semesters[0]; $sem_2 = $level->semesters[1]; ?>
+        <?php $sem_1 = @$level->semesters[0]; @$sem_2 = $level->semesters[1]; ?>
 
         <div class="row mb-4">
             <div class="col-md-12 col-lg-12 mb-4 mb-md-0">
