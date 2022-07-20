@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Field;
 use App\Models\Level;
+use App\Models\Semester;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -58,12 +59,22 @@ class LevelController extends Controller
             'pension' => "required",
         ]);
 
-        Level::create([
+        $new_level = Level::create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'description' => $request->description,
             'pension' => $request->pension,
             'field_id' => $field->id
+        ]);
+
+        Semester::create([
+            'name' => "Semester 1",
+            'slug' => "semester-1",
+            'level_id' => $new_level->id
+        ]); Semester::create([
+            'name' => "Semester 2",
+            'slug' => "semester-2",
+            'level_id' => $new_level->id
         ]);
 
         return redirect()->route('admin.levels', ['field_slug' => $field->slug]);
