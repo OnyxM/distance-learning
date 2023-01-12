@@ -13,15 +13,15 @@ class CreateLevelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('levels', function (Blueprint $table) {
-            $table->id();
-            $table->string("name");
-            $table->string("slug");
-            $table->text("description")->nullable();
-            $table->integer("pension");
-            $table->integer("field_id");
-            $table->timestamps();
-        });
+//        Schema::create('levels', function (Blueprint $table) {
+//            $table->id();
+//            $table->string("name");
+//            $table->string("slug");
+//            $table->text("description")->nullable();
+//            $table->integer("pension");
+//            $table->integer("field_id");
+//            $table->timestamps();
+//        });
     }
 
     /**
