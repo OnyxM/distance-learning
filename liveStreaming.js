@@ -11,11 +11,11 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "c1492bc2-8e91-4a6b-9c3a-0247a535aabf",
+    channel: "aaa01a63-c3db-4cdb-9b1c-de8c31e5ce1f",
     // Use a temp token
-    token: "007eJxTYDBesC126q2gadZ/f9tsX155uz7F02p35+yQ+193lO5813xXgcHExNLUwMgk0SjFxNDE0tDQ0tjI0tIs0dLMIi3ZwtTUcl7W2eSGQEaGzh9CDIxQCOKrMCQD1RslJRvpWqRaGuqaJJol6VomGyfqAk0zTzQ1Nk1MTEpjYAAA4yop9w==",
+    token: "007eJxTYAh5vDdWq4BbpmDCju5/HKxT49qSXlrG9S3/v/PJ5CulC/YrMJiYWJoaGJkkGqWYGJpYGhpaGhtZWpolWppZpCVbmJpaVuecTW4IZGS4N42HgREKQXwVhsTERAPDRDNj3WTjlCRdk2QgYZlkmKybkmqRbGyYapqcapjGwAAA58Eonw==",
     // Uid
-    uid: 6010203,
+    uid: 12345,
 };
 
 async function startBasicLiveStreaming() {
