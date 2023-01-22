@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    @if($user->id != auth()->user()->id)
+    @if(@$user->id != auth()->user()->id)
     <div class="modal fade" id="suspendUserModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-simple modal-enable-otp modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
