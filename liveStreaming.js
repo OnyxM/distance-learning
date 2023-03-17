@@ -11,9 +11,9 @@ let options = {
     // Pass your app ID here.
     appId: "4495024a2d414911932996a968fc8559",
     // Set the channel name.
-    channel: "4aeb8acf-45ed-4ee5-8fcb-6ae1e0b60bf8",
+    channel: "a97e2af4-a4c8-448d-88a2-74a45f8d5c82",
     // Use a temp token
-    token: "007eJxTYBA7ILBu3p7Ck2sezXYPZvzCbhPxcJcPp9RNpzPuXP8NvvQqMJiYWJoaGJkkGqWYGJpYGhpaGhtZWpolWppZpCVbmJpa3jt6J7khkJEh6/VxVkYGCATxVRhMElOTLBKT03RNTFNTdE1SU011gXqSdM0SUw1TDZLMDJLSLBgYAMPZKMo=",
+    token: "007eJxTYGhltVkWop90wUp0kcAN5YW13vGcbqvV3sWwpPDlVF9J3KvAYGJiaWpgZJJolGJiaGJpaGhpbGRpaZZoaWaRlmxhamo5TUskpSGQkSF/xgwGRigE8VUYEi3NU40S00x0E02SLXRNTCxSdC0sEo10zU0STUzTLFJMky2MGBgA2OAikg==",
     // Uid
     uid: 12345,
 };
